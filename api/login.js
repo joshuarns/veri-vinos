@@ -1,10 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // api/login.js — Valida credenciales de usuario contra WordPress
-//
-// El proxy general (api/wp.js) siempre usa las claves admin (WC_KEY/WC_SECRET).
-// Para el login necesitamos reenviar las credenciales del USUARIO a WordPress,
-// no las del admin. Este endpoint hace esa distinción de forma segura:
-// las credenciales viajan cliente → Vercel (HTTPS) y nunca quedan expuestas.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
@@ -12,26 +7,41 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { username, password } = req.body || {};
-
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Faltan credenciales' });
+  // Parseo manual del body (Vercel Node.js runtime no auto-parsea JSON)
+  let username, password;
+  try {
+    const chunks = [];
+    for await (const chunk of req) chunks.push(chunk);
+    const raw = Buffer.concat(chunks).toString('utf-8');
+    const body = raw ? JSON.parse(raw) : {};
+    username = body.username;
+    password = body.password;
+  } catch {
+    return res.status(400).json({ error: 'Body inválido' });
   }
 
-  const url  = `${process.env.WP_BASE_URL}/users/me`;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Faltan credenciales', username: !!username, password: !!password });
+  }
+
+  // WP_BASE_URL puede no estar configurada en Vercel; derivamos de WC_BASE_URL
+  const wpBase = process.env.WP_BASE_URL
+    || (process.env.WC_BASE_URL || '').replace('/wc/v3', '/wp/v2');
+
+  const url  = `${wpBase}/users/me`;
   const auth = Buffer.from(`${username}:${password}`).toString('base64');
 
   try {
     const upstream = await fetch(url, {
-      headers: {
-        Authorization:  `Basic ${auth}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Basic ${auth}` },
     });
 
-    const data = await upstream.json();
+    const text = await upstream.text();
+    let data;
+    try { data = JSON.parse(text); } catch { data = { raw: text.slice(0, 300) }; }
+
     res.status(upstream.status).json(data);
   } catch (err) {
-    res.status(502).json({ error: 'Login proxy error', detail: err.message });
+    res.status(502).json({ error: 'Login proxy error', detail: err.message, wpBase });
   }
 }

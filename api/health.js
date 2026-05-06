@@ -41,11 +41,45 @@ export default async function handler(req, res) {
     proxyTest = { status: upstream.status, isArray: Array.isArray(body), count: Array.isArray(body) ? body.length : 'N/A', raw: Array.isArray(body) ? undefined : body };
   } catch (e) { proxyTest = { error: e.message }; }
 
+  // ── Test 4: login con usuario de prueba (username=TEST_USER en env) ──────────
+  let loginTest = {};
+  try {
+    const host     = req.headers.host;
+    const protocol = host.includes('localhost') ? 'http' : 'https';
+    const loginUrl = `${protocol}://${host}/api/login`;
+    const upstream = await fetch(loginUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'test-user-nonexistent', password: 'test123' }),
+    });
+    const text = await upstream.text();
+    let body;
+    try { body = JSON.parse(text); } catch { body = { raw: text.slice(0, 300) }; }
+    loginTest = { status: upstream.status, body };
+  } catch (e) { loginTest = { error: e.message }; }
+
+  // ── Test 5: llamada directa a WordPress /users/me con admin keys ─────────────
+  let wpDirectTest = {};
+  try {
+    const wpBase = process.env.WP_BASE_URL
+      || (process.env.WC_BASE_URL || '').replace('/wc/v3', '/wp/v2');
+    const upstream = await fetch(`${wpBase}/users/me`, {
+      headers: { Authorization: `Basic ${auth}` },
+    });
+    const text = await upstream.text();
+    let body;
+    try { body = JSON.parse(text); } catch { body = { raw: text.slice(0, 300) }; }
+    wpDirectTest = { status: upstream.status, wpBase, id: body?.id, name: body?.name };
+  } catch (e) { wpDirectTest = { error: e.message }; }
+
   res.status(200).json({
-    wcBaseUrl:  baseUrl || 'NO DEFINIDA',
-    keyPrefix:  (process.env.WC_KEY || '').slice(0, 8) + '...',
+    wcBaseUrl:   baseUrl || 'NO DEFINIDA',
+    wpBaseUrl:   process.env.WP_BASE_URL || '(derivada de WC_BASE_URL)',
+    keyPrefix:   (process.env.WC_KEY || '').slice(0, 8) + '...',
     direct1,
     direct12,
     proxyTest,
+    loginTest,
+    wpDirectTest,
   });
 }
