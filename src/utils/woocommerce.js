@@ -50,7 +50,8 @@ export const validarArchivos = (archivos) => {
 //   normalizarMetaValor("Solo reloj")  → "solo_reloj"
 //   normalizarMetaValor("Masculino")   → "hombre"
 export const normalizarMetaValor = (valor) => {
-  if (!valor) return '';
+  // -1 es el valor que WPUF guarda cuando un select no tiene selección válida
+  if (!valor || valor === '-1') return '';
 
   // 1) minúsculas + quitar acentos (NFD decompose → eliminar diacríticos)
   const base = valor
@@ -99,7 +100,7 @@ export const normalizarMetaValor = (valor) => {
 //   stripUnidad("21cm")  → "21"
 //   stripUnidad("10atm") → "10"
 export const stripUnidad = (valor) => {
-  if (!valor) return '';
+  if (!valor || valor === '-1') return '';
   return valor.replace(/\s*(mm|cm|atm)\s*$/i, '').trim();
 };
 
