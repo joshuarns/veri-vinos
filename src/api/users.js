@@ -17,13 +17,18 @@ const USE_PROXY = process.env.REACT_APP_USE_PROXY === 'true';
 
 // ── loginUsuario ──────────────────────────────────────────────────────────────
 // Valida las credenciales del usuario contra WordPress.
-// GET /wp/v2/users/me con las credenciales del usuario → si son válidas,
-// WordPress devuelve el objeto del usuario autenticado.
-// Si son inválidas, devuelve 401 → AuthContext lo intercepta para marcar
-// la sesión como expirada.
+// En producción: POST /api/login → el proxy dedidcado reenvía las credenciales
+//   del usuario a WordPress server-side (el proxy general sobreescribiría con admin).
+// En desarrollo: GET /wp/v2/users/me con credenciales del usuario directamente.
 export const loginUsuario = async (username, password) => {
+    if (USE_PROXY) {
+        // api/login.js reenvía username/password a WordPress con Basic Auth del usuario
+        const response = await axios.post('/api/login', { username, password });
+        return response.data;
+    }
+
     const response = await axios.get(`${BASE_URL_WP}/users/me`, {
-        // Aquí usamos las credenciales del usuario, NO las del admin
+        // En desarrollo usamos las credenciales del usuario directamente
         auth: { username, password },
     });
     return response.data;
