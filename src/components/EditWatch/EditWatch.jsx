@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { obtenerProducto, actualizarProducto, uploadImage } from "../../api";
-import { getMeta, validarArchivos } from "../../utils/woocommerce";
+import { getMeta, normalizarMetaValor, stripUnidad, validarArchivos } from "../../utils/woocommerce";
 import useForm from "../../hooks/useForm";
 import WatchFormFields from "../WatchForm/WatchFormFields";
 import ErrorImagenes from "../WatchForm/ErrorImagenes";
@@ -50,29 +50,37 @@ function EditWatch() {
       try {
         const data = await obtenerProducto(id);
         if (!activo) return;
+        // n() normaliza valores de select (quita acentos, mapea sinónimos)
+        // u() elimina unidades de medida al final del valor ("44mm" → "44")
+        const n = (key) => normalizarMetaValor(getMeta(data.meta_data, key) || "");
+        const u = (key) => stripUnidad(getMeta(data.meta_data, key) || "");
+
         setProducto({
           name:               data.name || "",
           regular_price:      data.regular_price || "",
           description:        data.description?.replace(/<[^>]*>/g, "") || "",
           stock_quantity:     data.stock_quantity || "",
-          marca:              getMeta(data.meta_data, "marca")              || "",
-          modelo:             getMeta(data.meta_data, "modelo")             || "",
-          referencia:         getMeta(data.meta_data, "referencia")         || "",
-          numero_de_serie:    getMeta(data.meta_data, "numero_de_serie")    || "",
+          // Campos de texto libre — sin normalización
+          marca:              getMeta(data.meta_data, "marca")           || "",
+          modelo:             getMeta(data.meta_data, "modelo")          || "",
+          referencia:         getMeta(data.meta_data, "referencia")      || "",
+          numero_de_serie:    getMeta(data.meta_data, "numero_de_serie") || "",
           ano_de_fabricacion: getMeta(data.meta_data, "ano_de_fabricacion") || "",
-          genero:             getMeta(data.meta_data, "genero")             || "",
-          movimiento:         getMeta(data.meta_data, "movimiento")         || "",
-          medida_de_la_caja_:      getMeta(data.meta_data, "medida_de_la_caja_")      || "",
-          medida_del_extensible:   getMeta(data.meta_data, "medida_del_extensible")   || "",
-          resistencia_al_agua:     getMeta(data.meta_data, "resistencia_al_agua")     || "",
-          broche:                  getMeta(data.meta_data, "broche")                  || "",
-          material_del_bisel:      getMeta(data.meta_data, "material_del_bisel")      || "",
-          material_de_la_caja:     getMeta(data.meta_data, "material_de_la_caja")     || "",
-          material_del_extensible: getMeta(data.meta_data, "material_del_extensible") || "",
-          cristal:                 getMeta(data.meta_data, "cristal")                 || "",
-          documentacion:           getMeta(data.meta_data, "documentacion")           || "",
-          estetica_del_reloj:      getMeta(data.meta_data, "estetica_del_reloj")      || "",
-          estado_del_reloj:        getMeta(data.meta_data, "estado_del_reloj")        || "",
+          // Campos select — normalizar para que coincidan con los <option value="">
+          genero:             n("genero"),
+          movimiento:         n("movimiento"),
+          broche:             n("broche"),
+          material_del_bisel:      n("material_del_bisel"),
+          material_de_la_caja:     n("material_de_la_caja"),
+          material_del_extensible: n("material_del_extensible"),
+          cristal:                 n("cristal"),
+          documentacion:           n("documentacion"),
+          estetica_del_reloj:      n("estetica_del_reloj"),
+          estado_del_reloj:        n("estado_del_reloj"),
+          // Medidas — quitar unidades ("44mm" → "44")
+          medida_de_la_caja_:    u("medida_de_la_caja_"),
+          medida_del_extensible: u("medida_del_extensible"),
+          resistencia_al_agua:   u("resistencia_al_agua"),
         });
         setImagenesExistentes((data.images || []).map(img => img.src));
       } catch (err) {

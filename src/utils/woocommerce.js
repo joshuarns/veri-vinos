@@ -37,6 +37,72 @@ export const validarArchivos = (archivos) => {
 };
 
 
+// ── normalizarMetaValor ───────────────────────────────────────────────────────
+// Convierte los valores guardados en WordPress (capitalizados, con acentos,
+// con unidades) al formato interno que usan los <select> del formulario.
+//
+// Útil cuando los productos se crearon desde el admin de WordPress con
+// etiquetas legibles ("Automático", "Solo reloj") en lugar de los valores
+// internos ("automatico", "solo_reloj") que usa la app.
+//
+// Ejemplos:
+//   normalizarMetaValor("Automático")  → "automatico"
+//   normalizarMetaValor("Solo reloj")  → "solo_reloj"
+//   normalizarMetaValor("Masculino")   → "hombre"
+export const normalizarMetaValor = (valor) => {
+  if (!valor) return '';
+
+  // 1) minúsculas + quitar acentos (NFD decompose → eliminar diacríticos)
+  const base = valor
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .trim();
+
+  // 2) Mapa de sinónimos: WordPress admin labels → valores internos del select
+  const mapa = {
+    // genero
+    'masculino': 'hombre',
+    'femenino':  'mujer',
+    // movimiento
+    'automatico': 'automatico',
+    'cuarzo':     'cuarzo',
+    'cuerda':     'cuerda',
+    // documentacion (con espacios → con guiones bajos)
+    'solo reloj':          'solo_reloj',
+    'estuche original':    'estuche_original',
+    'estuche y manuales':  'estuche_y_manuales',
+    'full set':            'full_set',
+    // estado_del_reloj
+    'poco uso':  'poco_uso',
+    'con uso':   'con_uso',
+    'mucho uso': 'mucho_uso',
+    // estetica_del_reloj
+    'muy buena': 'muy_buena',
+    'muy mala':  'muy_mala',
+    // broche
+    'desplegable con botones': 'desplegable_con_botones',
+    'broche de gancho':        'broche_de_gancho',
+    'cierre de malla':         'cierre_de_malla',
+    // material
+    'acero oro':    'acero_oro',
+    'acero inoxidable': 'acero',
+  };
+
+  return mapa[base] ?? base;
+};
+
+// ── stripUnidad ───────────────────────────────────────────────────────────────
+// Elimina la unidad al final de un valor de medida guardado en WordPress.
+// Ejemplos:
+//   stripUnidad("44mm")  → "44"
+//   stripUnidad("21cm")  → "21"
+//   stripUnidad("10atm") → "10"
+export const stripUnidad = (valor) => {
+  if (!valor) return '';
+  return valor.replace(/\s*(mm|cm|atm)\s*$/i, '').trim();
+};
+
 // ── getMeta ───────────────────────────────────────────────────────────────────
 // WooCommerce guarda los campos personalizados (marca, movimiento, estado…)
 // como un array de objetos: [{ key: "marca", value: "Rolex" }, ...]
