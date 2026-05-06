@@ -24,8 +24,9 @@ export const obtenerProductos = async (page = 1, perPage = 12, busqueda = "") =>
 
     // parseInt con radix 10 para evitar interpretaciones octales en strings con ceros
     const totalPaginas = parseInt(respuesta.headers['x-wp-totalpages'] || '1', 10);
+    const productos    = Array.isArray(respuesta.data) ? respuesta.data : [];
 
-    return { productos: respuesta.data, totalPaginas };
+    return { productos, totalPaginas };
 };
 
 // ── obtenerProducto ───────────────────────────────────────────────────────────
@@ -79,8 +80,9 @@ export const obtenerProductosPorCategoria = async (slug, page = 1, perPage = 12)
     });
 
     const totalPaginas = parseInt(productosRespuesta.headers['x-wp-totalpages'] || '1', 10);
+    const productos    = Array.isArray(productosRespuesta.data) ? productosRespuesta.data : [];
 
-    return { productos: productosRespuesta.data, totalPaginas };
+    return { productos, totalPaginas };
 };
 
 // ── obtenerMisProductos ───────────────────────────────────────────────────────
