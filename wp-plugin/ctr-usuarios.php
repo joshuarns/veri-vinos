@@ -68,33 +68,9 @@ function ctr_registrar_usuario( WP_REST_Request $request ) {
 }
 
 
-// ════════════════════════════════════════════════════════════════════════════
-// 2. BLOQUEAR LOGIN REST API PARA USUARIOS NO APROBADOS
-//    rest_authentication_errors corre para TODA autenticación vía REST API,
-//    incluyendo Basic Auth — a diferencia de `authenticate` que solo aplica
-//    al formulario nativo de WordPress.
-// ════════════════════════════════════════════════════════════════════════════
-add_filter( 'rest_authentication_errors', function ( $result ) {
-    if ( ! empty( $result ) ) return $result;
-
-    $user = wp_get_current_user();
-    if ( ! $user || ! $user->exists() ) return $result;
-
-    // Administradores siempre pasan — no bloquear el panel de WP
-    if ( in_array( 'administrator', (array) $user->roles, true ) ) return $result;
-
-    $aprobado = get_user_meta( $user->ID, CTR_META_KEY, true );
-
-    if ( $aprobado === '' || (int) $aprobado === 0 ) {
-        return new WP_Error(
-            'user_not_approved',
-            'Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.',
-            [ 'status' => 401 ]
-        );
-    }
-
-    return $result;
-} );
+// NOTA: La verificación de aprobación se hace en el proxy de login (api/login.js)
+// que consulta /ctr/v1/check-approval antes de devolver la sesión a React.
+// No se necesita bloquear aquí a nivel de REST API.
 
 
 // ════════════════════════════════════════════════════════════════════════════
