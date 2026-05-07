@@ -193,6 +193,18 @@
   transform: none;
 }
 
+/* Sin existencia — botón deshabilitado gris */
+.singleBtnCart.outOfStock {
+  background-color: #e5e5ea;
+  color: #8e8e93;
+  cursor: not-allowed;
+}
+
+.singleBtnCart.outOfStock:hover {
+  background-color: #e5e5ea;
+  transform: none;
+}
+
 /* ── Botón secundario: "Haz una oferta" ── */
 /* Mismo ancho que el botón de compra, pero estilo fantasma */
 .singleBtnOferta {

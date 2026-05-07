@@ -252,17 +252,23 @@ function DetalleProducto() {
                 dangerouslySetInnerHTML={{ __html: producto.price_html }}
               />
 
-              {/* Botón primario: Comprar ahora / En tu selección ✓ */}
-              <button
-                onClick={addToCart}
-                className={`singleBtnCart${estaEnCarrito ? " inCart" : ""}`}
-              >
-                {estaEnCarrito ? "En tu selección ✓" : "Comprar ahora"}
-              </button>
+              {/* Botón primario: Comprar ahora / En tu selección ✓ / Sin existencia */}
+              {producto.stock_status === 'outofstock' ? (
+                <button className="singleBtnCart outOfStock" disabled>
+                  Sin existencia
+                </button>
+              ) : (
+                <button
+                  onClick={addToCart}
+                  className={`singleBtnCart${estaEnCarrito ? " inCart" : ""}`}
+                >
+                  {estaEnCarrito ? "En tu selección ✓" : "Comprar ahora"}
+                </button>
+              )}
 
               {/* Fila: "Haz una oferta" + botón de favoritos */}
               <div className="singleActionsRow">
-                {!estaEnCarrito && (
+                {!estaEnCarrito && producto.stock_status !== 'outofstock' && (
                   <button
                     onClick={() => setModalOferta(true)}
                     className="singleBtnOferta"
