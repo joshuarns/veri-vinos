@@ -55,6 +55,7 @@ function LoginForm() {
         username: userData.username,
         nombre:   userData.name,
         email:    userData.email,
+        roles:    userData.roles || [],
       });
 
       // replace:true para que el botón "atrás" no regrese al /login

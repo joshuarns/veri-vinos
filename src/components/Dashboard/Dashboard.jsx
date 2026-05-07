@@ -195,15 +195,17 @@ function MisRelojes({ usuario }) {
                     <Link to={`/editar-reloj/${reloj.id}`} className="btnEditWatch">
                       Editar
                     </Link>
-                    <button
-                      className={`btnPublicar ${reloj.status === 'publish' ? 'btnDespublicar' : ''}`}
-                      disabled={publicando === reloj.id}
-                      onClick={() => togglePublicar(reloj)}
-                    >
-                      {publicando === reloj.id
-                        ? '...'
-                        : reloj.status === 'publish' ? 'Despublicar' : 'Publicar'}
-                    </button>
+                    {usuario.roles?.includes('administrator') && (
+                      <button
+                        className={`btnPublicar ${reloj.status === 'publish' ? 'btnDespublicar' : ''}`}
+                        disabled={publicando === reloj.id}
+                        onClick={() => togglePublicar(reloj)}
+                      >
+                        {publicando === reloj.id
+                          ? '...'
+                          : reloj.status === 'publish' ? 'Despublicar' : 'Publicar'}
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>
