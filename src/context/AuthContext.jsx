@@ -3,9 +3,12 @@ import { obtenerUsuario } from "../api";
 import {
   SESSION_MS,
   REVALIDAR_CADA_MS,
+  VERIFICAR_RUTA_MS,
   STORAGE_KEY_USUARIO,
   STORAGE_KEY_ULTIMA_VALIDACION as ULTIMA_VALIDACION_KEY,
 } from "../config/constants";
+
+const STORAGE_KEY_ULTIMA_VERIFICACION_RUTA = "ultimaVerificacionRuta";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // AUTHCONTEXT.JSX
@@ -84,6 +87,30 @@ export function AuthProvider({ children }) {
   const clearExpirada = useCallback(() => setSesionExpirada(false), []);
 
   /**
+   * Verifica que el usuario sigue existiendo en WordPress.
+   * Llamado por PrivateRoute en cada navegación (throttleado a VERIFICAR_RUTA_MS).
+   * Si el usuario fue borrado (404) cierra la sesión automáticamente.
+   */
+  const verificarUsuario = useCallback(async () => {
+    const u = usuarioRef.current;
+    if (!u) return;
+
+    const ultima = Number(localStorage.getItem(STORAGE_KEY_ULTIMA_VERIFICACION_RUTA) || 0);
+    if (Date.now() - ultima < VERIFICAR_RUTA_MS) return;
+
+    localStorage.setItem(STORAGE_KEY_ULTIMA_VERIFICACION_RUTA, String(Date.now()));
+
+    try {
+      await obtenerUsuario(u.id);
+    } catch (err) {
+      if (err.response?.status === 404 || err.response?.status === 401) {
+        setSesionExpirada(true);
+        logout();
+      }
+    }
+  }, [logout]);
+
+  /**
    * Actualiza campos del usuario en estado y localStorage sin cerrar sesión.
    * Lo llama MiCuenta tras guardar cambios de perfil (nombre, email, password…).
    */
@@ -158,7 +185,7 @@ export function AuthProvider({ children }) {
 
   // ── API pública del contexto ──────────────────────────────────────────────
   return (
-    <AuthContext.Provider value={{ usuario, sesionExpirada, login, logout, clearExpirada, actualizarDatos }}>
+    <AuthContext.Provider value={{ usuario, sesionExpirada, login, logout, clearExpirada, actualizarDatos, verificarUsuario }}>
       {children}
     </AuthContext.Provider>
   );

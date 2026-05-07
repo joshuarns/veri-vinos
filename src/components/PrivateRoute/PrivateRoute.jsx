@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -17,11 +18,18 @@ import { useAuth } from "../../context/AuthContext";
  *     de vuelta a donde intentaba ir (en vez de siempre a /dashboard)
  *
  * Si el usuario SÍ está autenticado:
+ *   - Verifica que la cuenta sigue existiendo en WordPress (throttle 2 min)
+ *   - Si fue borrada, cierra sesión automáticamente
  *   - Renderiza <Outlet />, que React Router reemplaza con el hijo correspondiente
  */
 function PrivateRoute() {
-  const { usuario } = useAuth();
+  const { usuario, verificarUsuario } = useAuth();
   const location = useLocation();
+
+  // Verificar en cada navegación a ruta protegida si el usuario sigue activo en WP
+  useEffect(() => {
+    if (usuario) verificarUsuario();
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!usuario) {
     // replace:true evita que la ruta protegida quede en el historial del navegador,
