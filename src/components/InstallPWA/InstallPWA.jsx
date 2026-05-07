@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-const logo = "/logo192.png";
 import "./InstallPWA.css";
+
+const logo = "/logo192.png";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // InstallPWA
