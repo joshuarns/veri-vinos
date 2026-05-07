@@ -35,35 +35,27 @@ export const loginUsuario = async (username, password) => {
 };
 
 // ── createUser ────────────────────────────────────────────────────────────────
-// Registra un nuevo usuario en WordPress y lo marca como pendiente de aprobación.
-// El rol "vendor" da acceso limitado al WP admin (solo sus productos).
-// Tras crear el usuario, se escribe wp_user_is_approved=0 para que WP Approve
-// User lo bloquee hasta que el admin lo apruebe manualmente.
+// Registra un nuevo usuario vía el endpoint personalizado /ctr/v1/register.
+// Ese endpoint (definido en Code Snippets de WP) crea el usuario con wp_insert_user,
+// lo marca como pendiente de aprobación (wp_user_is_approved=0) y notifica al admin.
 export const createUser = async (userData) => {
+    const url = USE_PROXY ? '/api/register' : (() => {
+        // En desarrollo: construir la URL del endpoint personalizado
+        const wpRoot = BASE_URL_WP.replace('/wp/v2', '');
+        return `${wpRoot}/ctr/v1/register`;
+    })();
+
     const response = await axios.post(
-        `${BASE_URL_WP}/users`,
+        url,
         {
             username:   userData.username,
             email:      userData.email,
             password:   userData.password,
             first_name: userData.first_name,
             last_name:  userData.last_name,
-            roles:      ['vendor'],
         },
-        { auth },
+        USE_PROXY ? {} : { auth },
     );
-
-    // Marcar como pendiente de aprobación usando el mismo meta que WP Approve User.
-    // El snippet PHP registró este meta con show_in_rest:true para permitir esto.
-    try {
-        await axios.put(
-            `${BASE_URL_WP}/users/${response.data.id}`,
-            { meta: { wp_user_is_approved: 0 } },
-            { auth },
-        );
-    } catch {
-        // No es fatal — el snippet PHP también lo marca vía user_register hook
-    }
 
     return response.data;
 };
