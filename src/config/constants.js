@@ -66,8 +66,8 @@ export const REVALIDAR_CADA_MIN = 60;
 export const REVALIDAR_CADA_MS = REVALIDAR_CADA_MIN * 60 * 1000;
 
 // Throttle corto para la verificación en PrivateRoute (navegación entre páginas).
-// 2 minutos: lo suficiente para detectar usuarios borrados sin saturar la API.
-export const VERIFICAR_RUTA_MS = 2 * 60 * 1000;
+// 30 segundos: detecta usuarios borrados rápidamente sin saturar la API.
+export const VERIFICAR_RUTA_MS = 30 * 1000;
 
 
 // ── 4. KEYS DE LOCALSTORAGE ───────────────────────────────────────────────────

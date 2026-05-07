@@ -69,6 +69,9 @@ export function AuthProvider({ children }) {
     const data = { ...userData, loginAt: Date.now() };
     localStorage.setItem(STORAGE_KEY_USUARIO, JSON.stringify(data));
     localStorage.setItem(ULTIMA_VALIDACION_KEY, String(Date.now()));
+    // Resetear el throttle de verificación de ruta para que el primer
+    // acceso a una ruta protegida siempre verifique contra WordPress
+    localStorage.removeItem(STORAGE_KEY_ULTIMA_VERIFICACION_RUTA);
     setUsuario(data);
   }, []);
 
@@ -80,6 +83,7 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY_USUARIO);
     localStorage.removeItem(ULTIMA_VALIDACION_KEY);
+    localStorage.removeItem(STORAGE_KEY_ULTIMA_VERIFICACION_RUTA);
     setUsuario(null);
   }, []);
 
