@@ -41,7 +41,7 @@ function RegisterForm() {
         roles:      ["shop_manager"],
       });
 
-      setMessage({ text: "¡Registro exitoso! Ya puedes iniciar sesión.", type: "success" });
+      setMessage({ text: "¡Registro exitoso! Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.", type: "success" });
       setFormData({ username: "", email: "", password: "", first_name: "", last_name: "" });
       setAceptaTerminos(false);
 
