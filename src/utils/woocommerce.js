@@ -50,6 +50,9 @@ export const validarArchivos = (archivos) => {
 //   normalizarMetaValor("Solo reloj")  → "solo_reloj"
 //   normalizarMetaValor("Masculino")   → "hombre"
 export const normalizarMetaValor = (valor) => {
+  // Garantizar que siempre trabajamos con un string
+  if (Array.isArray(valor)) valor = valor[0] ?? '';
+  if (typeof valor !== 'string') valor = String(valor ?? '');
   // -1 es el valor que WPUF guarda cuando un select no tiene selección válida
   if (!valor || valor === '-1') return '';
 
@@ -113,6 +116,8 @@ export const normalizarMetaValor = (valor) => {
 //   stripUnidad("21cm")  → "21"
 //   stripUnidad("10atm") → "10"
 export const stripUnidad = (valor) => {
+  if (Array.isArray(valor)) valor = valor[0] ?? '';
+  if (typeof valor !== 'string') valor = String(valor ?? '');
   if (!valor || valor === '-1') return '';
   return valor.replace(/\s*(mm|cm|atm)\s*$/i, '').trim();
 };
@@ -128,10 +133,23 @@ export const stripUnidad = (valor) => {
 //   getMeta(producto.meta_data, "marca")      → "Rolex"
 //   getMeta(producto.meta_data, "no_existe")  → null
 export const getMeta = (meta_data = [], key) => {
-  // find() recorre el array y devuelve el primer elemento donde key coincide
   const campo = meta_data.find(m => m.key === key);
-  // Si no encontró nada, campo es undefined → devolvemos null
-  return campo?.value || null;
+  if (!campo) return null;
+
+  let val = campo.value;
+
+  // ACF SELECT puede guardar el valor como array ["acero"] en lugar de "acero".
+  // WooCommerce REST API lo devuelve deserializado como array de JS.
+  if (Array.isArray(val)) val = val[0] ?? null;
+
+  // ACF a veces guarda PHP serializado: 'a:1:{i:0;s:5:"acero";}'
+  // Extraemos el primer string entre comillas como fallback.
+  if (typeof val === 'string' && val.startsWith('a:')) {
+    const match = val.match(/s:\d+:"([^"]+)"/);
+    val = match ? match[1] : null;
+  }
+
+  return val || null;
 };
 
 
