@@ -12,6 +12,7 @@ import ErrorBoundary         from "./components/ErrorBoundary/ErrorBoundary";
 import NavbarMenu            from "./components/Navbar/Navbar";
 import PrivateRoute          from "./components/PrivateRoute/PrivateRoute";
 import Footer                from "./components/Footer/Footer";
+import InstallPWA            from "./components/InstallPWA/InstallPWA";
 import { Container }         from "react-bootstrap";
 
 // ── Páginas — carga diferida (lazy) ──────────────────────────────────────────
@@ -102,6 +103,7 @@ function App() {
               </Container>
 
               <Footer />
+              <InstallPWA />
             </Router>
           </ToastProvider>
         </WatchlistProvider>

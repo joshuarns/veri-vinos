@@ -1,0 +1,153 @@
+/* ── Fondo oscuro ── */
+.pwaMask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;        /* Card sube desde abajo */
+  justify-content: center;
+  padding: 0 0 20px;
+  animation: pwaMaskIn 0.3s ease;
+}
+
+@keyframes pwaMaskIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Card ── */
+.pwaCard {
+  position: relative;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 36px 28px 28px;
+  width: calc(100% - 32px);
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: pwaCardIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pwaCardIn {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Logo ── */
+.pwaLogoWrap {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+  background: #f5f5f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.pwaLogo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+/* ── Textos ── */
+.pwaTitle {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+.pwaSubtitle {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #6e6e73;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* ── Pasos ── */
+.pwaPasos {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  width: 100%;
+}
+
+.pwaPaso {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f5;
+  text-align: left;
+}
+
+.pwaPaso:last-child {
+  border-bottom: none;
+}
+
+.pwaPasoIcono {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.pwaPasoTexto {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #1d1d1f;
+  line-height: 1.4;
+}
+
+/* ── Botón principal ── */
+.pwaBtnEntendido {
+  width: 100%;
+  padding: 15px;
+  background: #1c2946;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.pwaBtnEntendido:hover {
+  background: #253761;
+  transform: scale(1.01);
+}
+
+/* ── Botón cerrar ── */
+.pwaBtnCerrar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #e8e8ed;
+  color: #6e6e73;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.pwaBtnCerrar:hover {
+  background: #d1d1d6;
+}
