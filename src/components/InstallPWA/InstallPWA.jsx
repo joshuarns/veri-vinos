@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logo from "../../assets/images/logo-compra-tu-reloj-1.png";
+const logo = "/logo192.png";
 import "./InstallPWA.css";
 
 // ─────────────────────────────────────────────────────────────────────────────
