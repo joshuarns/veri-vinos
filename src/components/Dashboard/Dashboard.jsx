@@ -33,6 +33,41 @@ import { useSEO } from "../../hooks/useSEO";
 import './Dashboard.css';
 import '../../App.css'; // Estilos globales: .apiErrorCard, .bannerSingle
 
+const POR_PAGINA_RELOJES  = 8;
+const POR_PAGINA_COMPRAS  = 10;
+
+// ── Paginación reutilizable ───────────────────────────────────────────────────
+function Paginacion({ paginaActual, totalPaginas, onChange }) {
+  if (totalPaginas <= 1) return null;
+  return (
+    <div className="dashPaginacion">
+      <button
+        className="dashPagBtn"
+        disabled={paginaActual === 1}
+        onClick={() => onChange(paginaActual - 1)}
+      >
+        ‹
+      </button>
+      {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(n => (
+        <button
+          key={n}
+          className={`dashPagBtn${n === paginaActual ? " dashPagActivo" : ""}`}
+          onClick={() => onChange(n)}
+        >
+          {n}
+        </button>
+      ))}
+      <button
+        className="dashPagBtn"
+        disabled={paginaActual === totalPaginas}
+        onClick={() => onChange(paginaActual + 1)}
+      >
+        ›
+      </button>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────
 // SUB-COMPONENTE: Tab "Mis relojes"
 // Muestra la tabla de relojes publicados por el usuario actual.
@@ -41,8 +76,8 @@ function MisRelojes({ usuario }) {
   const [relojes, setRelojes]   = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError]       = useState(false);
-  // Incrementar este contador dispara el useEffect de nuevo (patrón de reintento)
   const [reintento, setReintento] = useState(0);
+  const [pagina, setPagina]     = useState(1);
 
   // `activo` evita setState si el componente se desmonta antes de que
   // la petición responda (ej. el usuario cambia de tab muy rápido).
@@ -50,6 +85,7 @@ function MisRelojes({ usuario }) {
     let activo = true;
     setCargando(true);
     setError(false);
+    setPagina(1);
 
     obtenerMisProductos(usuario.id)
       .then(data  => { if (activo) setRelojes(data); })
@@ -61,6 +97,9 @@ function MisRelojes({ usuario }) {
 
     return () => { activo = false; };
   }, [usuario.id, reintento]);
+
+  const totalPaginas  = Math.ceil(relojes.length / POR_PAGINA_RELOJES);
+  const relojesPagina = relojes.slice((pagina - 1) * POR_PAGINA_RELOJES, pagina * POR_PAGINA_RELOJES);
 
   // Tarjeta de error con botón de reintentar
   if (error) return (
@@ -106,7 +145,7 @@ function MisRelojes({ usuario }) {
           </tr>
         </thead>
         <tbody>
-          {relojes.map((reloj) => {
+          {relojesPagina.map((reloj) => {
             const marca = getMeta(reloj.meta_data, "marca");
             return (
               <tr key={reloj.id}>
@@ -143,6 +182,7 @@ function MisRelojes({ usuario }) {
           })}
         </tbody>
       </table>
+      <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} onChange={setPagina} />
     </div>
   );
 }
@@ -158,6 +198,7 @@ function MisCompras({ usuario }) {
   const [cargando, setCargando] = useState(true);
   const [error, setError]       = useState(false);
   const [reintento, setReintento] = useState(0);
+  const [pagina, setPagina]     = useState(1);
 
   // Mismo patrón que MisRelojes: `activo` protege los setters
   // si el componente se desmonta mientras la petición está en vuelo.
@@ -165,6 +206,7 @@ function MisCompras({ usuario }) {
     let activo = true;
     setCargando(true);
     setError(false);
+    setPagina(1);
 
     obtenerMisPedidos(usuario.email)
       .then(data  => { if (activo) setPedidos(data); })
@@ -176,6 +218,9 @@ function MisCompras({ usuario }) {
 
     return () => { activo = false; };
   }, [usuario.email, reintento]);
+
+  const totalPaginas  = Math.ceil(pedidos.length / POR_PAGINA_COMPRAS);
+  const pedidosPagina = pedidos.slice((pagina - 1) * POR_PAGINA_COMPRAS, pagina * POR_PAGINA_COMPRAS);
 
   // Tarjeta de error con botón de reintentar
   if (error) return (
@@ -219,7 +264,7 @@ function MisCompras({ usuario }) {
           </tr>
         </thead>
         <tbody>
-          {pedidos.map((pedido) => {
+          {pedidosPagina.map((pedido) => {
             // Formateamos la fecha de WooCommerce (ISO 8601) a español legible
             const fecha = new Date(pedido.date_created).toLocaleDateString("es-MX", {
               year: "numeric", month: "short", day: "numeric",
@@ -256,6 +301,7 @@ function MisCompras({ usuario }) {
           })}
         </tbody>
       </table>
+      <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} onChange={setPagina} />
     </div>
   );
 }

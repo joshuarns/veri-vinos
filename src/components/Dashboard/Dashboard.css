@@ -287,3 +287,44 @@
         padding: 12px 14px;
     }
 }
+
+/* ── PAGINACIÓN ─────────────────────────────────── */
+.dashPaginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 0 8px;
+}
+
+.dashPagBtn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #d1d1d6;
+    border-radius: 8px;
+    background: #fff;
+    color: #1c2946;
+    font-family: "Mulish", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.dashPagBtn:hover:not(:disabled) {
+    background: #f2f4f8;
+    border-color: #1c2946;
+}
+
+.dashPagBtn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.dashPagBtn.dashPagActivo {
+    background: #1c2946;
+    border-color: #1c2946;
+    color: #fff;
+    font-weight: 700;
+}
