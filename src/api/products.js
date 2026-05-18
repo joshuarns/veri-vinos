@@ -86,69 +86,22 @@ export const obtenerProductosPorCategoria = async (slug, page = 1, perPage = 12)
 };
 
 // ── obtenerMisProductos ───────────────────────────────────────────────────────
-// Trae los productos de un vendedor usando un enfoque híbrido:
-//
-//   1. Productos CON `vendedor_id` en meta_data → filtrar por ese campo.
-//      Es el caso de todos los productos creados desde FormSellWatch.
-//      Garantiza que el reloj de otro usuario nunca aparezca aquí.
-//
-//   2. Productos SIN `vendedor_id` → son productos creados directamente desde
-//      el admin de WordPress. Para esos, filtramos por author vía WP REST API
-//      (el autor sí se asigna bien en el admin de WP).
-//
-// Ambos conjuntos se fusionan y deduplicан por ID.
+// Filtra por el meta campo `vendedor_id` que FormSellWatch y EditWatch
+// guardan con el ID real del vendedor. Es el único filtro confiable porque
+// el filtro ?author= de WP REST API no funciona correctamente para el CPT
+// `product` cuando se usan credenciales de admin.
 export const obtenerMisProductos = async (vendedorId) => {
     const idStr = String(vendedorId);
 
-    // ── Paso 1: traer todos los productos (con meta_data incluido) ────────────
     const wcRespuesta = await axios.get(`${BASE_URL}/products`, {
         params: { status: 'any', per_page: 100 },
         auth,
     });
     const todos = Array.isArray(wcRespuesta.data) ? wcRespuesta.data : [];
 
-    // Separar productos según tengan o no `vendedor_id`
-    const conVendedorId  = [];
-    const sinVendedorId  = [];
-
-    for (const p of todos) {
+    return todos.filter(p => {
         const meta = (p.meta_data || []).find(m => m.key === 'vendedor_id');
-        if (meta?.value && meta.value !== '-1') {
-            conVendedorId.push(p);
-        } else {
-            sinVendedorId.push(p);
-        }
-    }
-
-    // Filtrar por vendedor_id estrictamente
-    const porMeta = conVendedorId.filter(p => {
-        const meta = (p.meta_data || []).find(m => m.key === 'vendedor_id');
-        return meta.value === idStr;
-    });
-
-    // ── Paso 2: para los sin vendedor_id, consultar author vía WP REST API ────
-    let porAutor = [];
-    if (sinVendedorId.length > 0) {
-        try {
-            const wpRespuesta = await axios.get(`${BASE_URL_WP}/product`, {
-                params: { author: vendedorId, status: 'any', per_page: 100, _fields: 'id' },
-                auth,
-            });
-            const wpIds = new Set(
-                (Array.isArray(wpRespuesta.data) ? wpRespuesta.data : []).map(p => p.id)
-            );
-            porAutor = sinVendedorId.filter(p => wpIds.has(p.id));
-        } catch {
-            // Si falla la consulta WP (p.ej. captcha), omitir silenciosamente
-        }
-    }
-
-    // ── Fusionar y deduplicar por ID ──────────────────────────────────────────
-    const vistos = new Set();
-    return [...porMeta, ...porAutor].filter(p => {
-        if (vistos.has(p.id)) return false;
-        vistos.add(p.id);
-        return true;
+        return meta?.value === idStr;
     });
 };
 

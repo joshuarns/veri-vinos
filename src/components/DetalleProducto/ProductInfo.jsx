@@ -73,7 +73,6 @@ function ProductInfo({ producto }) {
             { label: "Marca",             value: getMeta(m, "marca") },
             { label: "Modelo",            value: getMeta(m, "modelo") },
             { label: "Referencia",        value: getMeta(m, "referencia") },
-            { label: "Número de serie",   value: getMeta(m, "numero_de_serie") },
             { label: "Año de producción", value: getMeta(m, "ano_de_fabricacion") },
             { label: "Género",            value: getMeta(m, "genero") },
           ]}
