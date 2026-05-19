@@ -13,8 +13,8 @@ function ProductCard({ producto }) {
   const { enWatchlist, toggleWatchlist } = useWatchlist();
   const guardado = enWatchlist(producto.id);
 
-  return (
-    <div className="productCard">
+  const cardContent = (
+    <>
       {/* Imagen */}
       <div className="productCardImgWrap">
         {imagen ? (
@@ -49,12 +49,20 @@ function ProductCard({ producto }) {
         {producto.stock_status === 'outofstock' ? (
           <span className="btnVerProducto btnVerProductoAgotado">Sin existencia</span>
         ) : (
-          <Link to={`/producto/${producto.id}`} className="btnVerProducto">
-            Ver detalles
-          </Link>
+          <span className="btnVerProducto">Ver detalles</span>
         )}
       </div>
+    </>
+  );
+
+  return producto.stock_status === 'outofstock' ? (
+    <div className="productCard">
+      {cardContent}
     </div>
+  ) : (
+    <Link to={`/producto/${producto.id}`} className="productCard productCardLink">
+      {cardContent}
+    </Link>
   );
 }
 

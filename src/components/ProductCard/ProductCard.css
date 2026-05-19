@@ -10,6 +10,20 @@
   flex-direction: column;
   height: 100%;
   text-decoration: none;
+  color: inherit;
+}
+
+/* Cuando la card entera es un Link */
+.productCardLink {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.productCardLink:hover {
+  color: inherit;
+  text-decoration: none;
 }
 
 .productCard:hover {
