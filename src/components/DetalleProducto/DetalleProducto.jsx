@@ -317,7 +317,13 @@ function DetalleProducto() {
         </Row>
 
         {/* ════════════════════════════════════════════════════
-            SECCIÓN MEDIA: Descripción editorial full-width
+            SECCIÓN MEDIA: Especificaciones técnicas
+            Se renderizan como grid de tarjetas en ProductInfo
+            ════════════════════════════════════════════════════ */}
+        <ProductInfo producto={producto} />
+
+        {/* ════════════════════════════════════════════════════
+            SECCIÓN INFERIOR: Descripción editorial full-width
             ════════════════════════════════════════════════════ */}
         {producto.description && (
           <div className="singleDescSection">
@@ -331,12 +337,6 @@ function DetalleProducto() {
             />
           </div>
         )}
-
-        {/* ════════════════════════════════════════════════════
-            SECCIÓN INFERIOR: Especificaciones técnicas
-            Se renderizan como grid de tarjetas en ProductInfo
-            ════════════════════════════════════════════════════ */}
-        <ProductInfo producto={producto} />
 
       </Container>
 
