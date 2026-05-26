@@ -1,3 +1,5 @@
+import filosofiaImg from '../assets/img/nuestra-filosofia.jpg'
+
 const values = [
   {
     icon: 'eco',
@@ -34,7 +36,7 @@ export default function Philosophy() {
           </div>
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzGWFpQEXFSsA91mUwqNUKfJW4krKfVGSRV83UKebI5KWs9sP1A7HGAN39tPcAqFOv08nsz93ynYRQwmoHzCymL1lcjD_XJTaNgTPOu4G4OAENieWZTyoI22KO_xjoBo9jZ-jtsTKm1bcbcp9MYBHIU3tk9TeI1RBcpvTxma8h2VYoxYOwLQMcBAkpHiclCTBQ92IEnQ0Io376FrFuhnjBKLUmWoE70wz6i0_bqHoXOI-vv5XWJb35bqvDYmaasLU4m7DYlOB4pns"
+              src={filosofiaImg}
               alt="Viñedos de Italia"
               className="w-full h-full object-cover"
             />
