@@ -1,3 +1,5 @@
+import historiasImg from '../assets/img/historias-con-alma.jpg'
+
 export default function Producers() {
   return (
     <section className="py-24 md:py-32 bg-surface-container-low">
@@ -11,7 +13,7 @@ export default function Producers() {
             <div className="aspect-[4/5] overflow-hidden rounded-2xl">
               <img
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzGWFpQEXFSsA91mUwqNUKfJW4krKfVGSRV83UKebI5KWs9sP1A7HGAN39tPcAqFOv08nsz93ynYRQwmoHzCymL1lcjD_XJTaNgTPOu4G4OAENieWZTyoI22KO_xjoBo9jZ-jtsTKm1bcbcp9MYBHIU3tk9TeI1RBcpvTxma8h2VYoxYOwLQMcBAkpHiclCTBQ92IEnQ0Io376FrFuhnjBKLUmWoE70wz6i0_bqHoXOI-vv5XWJb35bqvDYmaasLU4m7DYlOB4pns"
+                src={historiasImg}
                 alt="Famiglia Altieri"
               />
             </div>
