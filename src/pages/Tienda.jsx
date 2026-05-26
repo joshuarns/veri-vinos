@@ -65,7 +65,7 @@ export default function Tienda() {
         </div>
 
         {/* Filter Bar */}
-        <section className="sticky top-[72px] z-40 bg-surface/80 backdrop-blur-sm py-6 mb-12 border-b border-outline-variant/20">
+        <section className="py-6 mb-12 border-b border-outline-variant/20">
           <div className="flex flex-wrap items-center justify-between gap-6">
             {/* Dropdowns */}
             <div className="flex flex-wrap items-center gap-4 md:gap-8">

@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button className="bg-white text-primary px-10 py-5 rounded-full font-label-caps text-[11px] hover:bg-secondary hover:text-white transition-all duration-500 tracking-[0.2em] w-full sm:w-auto">
-            EXPLORAR TIENDA
+            EXPLORAR VINOS
           </button>
           <button className="border border-white/30 text-white backdrop-blur-sm px-10 py-5 rounded-full font-label-caps text-[11px] hover:bg-white/10 transition-all duration-500 tracking-[0.2em] w-full sm:w-auto">
             NUESTRA HISTORIA
