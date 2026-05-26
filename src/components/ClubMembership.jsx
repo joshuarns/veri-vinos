@@ -1,3 +1,5 @@
+import clubImg from '../assets/img/club-vini-veri.jpg'
+
 const benefits = [
   { icon: 'local_shipping', text: 'Envío gratuito en todos los pedidos' },
   { icon: 'wine_bar',       text: 'Acceso anticipado a nuevas cosechas' },
@@ -14,11 +16,11 @@ export default function ClubMembership() {
       {/* Fondo con imagen y overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD06Pe9B7MMWN0XTYd5wYTlIoqQQXHdq0oH_0KO4XrtAu-kpI6ss_gAt7X2-cQ-M_4ETA_YPiYXegBotmBg9lBj_PQ8TsEClJHqeuEr3wFVoKIQTQrolO2HlAcZp-2BkGD8htWgb-HKpU9eC6xnn3TXkVoJiMZ9o7sSwZu_HJA6TNDUVBYl5YMQLD9FgnxlWIJ5Wkfw6mCI3F2T91vN2nO6KdguvYs3jMnPKb0IRmh7_vxr6z-_P75H6TN8nMPbhJUGMoNLc0SjdH0"
+          src={clubImg}
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-primary/88" />
+        <div className="absolute inset-0 bg-primary/60" />
       </div>
 
       <div className="relative z-10 max-w-container-max mx-auto">
@@ -56,7 +58,7 @@ export default function ClubMembership() {
               {benefits.map((b) => (
                 <li key={b.icon} className="flex items-center gap-5">
                   <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-secondary text-sm">{b.icon}</span>
+                    <span className="material-symbols-outlined text-white text-sm">{b.icon}</span>
                   </div>
                   <span className="text-white/80 text-sm font-body-md">{b.text}</span>
                 </li>

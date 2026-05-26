@@ -1,10 +1,12 @@
+import heroBanner from '../assets/img/hero-banner-home.jpg'
+
 export default function Hero() {
   return (
     <header className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-primary">
       <img
         alt="Vineyard at dawn"
         className="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD06Pe9B7MMWN0XTYd5wYTlIoqQQXHdq0oH_0KO4XrtAu-kpI6ss_gAt7X2-cQ-M_4ETA_YPiYXegBotmBg9lBj_PQ8TsEClJHqeuEr3wFVoKIQTQrolO2HlAcZp-2BkGD8htWgb-HKpU9eC6xnn3TXkVoJiMZ9o7sSwZu_HJA6TNDUVBYl5YMQLD9FgnxlWIJ5Wkfw6mCI3F2T91vN2nO6KdguvYs3jMnPKb0IRmh7_vxr6z-_P75H6TN8nMPbhJUGMoNLc0SjdH0"
+        src={heroBanner}
       />
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <span className="font-label-caps text-white/80 mb-6 block tracking-[0.4em] uppercase text-[10px] md:text-xs">
