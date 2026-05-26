@@ -11,7 +11,7 @@ export default function Hero() {
           Exclusividad en cada gota
         </span>
         <h2 className="font-display-script text-white text-7xl md:text-9xl leading-[0.9] hero-text-shadow mb-8">
-          El Alma de la Tierra
+          Veri Vinos
         </h2>
         <p className="font-body-lg text-white/70 max-w-xl mx-auto mb-12 text-sm md:text-lg">
           Una curaduría artesanal de los viñedos más puros de Italia, traídos directamente a su mesa con respeto por la tradición.
