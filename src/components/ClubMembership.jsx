@@ -37,7 +37,7 @@ export default function ClubMembership() {
             </p>
 
             <div className="flex items-baseline gap-3 mb-10">
-              <span className="font-display-script text-white text-5xl">29€</span>
+              <span className="font-display-script text-white text-5xl">$1,200</span>
               <span className="font-label-caps text-white/40 text-[10px] tracking-widest">/ MES · SIN PERMANENCIA</span>
             </div>
 
