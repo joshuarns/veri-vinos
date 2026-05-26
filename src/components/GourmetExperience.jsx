@@ -1,3 +1,6 @@
+import aceiteImg from '../assets/img/aceites-virgenes.jpg'
+import embutidosImg from '../assets/img/embutidos-nobles.jpg'
+
 const items = [
   {
     id: 1,
@@ -9,13 +12,13 @@ const items = [
     id: 2,
     name: 'Aceites Vírgenes',
     offset: true,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAi36a_KzRqo91Ag715mbdw2q7bSkpJWhfRk3uyYfMqH_CznsTa8JSNEGuhJRue3ieiJp14RnttFagnUzsXNPCONQ0fKh46mTmhgF4nWlHyeKvU-MJnuwMg4z6uljpVHzdlunIfYeMPUXwtAfNMXwrBWVV45FcFlA22Z_omZSmDokTDD7gu4T6K8bi97yDNe80k1RtqCeClnRFa1uXSaC60mte2iofNYbUdeQolyP9yRyQs0TO3O5LfcpDJ9CCSRAdpKiQ0ZzSZAzc',
+    img: aceiteImg,
   },
   {
     id: 3,
     name: 'Embutidos Nobles',
     offset: false,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCQsVwPn5fDzL8qSa2EcjtFnFvWoAfMyuAGzv1K7oA5j5Z0TRJlqs769O_GkvlBLKQwmUBIFdrnyLn2clI6O03Fv_8-stYK2YtFZOcHZzdrYN3Do_imbjuhpcQKSUQILtOrY-dkb8kvmpy1kvt3qrZdWOJJP64mtioq7mW_05tTrzBjCHm1Vw_jY',
+    img: embutidosImg,
   },
 ]
 
