@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -22,6 +23,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const { pathname } = useLocation()
+
   return (
     <>
       <nav
@@ -34,12 +37,12 @@ export default function Navbar() {
           >
             <span className="material-symbols-outlined">menu</span>
           </button>
-          <h1 className="font-display-script text-headline-sm md:text-headline-md text-primary tracking-tighter">VINI VERI</h1>
+          <Link to="/" className="font-display-script text-headline-sm md:text-headline-md text-primary tracking-tighter">VINI VERI</Link>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex gap-8 mr-8">
-              <a className="text-secondary font-label-caps tracking-widest text-[11px] border-b border-secondary" href="#">INICIO</a>
-              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">PRODUCTORES</a>
-              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">VINOS</a>
+              <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>INICIO</Link>
+              <Link to="#" className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors">PRODUCTORES</Link>
+              <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>VINOS</Link>
             </div>
             <button className="p-2 hover:bg-surface-variant/20 rounded-full transition-colors text-primary relative">
               <span className="material-symbols-outlined">shopping_bag</span>

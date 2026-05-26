@@ -15,6 +15,10 @@
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f7ece2; }
+::-webkit-scrollbar-thumb { background: #924753; border-radius: 10px; }
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hero-text-shadow { text-shadow: 0 4px 30px rgba(0,0,0,0.1); }
