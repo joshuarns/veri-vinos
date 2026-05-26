@@ -38,8 +38,8 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <div className="hidden md:flex gap-8 mr-8">
               <a className="text-secondary font-label-caps tracking-widest text-[11px] border-b border-secondary" href="#">INICIO</a>
-              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">TIENDA</a>
-              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">NOSOTROS</a>
+              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">PRODUCTORES</a>
+              <a className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors" href="#">VINOS</a>
             </div>
             <button className="p-2 hover:bg-surface-variant/20 rounded-full transition-colors text-primary relative">
               <span className="material-symbols-outlined">shopping_bag</span>
@@ -66,11 +66,11 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="flex flex-col gap-6">
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">La Selección</a>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Regiones de Italia</a>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Productores</a>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Experiencia Gourmet</a>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Club de Miembros</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Nosotros</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">News</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Contacto</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Gourmet</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Aprende (FAQ)</a>
             </nav>
           </div>
           <div className="border-t border-outline-variant/30 pt-8">

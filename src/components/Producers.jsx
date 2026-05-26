@@ -1,4 +1,6 @@
 import historiasImg from '../assets/img/historias-con-alma.jpg'
+import team01Img from '../assets/img/team-01.jpg'
+import team02Img from '../assets/img/team-02.jpg'
 
 export default function Producers() {
   return (
@@ -31,7 +33,7 @@ export default function Producers() {
               <div className="w-32 h-32 flex-shrink-0 rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWAZYXehk6NE4gEk5BzW9CWbYfxoJHAv1mCco9IgQsX2i4wo4YgANGMmdESq4l5uazAUMJYO2xvHIxLCKKxyZwPX2iX_uLyaHNNGPlxGwnmKzHes48aF_BBu7q0XOksHHQZ9kXajfz_e8ytU0UewuxI1sCmRSrSNMM-DDcMnSVUkmaBTsAKzM_7lr8TQ36BiwYQSiezFz2fe-NAcJtdIMxpyQdF9mO0OkZlRBPhkJYwNfaHk71vCA6_u3t-DakMjhAMA8tRG5E-KM"
+                  src={team01Img}
                   alt="Tenuta del Sole"
                 />
               </div>
@@ -46,7 +48,7 @@ export default function Producers() {
               <div className="w-32 h-32 flex-shrink-0 rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuARWko94B_9EkePkWyUf82euubNgQcqsC0Kz4raPxjFZwyQ0Mkp5NjS3VN_Wi6AxU8OiJptPU0vFOcaSsIbP_aYURa09tDz_gTKyMM6AmPYXjxKrI7zDNskPiCDntBEUvcT2q0y7-SLJv5hDL6HxFmGkl3CQFNonhLTUm6tSAWon8hx7ewNR2IMnh9FXcsQ2pfkMcZX0237YdWHkHvMtFOP6yOBdtIQnYG2dAQgohUntzmbY8VHGfsBwbjhmK6Zcgd0PSOwal9kwg"
+                  src={team02Img}
                   alt="Cantina di Marco"
                 />
               </div>
