@@ -30,7 +30,7 @@ export default function ClubMembership() {
           <div>
             <span className="font-label-caps text-secondary-container block mb-6 tracking-[0.3em]">MEMBRESÍA EXCLUSIVA</span>
             <h3 className="font-display-script text-5xl md:text-6xl text-white mb-8 leading-tight">
-              Club Vini Veri
+              Club Veri Vinos
             </h3>
             <p className="text-white/60 font-body-lg text-sm md:text-base leading-relaxed mb-10">
               Únase a nuestra comunidad de amantes del vino natural y disfrute de privilegios diseñados para quienes valoran la autenticidad. Cada mes, una selección curada llega a su puerta.

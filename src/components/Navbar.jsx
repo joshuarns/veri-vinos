@@ -37,7 +37,7 @@ export default function Navbar({ barVisible = false }) {
           >
             <span className="material-symbols-outlined">menu</span>
           </button>
-          <Link to="/" className="font-display-script text-headline-sm md:text-headline-md text-primary tracking-tighter">VINI VERI</Link>
+          <Link to="/" className="font-display-script text-headline-sm md:text-headline-md text-primary tracking-tighter">Veri Vinos</Link>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex gap-8 mr-8">
               <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>INICIO</Link>
@@ -63,7 +63,7 @@ export default function Navbar({ barVisible = false }) {
         <div className="p-12 h-full flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-16">
-              <h2 className="font-display-script text-headline-md text-secondary">Vini Veri</h2>
+              <h2 className="font-display-script text-headline-md text-secondary">Veri Vinos</h2>
               <button className="p-2" onClick={() => setDrawerOpen(false)}>
                 <span className="material-symbols-outlined">close</span>
               </button>

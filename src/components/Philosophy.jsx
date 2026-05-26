@@ -31,7 +31,7 @@ export default function Philosophy() {
               "El vino natural no es una tendencia. Es una memoria."
             </blockquote>
             <p className="text-on-surface-variant/70 font-body-md leading-relaxed max-w-md">
-              Fundada sobre la convicción de que la tierra habla cuando no se la interrumpe, Vini Veri nació para llevar a su mesa lo que los viñedos italianos tienen que decir.
+              Fundada sobre la convicción de que la tierra habla cuando no se la interrumpe, Veri Vinos nació para llevar a su mesa lo que los viñedos italianos tienen que decir.
             </p>
           </div>
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">

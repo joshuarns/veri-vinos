@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-container-max mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1">
-            <h2 className="font-display-script text-3xl mb-8 tracking-tighter">VINI VERI</h2>
+            <h2 className="font-display-script text-3xl mb-8 tracking-tighter">VERI VINOS</h2>
             <p className="text-white/60 text-sm leading-relaxed mb-8">
               Dedicados a la preservación y promoción de la cultura vinícola artesanal italiana. Calidad sin compromisos.
             </p>
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-white/5">
-          <p className="text-[10px] text-white/30 tracking-widest uppercase">© 2024 VINI VERI. TRADICIÓN EMBOTELLADA.</p>
+          <p className="text-[10px] text-white/30 tracking-widest uppercase">© 2024 VERI VINOS. TRADICIÓN EMBOTELLADA.</p>
           <div className="flex gap-8 text-[10px] text-white/30 tracking-widest uppercase">
             <a className="hover:text-white transition-colors" href="#">Privacidad</a>
             <a className="hover:text-white transition-colors" href="#">Legal</a>

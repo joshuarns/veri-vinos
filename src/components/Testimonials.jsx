@@ -8,7 +8,7 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: 'La curaduría de Vini Veri es impecable. Me fío de su selección con los ojos cerrados. Es el regalo perfecto para cualquier ocasión.',
+    quote: 'La curaduría de Veri Vinos es impecable. Me fío de su selección con los ojos cerrados. Es el regalo perfecto para cualquier ocasión.',
     name: 'Carlos Fuentes',
     detail: 'Chef · Madrid',
     wine: 'Barolo Gran Riserva',
