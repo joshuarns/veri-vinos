@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import AnnouncementBar from '../components/AnnouncementBar'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
@@ -11,10 +12,12 @@ import ClubMembership from '../components/ClubMembership'
 import Footer from '../components/Footer'
 
 export default function Home() {
+  const [barVisible, setBarVisible] = useState(true)
+
   return (
     <>
-      <AnnouncementBar />
-      <Navbar />
+      {barVisible && <AnnouncementBar onClose={() => setBarVisible(false)} />}
+      <Navbar barVisible={barVisible} />
       <Hero />
       <main>
         <WineSelection />

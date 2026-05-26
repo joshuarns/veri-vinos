@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar({ barVisible = false }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300 ${scrolled ? 'py-3 top-0' : 'py-5 top-[38px]'} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
+        className={`fixed left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300 ${scrolled ? 'py-3 top-0' : `py-5 ${barVisible ? 'top-[38px]' : 'top-0'}`} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
           <button
