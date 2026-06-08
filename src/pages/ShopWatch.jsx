@@ -86,7 +86,7 @@ function ShopWatch() {
           <p>
             {nombreCategoria
               ? `Mostrando todos los relojes de la marca ${nombreCategoria}.`
-              : "Encuentra el reloj que siempre quisiste."}
+              : "Encuentra el reloj de tus sueños."}
           </p>
         </div>
 
