@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import guiaImg from '../../assets/images/guia-reloj.jpg';
 import './GuiaFotos.css';
+
+const guiaImg = '/guia-reloj.jpg';
 
 function GuiaFotos({ onClose }) {
   // Cerrar con Escape
