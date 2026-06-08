@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Logo from '../../assets/images/ctr-logo-white.png';
+import Logo from '../../assets/images/logo-ctr-gold.png';
 import './Footer.css';
 
 function Footer() {

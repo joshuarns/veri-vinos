@@ -25,7 +25,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth }      from "../../context/AuthContext";
 import { useWatchlist } from "../../context/WatchlistContext";
 
-import Logo from "../../assets/images/logo-compra-tu-reloj-1.png";
+import Logo from "../../assets/images/logo-ctr-gold.png";
 import "./Navbar.css";
 
 // Links de navegación principal — extraídos como constante para no duplicar

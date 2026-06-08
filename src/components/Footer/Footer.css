@@ -17,8 +17,6 @@
 
 .footerLogo {
   width: 180px;
-  filter: brightness(0) invert(1); /* convierte el logo a blanco */
-  opacity: 0.9;
 }
 
 .footerColTitle {
