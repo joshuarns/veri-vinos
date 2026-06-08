@@ -217,6 +217,7 @@ export const crearResena = async (_ignored, { nombre, email, resena, calificacio
         reviewer_email:  email,
         review:          resena,
         rating:          calificacion,
+        status:          'hold', // pendiente de aprobación — evita auto-aprobación por credenciales admin
     }, { auth });
     return response.data;
 };
