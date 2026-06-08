@@ -136,10 +136,38 @@ export const crearProducto = async (productoData, autorId) => {
 };
 
 // ── actualizarProducto ────────────────────────────────────────────────────────
-// Actualiza un producto existente por su ID.
-// Llamado desde EditWatch cuando el vendedor guarda cambios.
-// Solo se envían los campos que se quieren actualizar (PUT parcial).
 export const actualizarProducto = async (id, productoData) => {
     const response = await axios.put(`${BASE_URL}/products/${id}`, productoData, { auth });
+    return response.data;
+};
+
+// ── eliminarProducto ──────────────────────────────────────────────────────────
+// Mueve el producto a la papelera de WooCommerce (force=false).
+// Llamado desde el Dashboard cuando el vendedor elimina un reloj.
+export const eliminarProducto = async (id) => {
+    const response = await axios.delete(`${BASE_URL}/products/${id}`, { params: { force: false }, auth });
+    return response.data;
+};
+
+// ── obtenerResenas ────────────────────────────────────────────────────────────
+// Trae las reseñas aprobadas del producto ancla (REVIEWS_PRODUCT_ID).
+export const obtenerResenas = async (productId, perPage = 20) => {
+    const response = await axios.get(`${BASE_URL}/products/reviews`, {
+        params: { product: productId, status: 'approved', per_page: perPage },
+        auth,
+    });
+    return Array.isArray(response.data) ? response.data : [];
+};
+
+// ── crearResena ───────────────────────────────────────────────────────────────
+// Envía una reseña pública al producto ancla.
+export const crearResena = async (productId, { nombre, email, resena, calificacion }) => {
+    const response = await axios.post(`${BASE_URL}/products/reviews`, {
+        product_id:      productId,
+        reviewer:        nombre,
+        reviewer_email:  email,
+        review:          resena,
+        rating:          calificacion,
+    }, { auth });
     return response.data;
 };

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import ListaProductos from "../components/ListaProductos/ListaProductos";
 import PopularModels from "../components/PopularModels/PopularModels";
+import CarruselResenas from "../components/CarruselResenas/CarruselResenas";
 import { useSEO } from "../hooks/useSEO";
 import aboutImg from "../assets/images/f335eec8.jpg";
 import "./Home.css";
@@ -170,6 +171,11 @@ function Home() {
           </div>
         </Container>
       </section>
+
+      {/* ════════════════════════════════════════════
+          RESEÑAS — carrusel estilo Apple
+          ════════════════════════════════════════════ */}
+      <CarruselResenas />
 
     </div>
   );

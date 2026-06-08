@@ -171,7 +171,7 @@ function TerminosCondiciones() {
                 <strong>Teléfono:</strong>{" "}
                 <a href="tel:5545116894" style={{ color: "#1c2946" }}>55 4511 6894</a>
               </li>
-              <li><strong>Dirección:</strong> Rio Tiber 100, Cuauhtémoc, Ciudad de México</li>
+              <li><strong>Dirección:</strong> Duraznos 65, Bosques de las Lomas, Ciudad de México</li>
             </ul>
           </Section>
 

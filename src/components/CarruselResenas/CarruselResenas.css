@@ -1,0 +1,294 @@
+.resenasSection {
+  background: #fff;
+  padding: 80px 0 90px;
+}
+
+.resenasHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.resenasTitle {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+.resenasSubtitle {
+  font-family: "Mulish", sans-serif;
+  font-size: 15px;
+  color: #6e6e73;
+  margin: 0;
+}
+
+.resenasBtn {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c2946;
+  background: transparent;
+  border: 2px solid #1c2946;
+  border-radius: 30px;
+  padding: 10px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.resenasBtn:hover {
+  background: #1c2946;
+  color: #fff;
+}
+
+.resenasCarrusel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.resenasTrack {
+  flex: 1;
+  overflow: hidden;
+}
+
+.resenasArrow {
+  background: none;
+  border: 1.5px solid #d1d1d6;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  color: #1d1d1f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.resenasArrow:hover {
+  border-color: #1c2946;
+  color: #1c2946;
+}
+
+.resenasIndicadores {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.resenaDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d1d6;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.resenaDot.activo {
+  background: #1c2946;
+  transform: scale(1.3);
+}
+
+/* ── Tarjeta ── */
+.resenaTarjeta {
+  background: #f5f5f7;
+  border-radius: 18px;
+  padding: 36px 40px;
+  text-align: center;
+}
+
+.resenaTarjetaEstrellas {
+  color: #f5a623;
+  font-size: 22px;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+}
+
+.resenaTarjetaTexto {
+  font-family: "Mulish", sans-serif;
+  font-size: 17px;
+  color: #3d3d3f;
+  line-height: 1.75;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.resenaTarjetaAutor {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+.resenasVacio {
+  font-family: "Mulish", sans-serif;
+  font-size: 15px;
+  color: #6e6e73;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.resenasMensaje {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #1a7a4a;
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ── Modal ── */
+.resenaOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.resenaModal {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 36px 36px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.resenaClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resenaClose:hover { background: #1c2946; }
+
+.resenaTitulo {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 6px;
+  padding-right: 32px;
+}
+
+.resenaSubtitulo {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #6e6e73;
+  margin-bottom: 28px;
+}
+
+.resenaField {
+  margin-bottom: 18px;
+}
+
+.resenaField label {
+  display: block;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 6px;
+}
+
+.resenaField input,
+.resenaField textarea {
+  width: 100%;
+  border: 1.5px solid #d1d1d6;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #1d1d1f;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.resenaField input:focus,
+.resenaField textarea:focus {
+  border-color: #1c2946;
+}
+
+.resenaEstrellas {
+  display: flex;
+  gap: 6px;
+}
+
+.resenaEstrella {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #d1d1d6;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.resenaEstrella.activa { color: #f5a623; }
+.resenaEstrella:hover  { color: #f5a623; }
+
+.resenaError {
+  font-family: "Mulish", sans-serif;
+  font-size: 13px;
+  color: #c0392b;
+  margin-bottom: 12px;
+}
+
+.resenaSubmit {
+  width: 100%;
+  padding: 14px;
+  background: #1c2946;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.resenaSubmit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .resenaTarjeta { padding: 28px 22px; }
+  .resenasTitle  { font-size: 24px; }
+  .resenaModal   { padding: 32px 20px 24px; }
+}

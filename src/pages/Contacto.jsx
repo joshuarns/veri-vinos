@@ -1,5 +1,11 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useSEO } from "../hooks/useSEO";
+import {
+  EMAILJS_SERVICE_ID,
+  EMAILJS_TEMPLATE_CONTACTO,
+  EMAILJS_PUBLIC_KEY,
+} from "../config/constants";
 
 // ─────────────────────────────────────────────────────────
 // CONTACTO.JSX
@@ -37,17 +43,26 @@ function Contacto() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // handleSubmit se ejecuta al hacer clic en "Enviar mensaje"
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que el navegador recargue la página
+    e.preventDefault();
     setEnviando(true);
 
-    // Simulamos un pequeño delay para dar sensación de envío real
-    // En producción aquí iría la llamada a la API o servicio de email
-    setTimeout(() => {
-      setEnviando(false);
-      setEnviado(true); // Cambiamos a la pantalla de confirmación
-    }, 1000);
+    emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_CONTACTO,
+      {
+        nombre:   form.nombre,
+        email:    form.email,
+        telefono: form.telefono || "No proporcionado",
+        mensaje:  form.mensaje,
+      },
+      EMAILJS_PUBLIC_KEY
+    )
+      .catch(() => {}) // no bloqueamos al usuario si falla el envío
+      .finally(() => {
+        setEnviando(false);
+        setEnviado(true);
+      });
   };
 
   return (

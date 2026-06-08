@@ -27,6 +27,9 @@ export {
     obtenerMisProductos,
     crearProducto,
     actualizarProducto,
+    eliminarProducto,
+    obtenerResenas,
+    crearResena,
 } from './products';
 
 export {

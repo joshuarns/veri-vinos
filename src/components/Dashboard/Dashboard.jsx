@@ -24,8 +24,8 @@ import {
 } from "../../utils/woocommerce";
 
 import { useAuth } from "../../context/AuthContext";
-// obtenerUsuario y actualizarUsuario se usan solo en MiCuenta → se importan allá
-import { obtenerMisProductos, obtenerMisPedidos, actualizarProducto } from "../../api";
+import { obtenerMisProductos, obtenerMisPedidos, actualizarProducto, eliminarProducto, obtenerResenas } from "../../api";
+import { REVIEWS_PRODUCT_ID } from "../../config/constants";
 
 // MiCuenta vive en su propio archivo para mantener Dashboard.jsx manejable
 import MiCuenta from "./MiCuenta";
@@ -78,8 +78,21 @@ function MisRelojes({ usuario }) {
   const [error, setError]       = useState(false);
   const [reintento, setReintento] = useState(0);
   const [pagina, setPagina]     = useState(1);
-  // id del reloj que está siendo publicado/despublicado en este momento
   const [publicando, setPublicando] = useState(null);
+  const [eliminando, setEliminando] = useState(null);
+
+  const handleEliminar = async (reloj) => {
+    if (!window.confirm(`¿Eliminar "${reloj.name}"? Esta acción no se puede deshacer.`)) return;
+    setEliminando(reloj.id);
+    try {
+      await eliminarProducto(reloj.id);
+      setRelojes(prev => prev.filter(r => r.id !== reloj.id));
+    } catch {
+      alert('No se pudo eliminar el reloj. Intenta de nuevo.');
+    } finally {
+      setEliminando(null);
+    }
+  };
 
   const togglePublicar = async (reloj) => {
     const nuevoStatus = reloj.status === 'publish' ? 'draft' : 'publish';
@@ -210,6 +223,14 @@ function MisRelojes({ usuario }) {
                           : reloj.status === 'publish' ? 'Despublicar' : 'Publicar'}
                       </button>
                     )}
+                    <button
+                      className="btnEliminarReloj"
+                      disabled={eliminando === reloj.id}
+                      onClick={() => handleEliminar(reloj)}
+                      title="Eliminar reloj"
+                    >
+                      {eliminando === reloj.id ? '...' : 'Eliminar'}
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -342,6 +363,75 @@ function MisCompras({ usuario }) {
 }
 
 // ─────────────────────────────────────────────────────────
+// SUB-COMPONENTE: Tab "Reseñas"
+// ─────────────────────────────────────────────────────────
+function MisResenas() {
+  const [resenas, setResenas]   = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError]       = useState(false);
+  const [reintento, setReintento] = useState(0);
+
+  useEffect(() => {
+    let activo = true;
+    setCargando(true);
+    setError(false);
+    obtenerResenas(REVIEWS_PRODUCT_ID)
+      .then(data  => { if (activo) setResenas(data); })
+      .catch(()   => { if (activo) setError(true); })
+      .finally(() => { if (activo) setCargando(false); });
+    return () => { activo = false; };
+  }, [reintento]);
+
+  if (error) return (
+    <div className="apiErrorCard">
+      <div className="apiErrorIcon">⚠️</div>
+      <div className="apiErrorBody">
+        <p className="apiErrorTitle">No se pudieron cargar las reseñas</p>
+        <button className="apiErrorRetry" onClick={() => setReintento(r => r + 1)}>Reintentar</button>
+      </div>
+    </div>
+  );
+
+  if (cargando) return (
+    <p style={{ fontFamily: "Mulish", color: "#6e6e73", paddingTop: 20 }}>Cargando reseñas...</p>
+  );
+
+  if (resenas.length === 0) return (
+    <div className="emptyDashboard">
+      <div style={{ fontSize: 48, marginBottom: 16 }}>⭐</div>
+      <p>Aún no hay reseñas publicadas.</p>
+    </div>
+  );
+
+  return (
+    <div className="watchTableCard">
+      <table className="watchTable">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Reseña</th>
+            <th>Calificación</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {resenas.map(r => (
+            <tr key={r.id}>
+              <td><p className="watchTableName">{r.reviewer}</p></td>
+              <td><p className="watchTableMarca" dangerouslySetInnerHTML={{ __html: r.review }} /></td>
+              <td><span className="statusBadge publish">{"⭐".repeat(r.rating)}</span></td>
+              <td><span style={{ fontFamily: "Mulish", fontSize: 14, color: "#444" }}>
+                {new Date(r.date_created).toLocaleDateString("es-MX", { year: "numeric", month: "short", day: "numeric" })}
+              </span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
 // COMPONENTE PRINCIPAL: Dashboard
 // ─────────────────────────────────────────────────────────
 function Dashboard() {
@@ -402,6 +492,12 @@ function Dashboard() {
             >
               Mi cuenta
             </button>
+            <button
+              className={`dashboardTab${tabActivo === "resenas" ? " active" : ""}`}
+              onClick={() => setTabActivo("resenas")}
+            >
+              Reseñas
+            </button>
           </div>
 
           {/* ── Encabezado con botón de acción (solo en "Mis relojes") ── */}
@@ -417,6 +513,7 @@ function Dashboard() {
           {tabActivo === "relojes" && <MisRelojes  usuario={usuario} />}
           {tabActivo === "compras" && <MisCompras  usuario={usuario} />}
           {tabActivo === "cuenta"  && <MiCuenta    usuario={usuario} />}
+          {tabActivo === "resenas" && <MisResenas />}
 
         </div>
       </div>

@@ -16,7 +16,6 @@ function Footer() {
             <img src={Logo} alt="Compra Tu Reloj" className="footerLogo" />
             <p>
               El marketplace de relojes de lujo de segunda mano más confiable de México.
-              Compramos y vendemos con garantía de autenticidad.
             </p>
           </div>
 

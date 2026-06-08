@@ -366,3 +366,27 @@
     color: #8e2020;
     opacity: 1;
 }
+
+.btnEliminarReloj {
+    font-family: "Bai Jamjuree", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid #c0392b;
+    background: transparent;
+    color: #c0392b;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.btnEliminarReloj:hover:not(:disabled) {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btnEliminarReloj:disabled {
+    opacity: 0.45;
+    cursor: default;
+}

@@ -32,6 +32,16 @@ export const EMAILJS_TEMPLATE_RELOJ_NUEVO = "template_m75y91m";
 // Template que se envía al vendedor cuando un comprador hace una oferta
 export const EMAILJS_TEMPLATE_OFERTA = "template_87kx3st";
 
+// Template para mensajes del formulario de contacto
+// Variables esperadas: {{nombre}}, {{email}}, {{telefono}}, {{mensaje}}
+export const EMAILJS_TEMPLATE_CONTACTO = "template_contacto";
+
+
+// ── 5. RESEÑAS ────────────────────────────────────────────────────────────────
+// ID del producto de WooCommerce usado como ancla para las reseñas del público.
+// Crea un producto oculto en WP y pon su ID aquí.
+export const REVIEWS_PRODUCT_ID = 1;
+
 
 // ── 2. IMÁGENES ───────────────────────────────────────────────────────────────
 // Límites aplicados en FormSellWatch y EditWatch al seleccionar fotos.
