@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useProducts } from '../hooks/useProducts'
@@ -23,6 +24,7 @@ function ProductCard({ producto }) {
 
   return (
     <article className="group">
+      <Link to={`/producto/${producto.id}`} className="block">
       <div className="aspect-[4/5] bg-surface-container-low overflow-hidden relative mb-6">
         {imagen && (
           <img
@@ -52,9 +54,10 @@ function ProductCard({ producto }) {
       </div>
       <div className="text-center space-y-2">
         {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[10px]">{bodega}</p>}
-        <h3 className="font-display-script text-headline-sm text-primary">{producto.name}</h3>
+        <h3 className="font-display-script text-headline-sm text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
         <p className="font-body-md text-secondary font-bold">{precio}</p>
       </div>
+      </Link>
     </article>
   )
 }

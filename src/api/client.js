@@ -16,7 +16,9 @@ export { axios }
 
 export const BASE_URL = import.meta.env.VITE_WC_BASE_URL
 
-export const auth = {
-  username: import.meta.env.VITE_WC_KEY,
-  password: import.meta.env.VITE_WC_SECRET,
+// Se usan query params en lugar de Basic Auth header porque
+// algunos servidores Apache/Nginx no pasan Authorization a PHP
+export const authParams = {
+  consumer_key:    import.meta.env.VITE_WC_KEY,
+  consumer_secret: import.meta.env.VITE_WC_SECRET,
 }
