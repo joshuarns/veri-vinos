@@ -63,11 +63,8 @@ function ProductCard({ producto }) {
     </>
   );
 
-  return producto.stock_status === 'outofstock' ? (
-    <div className="productCard">
-      {cardContent}
-    </div>
-  ) : (
+  // Siempre navegable — incluso sin existencia el usuario puede consultar la info
+  return (
     <Link to={`/producto/${producto.id}`} className="productCard productCardLink">
       {cardContent}
     </Link>
