@@ -45,3 +45,36 @@ export const obtenerCategorias = async () => {
   })
   return Array.isArray(res.data) ? res.data : []
 }
+
+// ── obtenerRegiones ───────────────────────────────────────────────────────────
+export const obtenerRegiones = async () => {
+  // Primero buscamos el atributo "region"
+  const attrRes = await axios.get(`${BASE_URL}/products/attributes`, {
+    params: { ...authParams, per_page: 50 },
+  })
+  const atributo = attrRes.data.find(
+    (a) => a.slug === 'pa_region' || a.name.toLowerCase() === 'región' || a.name.toLowerCase() === 'region'
+  )
+  if (!atributo) return []
+
+  const termsRes = await axios.get(`${BASE_URL}/products/attributes/${atributo.id}/terms`, {
+    params: { ...authParams, per_page: 100, hide_empty: true },
+  })
+  return Array.isArray(termsRes.data)
+    ? termsRes.data.map((t) => ({ id: t.id, nombre: t.name, descripcion: t.description, slug: t.slug }))
+    : []
+}
+
+// ── obtenerProductosPorRegion ─────────────────────────────────────────────────
+export const obtenerProductosPorRegion = async (attributeId, termId) => {
+  const res = await axios.get(`${BASE_URL}/products`, {
+    params: {
+      ...authParams,
+      status: 'publish',
+      per_page: 100,
+      attribute: `pa_region`,
+      attribute_term: termId,
+    },
+  })
+  return Array.isArray(res.data) ? res.data : []
+}

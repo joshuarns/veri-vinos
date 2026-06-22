@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useProducts } from '../hooks/useProducts'
+import { obtenerRegiones, obtenerProductosPorRegion } from '../api/products'
 
 const tipos = ['Todos', 'Tinto', 'Blanco', 'Rosado', 'Espumoso', 'Naranja']
 
@@ -76,8 +77,16 @@ function SkeletonCard() {
 }
 
 export default function Tienda() {
-  const [activeTipo, setActiveTipo] = useState('Todos')
-  const [page,       setPage]       = useState(1)
+  const [activeTipo,   setActiveTipo]   = useState('Todos')
+  const [page,         setPage]         = useState(1)
+  const [regionActiva, setRegionActiva] = useState(null)   // { id, nombre, descripcion, slug }
+  const [regiones,     setRegiones]     = useState([])
+  const [regionDropdown, setRegionDropdown] = useState(false)
+
+  // productos filtrados por región (se cargan aparte)
+  const [productosRegion,  setProductosRegion]  = useState([])
+  const [cargandoRegion,   setCargandoRegion]   = useState(false)
+  const [atributoId,       setAtributoId]       = useState(null)
 
   const categoria = activeTipo === 'Todos' ? '' : TIPO_SLUG[activeTipo] ?? ''
 
@@ -87,9 +96,34 @@ export default function Tienda() {
     categoria,
   })
 
+  // Cargar lista de regiones al montar
+  useEffect(() => {
+    obtenerRegiones().then(setRegiones).catch(() => {})
+  }, [])
+
+  // Cargar productos cuando se selecciona una región
+  useEffect(() => {
+    if (!regionActiva) return
+    setCargandoRegion(true)
+    obtenerProductosPorRegion(atributoId, regionActiva.id)
+      .then(setProductosRegion)
+      .catch(() => setProductosRegion([]))
+      .finally(() => setCargandoRegion(false))
+  }, [regionActiva])
+
   const handleTipo = (tipo) => {
     setActiveTipo(tipo)
     setPage(1)
+  }
+
+  const handleRegion = (region) => {
+    setRegionActiva(region)
+    setRegionDropdown(false)
+  }
+
+  const limpiarRegion = () => {
+    setRegionActiva(null)
+    setProductosRegion([])
   }
 
   return (
@@ -108,7 +142,40 @@ export default function Tienda() {
         <section className="py-6 mb-12 border-b border-outline-variant/20">
           <div className="flex flex-wrap items-center justify-between gap-6">
             <div className="flex flex-wrap items-center gap-4 md:gap-8">
-              {['Región', 'Tipo', 'Precio'].map((label) => (
+
+              {/* Dropdown Región */}
+              <div className="relative">
+                <button
+                  onClick={() => setRegionDropdown((v) => !v)}
+                  className={`flex items-center gap-2 font-label-caps transition-colors ${regionActiva ? 'text-primary' : 'text-on-surface-variant hover:text-primary'}`}
+                >
+                  {regionActiva ? regionActiva.nombre : 'Región'}
+                  <span className="material-symbols-outlined text-sm">
+                    {regionDropdown ? 'expand_less' : 'expand_more'}
+                  </span>
+                </button>
+                {regionDropdown && (
+                  <div className="absolute top-full left-0 mt-2 bg-surface border border-outline-variant/30 shadow-lg z-50 min-w-[180px]">
+                    <button
+                      onClick={limpiarRegion}
+                      className="w-full text-left px-5 py-3 font-label-caps text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
+                    >
+                      Todas las regiones
+                    </button>
+                    {regiones.map((r) => (
+                      <button
+                        key={r.id}
+                        onClick={() => handleRegion(r)}
+                        className={`w-full text-left px-5 py-3 font-label-caps text-[10px] transition-colors ${regionActiva?.id === r.id ? 'text-primary bg-surface-container' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
+                      >
+                        {r.nombre}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {['Tipo', 'Precio'].map((label) => (
                 <button key={label} className="flex items-center gap-2 font-label-caps text-on-surface-variant hover:text-primary transition-colors">
                   {label} <span className="material-symbols-outlined text-sm">expand_more</span>
                 </button>
@@ -132,8 +199,48 @@ export default function Tienda() {
           </div>
         </section>
 
+        {/* Vista de Región seleccionada */}
+        {regionActiva && (
+          <div className="mb-20">
+            {/* Encabezado de región */}
+            <div className="py-16 border-b border-outline-variant/20 mb-16">
+              <button
+                onClick={limpiarRegion}
+                className="flex items-center gap-2 font-label-caps text-on-surface-variant hover:text-primary transition-colors mb-8"
+              >
+                <span className="material-symbols-outlined text-sm">arrow_back</span>
+                Todas las regiones
+              </button>
+              <p className="font-label-caps text-secondary mb-4 tracking-[0.3em]">REGIÓN</p>
+              <h2 className="font-display-script text-headline-lg md:text-[72px] leading-none mb-8 text-primary">
+                {regionActiva.nombre}
+              </h2>
+              {regionActiva.descripcion && (
+                <p className="font-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+                  {regionActiva.descripcion}
+                </p>
+              )}
+            </div>
+
+            {/* Vinos de la región */}
+            {cargandoRegion ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
+                {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+              </div>
+            ) : productosRegion.length === 0 ? (
+              <p className="font-body-md text-on-surface-variant text-center py-20">
+                No hay vinos disponibles para esta región.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
+                {productosRegion.map((p) => <ProductCard key={p.id} producto={p} />)}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Error */}
-        {error && (
+        {!regionActiva && error && (
           <div className="text-center py-20">
             <span className="material-symbols-outlined text-4xl text-outline mb-4 block">wifi_off</span>
             <p className="font-body-md text-on-surface-variant">No se pudo cargar el catálogo.</p>
@@ -141,8 +248,8 @@ export default function Tienda() {
           </div>
         )}
 
-        {/* Product Grid */}
-        {!error && (
+        {/* Product Grid (solo cuando no hay región activa) */}
+        {!regionActiva && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
             {cargando
               ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
@@ -152,7 +259,7 @@ export default function Tienda() {
         )}
 
         {/* Paginación */}
-        {!cargando && !error && totalPaginas > 1 && (
+        {!regionActiva && !cargando && !error && totalPaginas > 1 && (
           <div className="flex justify-center items-center gap-4 mt-20">
             <button
               disabled={page === 1}
