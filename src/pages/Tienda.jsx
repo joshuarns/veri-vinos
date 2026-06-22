@@ -26,7 +26,7 @@ function ProductCard({ producto }) {
   return (
     <article className="group">
       <Link to={`/producto/${producto.id}`} className="block">
-      <div className="aspect-[4/5] bg-surface-container-low overflow-hidden relative mb-6">
+      <div className="aspect-[3/4] max-h-72 bg-surface-container-low overflow-hidden relative mb-6">
         {imagen && (
           <img
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
