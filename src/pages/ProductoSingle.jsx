@@ -126,9 +126,9 @@ export default function ProductoSingle() {
               )}
 
               {/* CTA */}
-              <button className="w-full bg-primary text-on-primary font-label-caps py-5 tracking-[0.25em] hover:bg-secondary transition-colors duration-300 mb-10">
+              {/* <button className="w-full bg-primary text-on-primary font-label-caps py-5 tracking-[0.25em] hover:bg-secondary transition-colors duration-300 mb-10">
                 AÑADIR AL CARRITO
-              </button>
+              </button> */}
 
               {/* Ficha técnica */}
               {camposAcf.length > 0 && (
@@ -173,9 +173,9 @@ export default function ProductoSingle() {
       {!cargando && !error && producto && precio && (
         <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-surface/95 backdrop-blur border-t border-outline-variant/20 px-margin-mobile py-4 flex items-center gap-4">
           <span className="font-body-md font-semibold text-secondary flex-1">{precio}</span>
-          <button className="bg-primary text-on-primary font-label-caps px-8 py-3.5 tracking-[0.2em] hover:bg-secondary transition-colors duration-300">
+          {/* <button className="bg-primary text-on-primary font-label-caps px-8 py-3.5 tracking-[0.2em] hover:bg-secondary transition-colors duration-300">
             AÑADIR
-          </button>
+          </button> */}
         </div>
       )}
 
