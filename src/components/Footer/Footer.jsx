@@ -64,7 +64,7 @@ function Footer() {
               </li>
               <li>
                 <span>📞</span>
-                <a href="tel:5545116894">55 4511 6894</a>
+                <a href="tel:5554025133">55 5402 5133</a>
               </li>
               <li>
                 <span>✉️</span>
@@ -75,7 +75,7 @@ function Footer() {
               <li>
                 <span>💬</span>
                 <a
-                  href="https://wa.link/6sp0dr"
+                  href="https://wa.link/g5a0s0"
                   target="_blank"
                   rel="noreferrer"
                 >

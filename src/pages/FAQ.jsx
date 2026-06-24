@@ -53,7 +53,7 @@ const FAQS = [
       {
         pregunta: "¿Cómo puedo contactarlos?",
         respuesta:
-          "Puedes comunicarte con nosotros por teléfono al 55 4511 6894, por correo a info.compratureloj@gmail.com o directamente por WhatsApp. También tienes disponible el formulario de contacto en nuestro sitio.",
+          "Puedes comunicarte con nosotros por teléfono al 55 5402 5133, por correo a info.compratureloj@gmail.com o directamente por WhatsApp. También tienes disponible el formulario de contacto en nuestro sitio.",
       },
     ],
   },
@@ -273,7 +273,7 @@ function FAQ() {
               Nuestro equipo está disponible 24/7 para atenderte.
             </p>
             <a
-              href="https://wa.link/6sp0dr"
+              href="https://wa.link/g5a0s0"
               target="_blank"
               rel="noreferrer"
               style={{

@@ -303,7 +303,7 @@ function DetalleProducto() {
                 {/* Botón de WhatsApp */}
                 <a
                   className="singleBtnWhatsApp"
-                  href="https://wa.link/6sp0dr"
+                  href="https://wa.link/g5a0s0"
                   target="_blank"
                   rel="noreferrer"
                 >

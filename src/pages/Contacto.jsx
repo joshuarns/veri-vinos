@@ -266,8 +266,8 @@ function Contacto() {
                 emoji="📞"
                 titulo="Teléfono"
                 contenido={
-                  <a href="tel:5545116894" style={{ color: "#1c2946", textDecoration: "none", fontWeight: 600 }}>
-                    55 4511 6894
+                  <a href="tel:5554025133" style={{ color: "#1c2946", textDecoration: "none", fontWeight: 600 }}>
+                    55 5402 5133
                   </a>
                 }
               />
@@ -287,7 +287,7 @@ function Contacto() {
                 titulo="WhatsApp"
                 contenido={
                   <a
-                    href="https://wa.link/6sp0dr"
+                    href="https://wa.link/g5a0s0"
                     target="_blank"
                     rel="noreferrer"
                     style={{ color: "#1c2946", textDecoration: "none", fontWeight: 600 }}
