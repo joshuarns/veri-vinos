@@ -75,7 +75,7 @@ function Footer() {
               <li>
                 <span>💬</span>
                 <a
-                  href="https://api.whatsapp.com/send/?phone=525545116894"
+                  href="https://wa.me/525545116894"
                   target="_blank"
                   rel="noreferrer"
                 >
