@@ -55,7 +55,7 @@ function ProductCard({ producto }) {
       </div>
       <div className="text-center space-y-2">
         {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[10px]">{bodega}</p>}
-        <h3 className="font-display-script text-headline-sm text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
+        <h3 className="font-display-script text-title-lg text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
         <p className="font-body-md text-secondary font-bold">{precio}</p>
       </div>
       </Link>
