@@ -21,7 +21,7 @@ function ProductCard({ producto }) {
   const precio = producto.price
     ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
     : '—'
-  const bodega = producto.categories?.[0]?.name?.toUpperCase() || ''
+  const bodega = (producto.acf?.productores || producto.categories?.[0]?.name || '').toUpperCase()
 
   return (
     <article className="group">
