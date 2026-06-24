@@ -224,7 +224,7 @@ export default function Tienda() {
 
             {/* Vinos de la región */}
             {cargandoRegion ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
                 {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
               </div>
             ) : productosRegion.length === 0 ? (
@@ -232,7 +232,7 @@ export default function Tienda() {
                 No hay vinos disponibles para esta región.
               </p>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
                 {productosRegion.map((p) => <ProductCard key={p.id} producto={p} />)}
               </div>
             )}
@@ -250,7 +250,7 @@ export default function Tienda() {
 
         {/* Product Grid (solo cuando no hay región activa) */}
         {!regionActiva && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-24">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
             {cargando
               ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
               : productos.map((p) => <ProductCard key={p.id} producto={p} />)
