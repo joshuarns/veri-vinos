@@ -82,10 +82,9 @@ export default async function handler(req, res) {
       line_items: carrito.map(item => ({
         price_data: {
           currency:     'mxn',
-          unit_amount:  Math.round(item.precio * 100), // centavos
+          unit_amount:  Math.round(Number(item.precio) * 100), // centavos
           product_data: {
-            name:   item.name,
-            images: item.imagen ? [item.imagen] : [],
+            name: item.name || 'Reloj',
           },
         },
         quantity: item.cantidad || 1,
@@ -103,6 +102,6 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    return res.status(502).json({ error: 'Error creando sesión de Stripe', detail: err.message });
+    return res.status(502).json({ error: err.message || 'Error creando sesión de Stripe' });
   }
 }
