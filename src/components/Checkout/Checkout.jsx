@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { crearPedido } from "../../api";
+// crearPedido ya no se usa directamente — lo hace el serverless create-checkout-session
 import { useAuth } from "../../context/AuthContext";
 import PaymentConfirmation from "../PaymentConfirmation/PaymentConfirmation";
 import './Checkout.css';
@@ -47,41 +47,29 @@ function Checkout() {
     setEnviando(true);
     setError("");
 
-    const line_items = carrito.map(item => ({
-      product_id: item.id,
-      quantity: item.cantidad || 1,
-    }));
-
-    const pedidoData = {
-      payment_method: "bacs",
-      payment_method_title: "Transferencia bancaria",
-      // set_paid: true marca el pedido como procesado y dispara los correos
-      // de confirmación tanto al admin como al cliente automáticamente
-      set_paid: true,
-      // customer_id vincula el pedido al usuario registrado para que aparezca
-      // en "Mis compras". Si no hay sesión (compra como invitado) se omite.
-      ...(usuario?.id ? { customer_id: usuario.id } : {}),
-      billing: { ...datosCliente },
-      shipping: {
-        first_name: datosCliente.first_name,
-        last_name: datosCliente.last_name,
-        address_1: datosCliente.address_1,
-        city: datosCliente.city,
-        state: datosCliente.state,
-        postcode: datosCliente.postcode,
-        country: datosCliente.country,
-      },
-      line_items,
-    };
-
     try {
-      const res = await crearPedido(pedidoData);
-      setPedido(res);         // guardamos el objeto completo
-      setPedidoEnviado(true);
-      localStorage.removeItem("carrito");
+      // Crear sesión de Stripe — el servidor crea el pedido en WooCommerce
+      // y devuelve la URL de la página de pago de Stripe
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          carrito,
+          datosCliente,
+          usuarioId: usuario?.id || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.url) {
+        throw new Error(data.error || "Error al crear la sesión de pago");
+      }
+
+      // Redirigir a la página de pago de Stripe
+      window.location.href = data.url;
     } catch (err) {
       setError("Ocurrió un error al procesar tu pedido. Intenta de nuevo.");
-    } finally {
       setEnviando(false);
     }
   };
@@ -220,11 +208,18 @@ function Checkout() {
             <div className="checkoutCard">
               <p className="checkoutSectionTitle">Método de pago</p>
               <div className="paymentNote">
-                <span>🏦</span>
+                <span>🔒</span>
                 <span>
-                  Aceptamos <strong>transferencia bancaria</strong>. Después de confirmar tu pedido
-                  recibirás los datos para realizar el pago.
+                  Pago seguro con <strong>tarjeta de crédito o débito</strong> procesado por Stripe.
+                  Tu información está cifrada y protegida.
                 </span>
+              </div>
+              <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+                {["Visa", "Mastercard", "American Express"].map(card => (
+                  <span key={card} style={{ fontSize: 12, fontFamily: "Mulish, sans-serif", color: "#6e6e73", background: "#f5f5f7", borderRadius: 6, padding: "4px 10px" }}>
+                    {card}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -235,7 +230,7 @@ function Checkout() {
             )}
 
             <button type="submit" form="checkoutForm" className="btnConfirmar" disabled={enviando}>
-              {enviando ? "Procesando..." : "Confirmar pedido"}
+              {enviando ? "Redirigiendo a Stripe..." : "💳 Pagar con tarjeta"}
             </button>
           </div>
 

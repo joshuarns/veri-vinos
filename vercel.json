@@ -4,7 +4,9 @@
   "routes": [
     { "src": "/api/wc/(.*)",  "dest": "/api/wc?_path=$1" },
     { "src": "/api/wp/(.*)",  "dest": "/api/wp?_path=$1" },
-    { "src": "/api/reviews",  "dest": "/api/reviews" },
+    { "src": "/api/reviews",                  "dest": "/api/reviews" },
+    { "src": "/api/create-checkout-session",  "dest": "/api/create-checkout-session" },
+    { "src": "/api/stripe-webhook",           "dest": "/api/stripe-webhook" },
     { "handle": "filesystem" },
     { "src": "/(.*)",         "dest": "/index.html" }
   ]

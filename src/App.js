@@ -34,6 +34,8 @@ const Contacto                  = lazy(() => import("./pages/Contacto"));
 const NotFound                  = lazy(() => import("./pages/NotFound"));
 const ForgotPassword            = lazy(() => import("./pages/ForgotPassword"));
 const MiLista                   = lazy(() => import("./pages/MiLista"));
+const PagoExitoso               = lazy(() => import("./pages/PagoExitoso"));
+const PagoCancelado             = lazy(() => import("./pages/PagoCancelado"));
 
 // Componentes usados directamente como rutas también se cargan bajo demanda
 const DetalleProducto = lazy(() => import("./components/DetalleProducto/DetalleProducto"));
@@ -91,6 +93,8 @@ function App() {
                     <Route path="/aviso-de-privacidad"    element={<AvisoPrivacidad />} />
                     <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
                     <Route path="/contacto"               element={<Contacto />} />
+                    <Route path="/pago-exitoso"           element={<PagoExitoso />} />
+                    <Route path="/pago-cancelado"         element={<PagoCancelado />} />
 
                     {/* ── Rutas privadas ── */}
                     <Route element={<PrivateRoute />}>
