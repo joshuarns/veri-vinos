@@ -100,10 +100,6 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    return res.status(502).json({
-      error: err.message,
-      type: err.type,
-      successUrl: `${appUrl}/pago-exitoso`,
-    });
+    return res.status(502).json({ error: err.message || 'Error creando sesión de Stripe' });
   }
 }
