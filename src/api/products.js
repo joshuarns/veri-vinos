@@ -93,19 +93,49 @@ export const obtenerProductosPorIds = async (ids) => {
 // solo acepta IDs numéricos. Por eso hacemos dos peticiones:
 //   Paso 1 → resolvemos el slug ("rolex") a su ID numérico
 //   Paso 2 → traemos los productos de esa categoría con paginación
-export const obtenerProductosPorCategoria = async (slug, page = 1, perPage = 12) => {
-    // Paso 1: GET /products/categories?slug=rolex&per_page=1
+export const obtenerProductosPorCategoria = async (slug, page = 1, perPage = 12, busqueda = "") => {
+    // Paso 1: resolver slug → ID numérico
     const catRespuesta = await axios.get(`${BASE_URL}/products/categories`, {
         params: { slug, per_page: 1 },
         auth,
     });
 
-    // Si no existe la categoría devolvemos vacío sin lanzar error
     if (!catRespuesta.data.length) return { productos: [], totalPaginas: 0 };
 
     const categoriaId = catRespuesta.data[0].id;
 
-    // Paso 2: GET /products?category=<id>&page=<n>&per_page=<n>
+    // Con búsqueda: traemos todos los de la categoría y filtramos client-side
+    if (busqueda) {
+        const termino = busqueda.toLowerCase().trim();
+
+        const productosRespuesta = await axios.get(`${BASE_URL}/products`, {
+            params: { status: 'publish', category: categoriaId, per_page: 100, page: 1 },
+            auth,
+        });
+
+        const todos = Array.isArray(productosRespuesta.data) ? productosRespuesta.data : [];
+
+        const getMeta = (metaData, key) =>
+            (metaData || []).find(m => m.key === key)?.value || '';
+
+        const filtrados = todos.filter(p => {
+            const campos = [
+                p.name,
+                getMeta(p.meta_data, 'marca'),
+                getMeta(p.meta_data, 'modelo'),
+                getMeta(p.meta_data, 'referencia'),
+            ].join(' ').toLowerCase();
+            return campos.includes(termino);
+        });
+
+        const totalPaginas = Math.max(1, Math.ceil(filtrados.length / perPage));
+        const inicio       = (page - 1) * perPage;
+        const productos    = filtrados.slice(inicio, inicio + perPage);
+
+        return { productos, totalPaginas };
+    }
+
+    // Sin búsqueda: paginación server-side normal
     const productosRespuesta = await axios.get(`${BASE_URL}/products`, {
         params: { status: 'publish', category: categoriaId, per_page: perPage, page },
         auth,

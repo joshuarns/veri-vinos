@@ -91,33 +91,28 @@ function ShopWatch() {
         </div>
 
         {/* ── Buscador ── */}
-        {/* Solo visible cuando NO hay filtro de categoría activo,
-            ya que la API de WooCommerce no combina search + category fácilmente */}
-        {!categoria && (
-          <div className="shopSearchWrap">
-            <div className="shopSearchBox">
-              <span className="shopSearchIcon">🔍</span>
-              <input
-                type="text"
-                className="shopSearchInput"
-                placeholder="Buscar por nombre, marca o referencia..."
-                value={inputBusqueda}
-                onChange={handleBusqueda}
-                aria-label="Buscar relojes"
-              />
-              {/* Botón para limpiar la búsqueda */}
-              {inputBusqueda && (
-                <button
-                  className="shopSearchClear"
-                  onClick={() => { setInputBusqueda(""); setBusqueda(""); }}
-                  aria-label="Limpiar búsqueda"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
+        <div className="shopSearchWrap">
+          <div className="shopSearchBox">
+            <span className="shopSearchIcon">🔍</span>
+            <input
+              type="text"
+              className="shopSearchInput"
+              placeholder="Buscar por nombre, marca o referencia..."
+              value={inputBusqueda}
+              onChange={handleBusqueda}
+              aria-label="Buscar relojes"
+            />
+            {inputBusqueda && (
+              <button
+                className="shopSearchClear"
+                onClick={() => { setInputBusqueda(""); setBusqueda(""); }}
+                aria-label="Limpiar búsqueda"
+              >
+                ✕
+              </button>
+            )}
           </div>
-        )}
+        </div>
 
         {/* ── Grid de productos con paginación ── */}
         <ListaProductos

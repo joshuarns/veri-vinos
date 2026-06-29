@@ -127,7 +127,7 @@ function ListaProductos({ limit, categoria, busqueda = "", paginado = false, pag
     const perPage = paginado ? PER_PAGE : (limit || PER_PAGE);
 
     const peticion = categoria
-      ? obtenerProductosPorCategoria(categoria, paginaActual, perPage)
+      ? obtenerProductosPorCategoria(categoria, paginaActual, perPage, busqueda)
       : obtenerProductos(paginaActual, perPage, busqueda);
 
     peticion
