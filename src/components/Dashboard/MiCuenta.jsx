@@ -79,7 +79,6 @@ function MiCuenta({ usuario }) {
   useEffect(() => {
     let activo = true;
     setCargandoPerfil(true);
-    setErrorCarga(false);
 
     obtenerUsuario(usuario.id)
       .then(data => {
