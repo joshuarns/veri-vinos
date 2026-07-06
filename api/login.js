@@ -58,21 +58,24 @@ export default async function handler(req, res) {
 
     const userId = data.id;
 
-    // ── Paso 2: Verificar aprobación con credenciales de admin ─────────────
-    try {
-      const approvalRes  = await fetch(`${wpRoot}/ctr/v1/check-approval/${userId}`, {
-        headers: { Authorization: `Basic ${adminAuth}` },
-      });
-      const approvalData = await approvalRes.json();
-
-      if (!approvalData.approved) {
-        return res.status(401).json({
-          code:    'user_not_approved',
-          message: 'Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.',
+    // ── Paso 2: Verificar aprobación (saltar para administradores) ───────────
+    const roles = Array.isArray(data.roles) ? data.roles : [];
+    if (!roles.includes('administrator')) {
+      try {
+        const approvalRes  = await fetch(`${wpRoot}/ctr/v1/check-approval/${userId}`, {
+          headers: { Authorization: `Basic ${adminAuth}` },
         });
+        const approvalData = await approvalRes.json();
+
+        if (!approvalData.approved) {
+          return res.status(401).json({
+            code:    'user_not_approved',
+            message: 'Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.',
+          });
+        }
+      } catch {
+        // Si el endpoint no responde no bloqueamos (evita falsos negativos por red)
       }
-    } catch {
-      // Si el endpoint no responde no bloqueamos (evita falsos negativos por red)
     }
 
     // ── Paso 3: Todo OK → devolver datos del usuario a React ──────────────
