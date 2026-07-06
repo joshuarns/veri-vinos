@@ -5,53 +5,64 @@ export default {
   theme: {
     extend: {
       colors: {
-        "secondary-fixed": "#ffd9dd",
-        "inverse-surface": "#353029",
-        "inverse-on-surface": "#faefe5",
-        "primary-fixed": "#d0e9d4",
-        "on-surface-variant": "#434843",
-        "tertiary-fixed": "#e0e5cc",
-        "on-secondary": "#ffffff",
-        "on-primary-fixed": "#0b2013",
-        "background": "#fff8f3",
-        "surface-container-low": "#fdf2e7",
-        "on-primary-container": "#819986",
-        "on-tertiary-container": "#90957f",
-        "primary-fixed-dim": "#b4cdb8",
-        "on-secondary-fixed": "#3d0413",
-        "on-primary-fixed-variant": "#364c3c",
-        "inverse-primary": "#b4cdb8",
-        "on-secondary-fixed-variant": "#75303c",
-        "surface-tint": "#4d6453",
-        "on-tertiary": "#ffffff",
-        "secondary-container": "#ffa1ae",
-        "on-primary": "#ffffff",
-        "on-surface": "#1f1b15",
-        "on-error-container": "#93000a",
-        "surface-dim": "#e2d8ce",
-        "surface-container-high": "#f1e6dc",
-        "secondary": "#924753",
-        "on-tertiary-fixed-variant": "#444937",
-        "on-error": "#ffffff",
-        "error-container": "#ffdad6",
-        "outline-variant": "#c3c8c1",
-        "surface-container-highest": "#ebe1d7",
-        "surface": "#fff8f3",
-        "tertiary-container": "#282d1d",
-        "on-secondary-container": "#7b3440",
-        "on-tertiary-fixed": "#191d0e",
-        "error": "#ba1a1a",
-        "surface-container-lowest": "#ffffff",
-        "primary": "#061b0e",
-        "outline": "#737973",
-        "secondary-fixed-dim": "#ffb2bb",
-        "tertiary": "#14190a",
-        "surface-bright": "#fff8f3",
-        "primary-container": "#1b3022",
-        "surface-container": "#f7ece2",
-        "tertiary-fixed-dim": "#c4c9b1",
-        "surface-variant": "#ebe1d7",
-        "on-background": "#1f1b15",
+        // ── Paleta Veri Vinos ─────────────────────────────────────────
+        "primary":                    "#8B1A2E",   // burdeos principal
+        "on-primary":                 "#FFFFFF",
+        "primary-container":          "#5C0D1C",   // burdeos oscuro
+        "on-primary-container":       "#F5C6CE",
+
+        "secondary":                  "#C9A227",   // dorado
+        "on-secondary":               "#1C1008",
+        "secondary-container":        "#F0D97A",   // dorado claro
+        "on-secondary-container":     "#3D2800",
+
+        "tertiary":                   "#6B2737",   // vino medio
+        "on-tertiary":                "#FFFFFF",
+        "tertiary-container":         "#3D0F1A",
+        "on-tertiary-container":      "#F5C6CE",
+
+        "background":                 "#F5EFE6",   // crema fondo
+        "on-background":              "#1C1008",
+
+        "surface":                    "#F5EFE6",
+        "surface-bright":             "#FDF8F2",
+        "surface-dim":                "#E0D6CA",
+        "surface-container-lowest":   "#FFFFFF",
+        "surface-container-low":      "#FAF4EC",
+        "surface-container":          "#F0E8DC",
+        "surface-container-high":     "#E8DDD0",
+        "surface-container-highest":  "#DFD3C4",
+        "surface-variant":            "#EDE0D4",
+        "surface-tint":               "#8B1A2E",
+
+        "on-surface":                 "#1C1008",
+        "on-surface-variant":         "#4A3828",
+
+        "outline":                    "#7A6050",
+        "outline-variant":            "#C8B8A8",
+
+        "inverse-surface":            "#1C1008",
+        "inverse-on-surface":         "#F5EFE6",
+        "inverse-primary":            "#F5C6CE",
+
+        "error":                      "#BA1A1A",
+        "on-error":                   "#FFFFFF",
+        "error-container":            "#FFDAD6",
+        "on-error-container":         "#93000A",
+
+        // legados (sin uso activo, mantenidos por compatibilidad)
+        "secondary-fixed":            "#F0D97A",
+        "secondary-fixed-dim":        "#D4B44A",
+        "on-secondary-fixed":         "#3D2800",
+        "on-secondary-fixed-variant": "#6B4E00",
+        "primary-fixed":              "#F5C6CE",
+        "primary-fixed-dim":          "#E89BA8",
+        "on-primary-fixed":           "#3D0010",
+        "on-primary-fixed-variant":   "#6B1022",
+        "tertiary-fixed":             "#F5C6CE",
+        "tertiary-fixed-dim":         "#E89BA8",
+        "on-tertiary-fixed":          "#3D0010",
+        "on-tertiary-fixed-variant":  "#6B1022",
       },
       borderRadius: {
         DEFAULT: "4px",
