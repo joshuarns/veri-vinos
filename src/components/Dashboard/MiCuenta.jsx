@@ -46,9 +46,12 @@ function MiCuenta({ usuario }) {
 
   // ── Estado: campos de datos personales ──────────────────────────────────
   // Se inicializan vacíos y se rellenan cuando llega la respuesta de la API
-  const [firstName,   setFirstName]   = useState("");
-  const [lastName,    setLastName]    = useState("");
-  const [email,       setEmail]       = useState("");
+  // Pre-rellenar con datos del contexto de sesión para mostrar algo
+  // mientras carga la API, y como fallback si la API falla.
+  const nombrePartes = (usuario.nombre || "").trim().split(" ");
+  const [firstName,   setFirstName]   = useState(nombrePartes[0] || "");
+  const [lastName,    setLastName]    = useState(nombrePartes.slice(1).join(" ") || "");
+  const [email,       setEmail]       = useState(usuario.email || "");
   const [descripcion, setDescripcion] = useState("");
   const [avatarUrl,   setAvatarUrl]   = useState("");
 
@@ -91,7 +94,11 @@ function MiCuenta({ usuario }) {
         setDescripcion(data.description   || "");
         setAvatarUrl(data.avatar_urls?.["96"] || "");
       })
-      .catch(() => { if (activo) setErrorCarga(true); })
+      .catch(() => {
+        // Si falla la API, no bloqueamos — el formulario ya tiene los datos
+        // del contexto de sesión como valores iniciales.
+        if (activo) setErrorCarga(false);
+      })
       .finally(() => { if (activo) setCargandoPerfil(false); });
 
     return () => { activo = false; };
@@ -174,19 +181,7 @@ function MiCuenta({ usuario }) {
     </p>
   );
 
-  // ── Renderizado condicional: error al cargar ─────────────────────────────
-  if (errorCarga) return (
-    <div className="apiErrorCard">
-      <div className="apiErrorIcon">⚠️</div>
-      <div className="apiErrorBody">
-        <p className="apiErrorTitle">No se pudo cargar tu perfil</p>
-        <p className="apiErrorText">Verifica tu conexión e intenta de nuevo.</p>
-        <button className="apiErrorRetry" onClick={reintentarCarga}>
-          Reintentar
-        </button>
-      </div>
-    </div>
-  );
+  // El error de carga ya no bloquea — el form se muestra con datos del contexto.
 
   // Inicial para el placeholder del avatar cuando no hay Gravatar
   const inicialAvatar = (firstName?.[0] || usuario.nombre?.[0] || "?").toUpperCase();
