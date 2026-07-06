@@ -65,13 +65,17 @@ export default async function handler(req, res) {
         const approvalRes  = await fetch(`${wpRoot}/ctr/v1/check-approval/${userId}`, {
           headers: { Authorization: `Basic ${adminAuth}` },
         });
-        const approvalData = await approvalRes.json();
 
-        if (!approvalData.approved) {
-          return res.status(401).json({
-            code:    'user_not_approved',
-            message: 'Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.',
-          });
+        // Solo bloquear si el endpoint responde correctamente Y dice que no está aprobado.
+        // Si el endpoint no existe (404) o falla, no bloqueamos al usuario.
+        if (approvalRes.ok) {
+          const approvalData = await approvalRes.json();
+          if (approvalData.approved === false) {
+            return res.status(401).json({
+              code:    'user_not_approved',
+              message: 'Tu cuenta está pendiente de aprobación. Te avisaremos por email cuando esté activa.',
+            });
+          }
         }
       } catch {
         // Si el endpoint no responde no bloqueamos (evita falsos negativos por red)
