@@ -24,9 +24,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Faltan campos requeridos' });
   }
 
-  const wpBase = process.env.WP_BASE_URL.replace('/wp/v2', '').replace('/wp-json', '');
+  const wpBase    = process.env.WP_BASE_URL.replace('/wp/v2', '').replace('/wp-json', '');
+  const wpApiBase = `${wpBase}/wp-json/wp/v2`;
+  const wpUser    = process.env.WP_USER || '';
+  const wpPass    = process.env.WP_PASS || '';
+  const adminAuth = Buffer.from(`${wpUser}:${wpPass}`).toString('base64');
 
   try {
+    // 1. Cambiar la contraseña
     const wpRes = await fetch(`${wpBase}/wp-json/ctr/v1/reset-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -37,6 +42,27 @@ export default async function handler(req, res) {
 
     if (!wpRes.ok) {
       return res.status(wpRes.status).json(data);
+    }
+
+    // 2. Re-aprobar al usuario (el reset de contraseña puede limpiar el flag de aprobación)
+    try {
+      // Buscar el usuario por su login para obtener el ID
+      const searchRes = await fetch(`${wpApiBase}/users?search=${encodeURIComponent(login)}&context=edit`, {
+        headers: { Authorization: `Basic ${adminAuth}` },
+      });
+      if (searchRes.ok) {
+        const users = await searchRes.json();
+        const user  = users.find(u => u.slug === login || u.name === login || u.email === login);
+        if (user?.id) {
+          // Actualizar el meta de aprobación con admin
+          await fetch(`${wpBase}/wp-json/ctr/v1/approve-user/${user.id}`, {
+            method: 'POST',
+            headers: { Authorization: `Basic ${adminAuth}`, 'Content-Type': 'application/json' },
+          }).catch(() => {});
+        }
+      }
+    } catch {
+      // Si la re-aprobación falla no bloqueamos el flujo
     }
 
     return res.status(200).json({ success: true });
