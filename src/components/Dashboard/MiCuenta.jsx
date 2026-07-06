@@ -58,7 +58,6 @@ function MiCuenta({ usuario }) {
   // Estados de carga/error para la sección de datos personales.
   // exitoDatos ya no existe: el feedback de éxito lo maneja showToast().
   const [cargandoPerfil, setCargandoPerfil] = useState(true);
-  const [reintento,      setReintento]      = useState(0);
   const [guardandoDatos, setGuardandoDatos] = useState(false);
   const [errorDatos,     setErrorDatos]     = useState("");
 
@@ -94,7 +93,7 @@ function MiCuenta({ usuario }) {
       .finally(() => { if (activo) setCargandoPerfil(false); });
 
     return () => { activo = false; };
-  }, [usuario.id, reintento]);
+  }, [usuario.id]);
 
   // ── Handler: guardar datos personales ────────────────────────────────────
   const handleGuardarDatos = async (e) => {
