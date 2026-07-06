@@ -54,10 +54,11 @@ export default async function handler(req, res) {
         const users = await searchRes.json();
         const user  = users.find(u => u.slug === login || u.name === login || u.email === login);
         if (user?.id) {
-          // Actualizar el meta de aprobación con admin
-          await fetch(`${wpBase}/wp-json/ctr/v1/approve-user/${user.id}`, {
+          // Actualizar wp_user_is_approved directamente via WP REST API
+          await fetch(`${wpApiBase}/users/${user.id}`, {
             method: 'POST',
             headers: { Authorization: `Basic ${adminAuth}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ meta: { wp_user_is_approved: '1' } }),
           }).catch(() => {});
         }
       }
