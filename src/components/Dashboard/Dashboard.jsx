@@ -273,7 +273,7 @@ function MisCompras({ usuario }) {
       .finally(() => { if (activo) setCargando(false); });
 
     return () => { activo = false; };
-  }, [usuario.id, reintento]);
+  }, [usuario.id, usuario.email, reintento]);
 
   const totalPaginas  = Math.ceil(pedidos.length / POR_PAGINA_COMPRAS);
   const pedidosPagina = pedidos.slice((pagina - 1) * POR_PAGINA_COMPRAS, pagina * POR_PAGINA_COMPRAS);
