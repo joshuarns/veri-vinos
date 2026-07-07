@@ -22,8 +22,10 @@ export default async function handler(req, res) {
   // Las claves WooCommerce (ck_/cs_) solo funcionan para /wc/v3/*.
   // Para la WordPress REST API (/wp/v2/*) se necesitan credenciales de WordPress.
   // WP_USER y WP_PASS se configuran en las variables de entorno de Vercel.
-  const wpUser = process.env.WP_USER || '';
-  const wpPass = process.env.WP_PASS || '';
+  const wpUser = (process.env.WP_USER || '').trim();
+  // Las contraseñas de aplicación de WordPress vienen con espacios (XXXX XXXX...),
+  // normalizar espacios múltiples por si se copiaron mal desde Vercel.
+  const wpPass = (process.env.WP_PASS || '').trim().replace(/\s+/g, ' ');
   const auth   = Buffer.from(`${wpUser}:${wpPass}`).toString('base64');
 
   const chunks = [];
