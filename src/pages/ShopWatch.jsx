@@ -21,6 +21,7 @@ function ShopWatch() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoria = searchParams.get("categoria");
   const pageParam = parseInt(searchParams.get("page") || "1", 10);
+  const qParam    = searchParams.get("q") || "";
 
   const handlePageChange = (nueva) => {
     setSearchParams(prev => {
@@ -33,9 +34,9 @@ function ShopWatch() {
   };
 
   // Valor del input (se actualiza en cada tecla)
-  const [inputBusqueda, setInputBusqueda] = useState("");
+  const [inputBusqueda, setInputBusqueda] = useState(qParam);
   // Valor que se pasa a la API (solo se actualiza tras el debounce)
-  const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] = useState(qParam);
 
   const timerRef = useRef(null);
 

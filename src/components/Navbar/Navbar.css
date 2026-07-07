@@ -200,6 +200,87 @@
 }
 
 
+/* ── Buscador expandible (desktop) ──────────────────────────────────────── */
+
+.navBar__search {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.navBar__searchForm {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  padding: 0 4px 0 12px;
+  gap: 4px;
+  animation: searchExpand 0.2s ease;
+}
+
+@keyframes searchExpand {
+  from { opacity: 0; transform: scaleX(0.8); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+
+.navBar__searchInput {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  color: #1d1d1f;
+  width: 180px;
+  padding: 6px 0;
+}
+
+.navBar__searchInput::placeholder { color: #aeaeb2; }
+
+.navBar__searchBtn,
+.navBar__searchClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 12px;
+  color: #6e6e73;
+  transition: background-color 0.15s;
+  font-size: 13px;
+}
+
+.navBar__searchBtn:hover,
+.navBar__searchClose:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+  color: #1d1d1f;
+}
+
+/* Buscador móvil */
+.navBar__mobileSearch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 20px 4px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+}
+
+.navBar__mobileSearch input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: "Mulish", sans-serif;
+  font-size: 15px;
+  color: #1d1d1f;
+}
+
+.navBar__mobileSearch input::placeholder { color: #aeaeb2; }
+
 /* ── Botón hamburger (solo visible en móvil) ─────────────────────────────── */
 
 .navBar__hamburger {
@@ -328,9 +409,10 @@
 /* ── Responsive: breakpoint móvil ───────────────────────────────────────── */
 
 @media (max-width: 992px) {
-  /* Ocultar links y acciones del desktop */
+  /* Ocultar links, acciones y buscador del desktop */
   .navBar__links,
-  .navBar__actions {
+  .navBar__actions,
+  .navBar__search {
     display: none;
   }
 

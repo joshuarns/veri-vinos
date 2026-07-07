@@ -19,7 +19,7 @@
 //   import NavbarMenu from "./components/Navbar/Navbar"
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth }      from "../../context/AuthContext";
@@ -47,10 +47,39 @@ function NavbarV2() {
 
   // Controla si el menú móvil está abierto.
   // La clase .navBar--open en el <header> activa las transiciones CSS.
-  const [menuAbierto, setMenuAbierto] = useState(false);
+  const [menuAbierto,   setMenuAbierto]   = useState(false);
+  const [searchAbierto, setSearchAbierto] = useState(false);
+  const [searchQuery,   setSearchQuery]   = useState("");
+  const searchInputRef = useRef(null);
 
   const cerrarMenu = () => setMenuAbierto(false);
   const toggleMenu = () => setMenuAbierto(prev => !prev);
+
+  const abrirSearch = () => {
+    setSearchAbierto(true);
+    setTimeout(() => searchInputRef.current?.focus(), 50);
+  };
+
+  const cerrarSearch = () => {
+    setSearchAbierto(false);
+    setSearchQuery("");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+    cerrarSearch();
+    cerrarMenu();
+    navigate(`/shop?q=${encodeURIComponent(q)}`);
+  };
+
+  // Cerrar con Escape
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") cerrarSearch(); };
+    if (searchAbierto) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [searchAbierto]);
 
   const handleLogout = () => {
     logout();
@@ -88,6 +117,31 @@ function NavbarV2() {
             </NavLink>
           ))}
         </nav>
+
+        {/* Buscador expandible (desktop) */}
+        <div className={`navBar__search${searchAbierto ? " navBar__search--open" : ""}`}>
+          {searchAbierto ? (
+            <form onSubmit={handleSearch} className="navBar__searchForm">
+              <input
+                ref={searchInputRef}
+                type="text"
+                className="navBar__searchInput"
+                placeholder="Buscar relojes..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                aria-label="Buscar"
+              />
+              <button type="submit" className="navBar__searchBtn" aria-label="Buscar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+              <button type="button" className="navBar__searchClose" onClick={cerrarSearch} aria-label="Cerrar">✕</button>
+            </form>
+          ) : (
+            <button className="navBar__iconBtn" onClick={abrirSearch} aria-label="Buscar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          )}
+        </div>
 
         {/* Acciones — solo visible en desktop */}
         <div className="navBar__actions">
@@ -141,6 +195,18 @@ function NavbarV2() {
 
       {/* ── Menú móvil deslizante ── */}
       <nav id="navMobileMenu" className="navBar__mobile" aria-label="Menú móvil">
+
+        {/* Buscador móvil */}
+        <form onSubmit={handleSearch} className="navBar__mobileSearch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="text"
+            placeholder="Buscar relojes..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            aria-label="Buscar"
+          />
+        </form>
 
         {/* Links principales */}
         {NAV_LINKS.filter(l => !(l.hideIfAuth && usuario)).map(({ to, label, end }) => (
