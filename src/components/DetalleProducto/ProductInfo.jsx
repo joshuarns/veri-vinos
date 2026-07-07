@@ -93,11 +93,11 @@ function ProductInfo({ producto }) {
         <SpecCard
           title="Materiales"
           rows={[
-            { label: "Caja",        value: getMeta(m, "material_de_la_caja") },
-            { label: "Bisel",       value: getMeta(m, "material_del_bisel") },
-            { label: "Extensible",  value: getMeta(m, "material_del_extensible") },
-            { label: "Cristal",     value: getMeta(m, "cristal") },
-            { label: "Broche",      value: getMeta(m, "broche") },
+            { label: "Caja",        value: getMeta(m, "material_de_la_caja").replace(/_/g, " ") },
+            { label: "Bisel",       value: getMeta(m, "material_del_bisel").replace(/_/g, " ") },
+            { label: "Extensible",  value: getMeta(m, "material_del_extensible").replace(/_/g, " ") },
+            { label: "Cristal",     value: getMeta(m, "cristal").replace(/_/g, " ") },
+            { label: "Broche",      value: getMeta(m, "broche").replace(/_/g, " ") },
           ]}
         />
 
