@@ -95,17 +95,21 @@ export const uploadImage = async (file) => {
     // del archivo + Content-Disposition con el nombre.
     const arrayBuffer = await fileComprimido.arrayBuffer();
 
-    const response = await axios.post(
-        `${BASE_URL_WP}/media`,
-        arrayBuffer,
-        {
-            headers: {
-                'Content-Type':        fileComprimido.type || 'image/jpeg',
-                'Content-Disposition': `attachment; filename="${fileComprimido.name}"`,
+    try {
+        const response = await axios.post(
+            `${BASE_URL_WP}/media`,
+            arrayBuffer,
+            {
+                headers: {
+                    'Content-Type':        fileComprimido.type || 'image/jpeg',
+                    'Content-Disposition': `attachment; filename="${fileComprimido.name}"`,
+                },
+                auth,
             },
-            auth,
-        },
-    );
-
-    return response.data;
+        );
+        return response.data;
+    } catch (err) {
+        const wpMsg = err.response?.data?.message || err.response?.data?.code || JSON.stringify(err.response?.data);
+        throw new Error(`WP media error ${err.response?.status}: ${wpMsg || err.message}`);
+    }
 };
