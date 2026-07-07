@@ -33,39 +33,41 @@ function ShopWatch() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Valor del input (se actualiza en cada tecla)
+  // inputBusqueda: valor del input mientras el usuario escribe
   const [inputBusqueda, setInputBusqueda] = useState(qParam);
-  // Valor que se pasa a la API (solo se actualiza tras el debounce)
-  const [busqueda, setBusqueda] = useState(qParam);
-
-  // Sincronizar con el parámetro ?q= cuando cambia (ej. búsqueda desde el navbar)
-  useEffect(() => {
-    setInputBusqueda(qParam);
-    setBusqueda(qParam);
-  }, [qParam]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const timerRef = useRef(null);
 
-  // Aplica debounce: cancela el timer anterior y crea uno nuevo cada vez que
-  // el usuario teclea. Solo cuando deja de teclear por DEBOUNCE_MS se lanza
-  // la búsqueda real (que provoca una nueva petición a la API).
+  // Mantener el input sincronizado cuando llega ?q= desde el navbar
+  useEffect(() => {
+    setInputBusqueda(qParam);
+  }, [qParam]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Al escribir en el input, actualizar URL con debounce (fuente de verdad = URL)
   const handleBusqueda = (e) => {
     const valor = e.target.value;
     setInputBusqueda(valor);
     clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setBusqueda(valor), DEBOUNCE_MS);
+    timerRef.current = setTimeout(() => {
+      setSearchParams(prev => {
+        const next = new URLSearchParams(prev);
+        next.delete("page");
+        if (valor.trim()) next.set("q", valor.trim());
+        else next.delete("q");
+        return next;
+      }, { replace: true });
+    }, DEBOUNCE_MS);
   };
 
-  // Limpia el timer al desmontar el componente para evitar memory leaks
+  // Limpia el timer al desmontar
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
-  // Al cambiar de categoría limpiamos la búsqueda y reseteamos la página
+  // Al cambiar de categoría limpiar búsqueda y página
   useEffect(() => {
     setInputBusqueda("");
-    setBusqueda("");
     setSearchParams(prev => {
       const next = new URLSearchParams(prev);
       next.delete("page");
+      next.delete("q");
       return next;
     }, { replace: true });
   }, [categoria]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -112,7 +114,10 @@ function ShopWatch() {
             {inputBusqueda && (
               <button
                 className="shopSearchClear"
-                onClick={() => { setInputBusqueda(""); setBusqueda(""); }}
+                onClick={() => {
+                  setInputBusqueda("");
+                  setSearchParams(prev => { const n = new URLSearchParams(prev); n.delete("q"); n.delete("page"); return n; }, { replace: true });
+                }}
                 aria-label="Limpiar búsqueda"
               >
                 ✕
@@ -124,7 +129,7 @@ function ShopWatch() {
         {/* ── Grid de productos con paginación ── */}
         <ListaProductos
           categoria={categoria}
-          busqueda={busqueda}
+          busqueda={qParam}
           paginado
           paginaExterna={pageParam}
           onPaginaChange={handlePageChange}
