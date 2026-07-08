@@ -189,24 +189,24 @@ export default function ProductoSingle() {
                       const extracto = getProducerExcerpt(p)
                       const foto    = getProducerImage(p)
                       return (
-                        <div key={p?.ID || p?.id || i} className="flex items-center gap-5">
-                          {foto
-                            ? <img src={foto} alt={nombre} className="w-16 h-16 object-cover rounded-full shrink-0" />
-                            : (
-                              <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center shrink-0">
-                                <span className="material-symbols-outlined text-2xl text-outline/40">person</span>
-                              </div>
-                            )
-                          }
-                          <div>
+                        <div key={p?.ID || p?.id || i} className="flex flex-col gap-3 w-full">
+                          <div className="flex items-center gap-3">
+                            {foto
+                              ? <img src={foto} alt={nombre} className="w-10 h-10 object-cover rounded-full shrink-0" />
+                              : (
+                                <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+                                  <span className="material-symbols-outlined text-lg text-outline/40">person</span>
+                                </div>
+                              )
+                            }
                             <p className="font-label-caps text-[13px] text-primary tracking-wide">{nombre}</p>
-                            {extracto && (
-                              <div
-                                className="font-body-md text-sm text-on-surface-variant/70 mt-1 leading-relaxed"
-                                dangerouslySetInnerHTML={{ __html: extracto }}
-                              />
-                            )}
                           </div>
+                          {extracto && (
+                            <div
+                              className="font-body-md text-sm text-on-surface-variant/70 leading-relaxed text-left w-full"
+                              dangerouslySetInnerHTML={{ __html: extracto }}
+                            />
+                          )}
                         </div>
                       )
                     })}
