@@ -17,7 +17,7 @@ function getProducerName(p) {
   return p?.post_title || p?.title?.rendered || p?.name || ''
 }
 function getProducerExcerpt(p) {
-  return p?.post_excerpt || p?.excerpt?.rendered || p?.description || ''
+  return p?.post_content || p?.content?.rendered || p?.post_excerpt || p?.excerpt?.rendered || p?.description || ''
 }
 function getProducerImage(p) {
   return p?.featured_image_url || p?.acf?.foto || p?.fimg_url || ''
@@ -202,7 +202,7 @@ export default function ProductoSingle() {
                             <p className="font-label-caps text-[13px] text-primary tracking-wide">{nombre}</p>
                             {extracto && (
                               <div
-                                className="font-body-md text-sm text-on-surface-variant/70 mt-1 leading-relaxed line-clamp-2"
+                                className="font-body-md text-sm text-on-surface-variant/70 mt-1 leading-relaxed"
                                 dangerouslySetInnerHTML={{ __html: extracto }}
                               />
                             )}
