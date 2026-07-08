@@ -4,15 +4,24 @@ import Footer from '../components/Footer'
 import { useProduct } from '../hooks/useProduct'
 
 const acfFields = [
-  { key: 'productores',   label: 'Productor',      icon: 'person'         },
-  { key: 'year',          label: 'Añada',           icon: 'calendar_today' },
-  { key: 'tipo_de_vino',  label: 'Tipo',            icon: 'wine_bar'       },
-  { key: 'uvas',          label: 'Uvas',            icon: 'grass'          },
-  { key: 'region',        label: 'Región',          icon: 'location_on'    },
+  { key: 'year',          label: 'Añada',          icon: 'calendar_today' },
+  { key: 'tipo_de_vino',  label: 'Tipo',           icon: 'wine_bar'       },
+  { key: 'uvas',          label: 'Uvas',           icon: 'grass'          },
+  { key: 'region',        label: 'Región',         icon: 'location_on'    },
   { key: 'sub_apelacion', label: 'Sub Apelación',  icon: 'map'            },
-  { key: 'pais',          label: 'País',            icon: 'public'         },
+  { key: 'pais',          label: 'País',           icon: 'public'         },
   { key: 'presentation',  label: 'Presentación',   icon: 'liquor'         },
 ]
+
+function getProducerName(p) {
+  return p?.post_title || p?.title?.rendered || p?.name || ''
+}
+function getProducerExcerpt(p) {
+  return p?.post_excerpt || p?.excerpt?.rendered || p?.description || ''
+}
+function getProducerImage(p) {
+  return p?.featured_image_url || p?.acf?.foto || p?.fimg_url || ''
+}
 
 function SkeletonSingle() {
   return (
@@ -39,10 +48,11 @@ export default function ProductoSingle() {
   const precio  = producto?.price
     ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
     : null
-  const acf       = producto?.acf || {}
-  const bodega    = producto?.categories?.[0]?.name || ''
-  const camposAcf = acfFields.filter(({ key }) => acf[key])
-  const fichaPdf  = acf.ficha_tecnica || ''
+  const acf            = producto?.acf || {}
+  const bodega         = producto?.categories?.[0]?.name || ''
+  const camposAcf      = acfFields.filter(({ key }) => acf[key])
+  const fichaPdf       = acf.ficha_tecnica || ''
+  const productoresRel = Array.isArray(acf.productores) ? acf.productores : []
 
   return (
     <>
@@ -164,6 +174,43 @@ export default function ProductoSingle() {
                     <span className="material-symbols-outlined text-[18px]">download</span>
                     FICHA TÉCNICA
                   </a>
+                </div>
+              )}
+
+              {/* Productores relacionados */}
+              {productoresRel.length > 0 && (
+                <div className="mt-10 pt-10 border-t border-outline-variant/20">
+                  <p className="font-label-caps text-[10px] text-on-surface-variant/40 tracking-[0.25em] mb-6">
+                    {productoresRel.length === 1 ? 'PRODUCTOR' : 'PRODUCTORES'}
+                  </p>
+                  <div className="flex flex-col gap-5">
+                    {productoresRel.map((p, i) => {
+                      const nombre  = getProducerName(p)
+                      const extracto = getProducerExcerpt(p)
+                      const foto    = getProducerImage(p)
+                      return (
+                        <div key={p?.ID || p?.id || i} className="flex items-center gap-5">
+                          {foto
+                            ? <img src={foto} alt={nombre} className="w-16 h-16 object-cover rounded-full shrink-0" />
+                            : (
+                              <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+                                <span className="material-symbols-outlined text-2xl text-outline/40">person</span>
+                              </div>
+                            )
+                          }
+                          <div>
+                            <p className="font-label-caps text-[13px] text-primary tracking-wide">{nombre}</p>
+                            {extracto && (
+                              <div
+                                className="font-body-md text-sm text-on-surface-variant/70 mt-1 leading-relaxed line-clamp-2"
+                                dangerouslySetInnerHTML={{ __html: extracto }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               )}
 
