@@ -177,43 +177,6 @@ export default function ProductoSingle() {
                 </div>
               )}
 
-              {/* Productores relacionados */}
-              {productoresRel.length > 0 && (
-                <div className="mt-10 pt-10 border-t border-outline-variant/20">
-                  <p className="font-label-caps text-[10px] text-on-surface-variant/40 tracking-[0.25em] mb-6">
-                    {productoresRel.length === 1 ? 'PRODUCTOR' : 'PRODUCTORES'}
-                  </p>
-                  <div className="flex flex-col gap-5">
-                    {productoresRel.map((p, i) => {
-                      const nombre  = getProducerName(p)
-                      const extracto = getProducerExcerpt(p)
-                      const foto    = getProducerImage(p)
-                      return (
-                        <div key={p?.ID || p?.id || i} className="flex flex-col gap-3 w-full">
-                          <div className="flex items-center gap-3">
-                            {foto
-                              ? <img src={foto} alt={nombre} className="w-10 h-10 object-cover rounded-full shrink-0" />
-                              : (
-                                <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
-                                  <span className="material-symbols-outlined text-lg text-outline/40">person</span>
-                                </div>
-                              )
-                            }
-                            <p className="font-label-caps text-[13px] text-primary tracking-wide">{nombre}</p>
-                          </div>
-                          {extracto && (
-                            <div
-                              className="font-body-md text-sm text-on-surface-variant/70 leading-relaxed text-left w-full"
-                              dangerouslySetInnerHTML={{ __html: extracto }}
-                            />
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-
               {/* Descripción */}
               {(producto.short_description || producto.description) && (
                 <div className="mt-10 pt-10 border-t border-outline-variant/20">
@@ -229,6 +192,43 @@ export default function ProductoSingle() {
 
             </div>
           </div>
+
+          {/* ── Productores relacionados (full width) ── */}
+          {productoresRel.length > 0 && (
+            <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-20 pt-16 border-t border-outline-variant/20">
+              <p className="font-label-caps text-[10px] text-on-surface-variant/40 tracking-[0.25em] mb-10">
+                {productoresRel.length === 1 ? 'PRODUCTOR' : 'PRODUCTORES'}
+              </p>
+              <div className="flex flex-col gap-10">
+                {productoresRel.map((p, i) => {
+                  const nombre   = getProducerName(p)
+                  const extracto = getProducerExcerpt(p)
+                  const foto     = getProducerImage(p)
+                  return (
+                    <div key={p?.ID || p?.id || i} className="flex flex-col gap-4">
+                      <div className="flex items-center gap-4">
+                        {foto
+                          ? <img src={foto} alt={nombre} className="w-12 h-12 object-cover rounded-full shrink-0" />
+                          : (
+                            <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+                              <span className="material-symbols-outlined text-xl text-outline/40">person</span>
+                            </div>
+                          )
+                        }
+                        <p className="font-label-caps text-[14px] text-primary tracking-wide">{nombre}</p>
+                      </div>
+                      {extracto && (
+                        <div
+                          className="font-body-md text-sm text-on-surface-variant/70 leading-relaxed text-left w-full"
+                          dangerouslySetInnerHTML={{ __html: extracto }}
+                        />
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
         </main>
       )}
