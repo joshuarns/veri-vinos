@@ -22,6 +22,7 @@ function ProductCard({ producto }) {
     ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
     : '—'
   const bodega = (producto.acf?.productores || producto.categories?.[0]?.name || '').toUpperCase()
+  const anada  = producto.acf?.year || ''
 
   return (
     <article className="group">
@@ -35,10 +36,7 @@ function ProductCard({ producto }) {
           />
         )}
         <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <button className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-caps px-8 py-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-          Añadir
-        </button>
-        {producto.featured && (
+{producto.featured && (
           <div className="absolute top-4 left-4">
             <span className="bg-secondary-container text-on-secondary-container px-3 py-1 font-label-caps text-[10px] rounded-full">
               DESTACADO
@@ -57,6 +55,12 @@ function ProductCard({ producto }) {
         {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[10px]">{bodega}</p>}
         <h3 className="font-display-script text-title-lg text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
         <p className="font-body-md text-secondary font-bold">{precio}</p>
+        {anada && (
+          <div className="pt-1">
+            <p className="font-label-caps text-[9px] text-secondary tracking-[0.2em]">AÑADA</p>
+            <p className="font-body-md text-sm text-on-surface-variant">{anada}</p>
+          </div>
+        )}
       </div>
       </Link>
     </article>
