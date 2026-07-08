@@ -39,9 +39,10 @@ export default function ProductoSingle() {
   const precio  = producto?.price
     ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
     : null
-  const acf     = producto?.acf || {}
-  const bodega  = producto?.categories?.[0]?.name || ''
+  const acf       = producto?.acf || {}
+  const bodega    = producto?.categories?.[0]?.name || ''
   const camposAcf = acfFields.filter(({ key }) => acf[key])
+  const fichaPdf  = acf.ficha_tecnica || ''
 
   return (
     <>
@@ -147,6 +148,22 @@ export default function ProductoSingle() {
                       </span>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {/* Ficha técnica PDF */}
+              {fichaPdf && (
+                <div className="mt-8">
+                  <a
+                    href={fichaPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="inline-flex items-center gap-3 border border-primary text-primary font-label-caps py-4 px-8 tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all duration-300"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">download</span>
+                    FICHA TÉCNICA
+                  </a>
                 </div>
               )}
 
