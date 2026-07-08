@@ -41,7 +41,7 @@ export default function Navbar({ barVisible = false }) {
           <div className="flex items-center gap-4">
             <div className="hidden md:flex gap-8 mr-8">
               <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>INICIO</Link>
-              <Link to="#" className="text-on-surface-variant/80 font-label-caps tracking-widest text-[11px] hover:text-secondary transition-colors">PRODUCTORES</Link>
+              <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>PRODUCTORES</Link>
               <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>VINOS</Link>
             </div>
             <button className="p-2 hover:bg-surface-variant/20 rounded-full transition-colors text-primary relative">
