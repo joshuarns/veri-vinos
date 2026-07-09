@@ -21,7 +21,11 @@ function ProductCard({ producto }) {
   const precio = producto.price
     ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
     : '—'
-  const bodega = (producto.acf?.productores || producto.categories?.[0]?.name || '').toUpperCase()
+  const productoresRaw = producto.acf?.productores
+  const bodegaStr = Array.isArray(productoresRaw)
+    ? (productoresRaw[0]?.post_title || productoresRaw[0]?.title?.rendered || '')
+    : (typeof productoresRaw === 'string' ? productoresRaw : producto.categories?.[0]?.name || '')
+  const bodega = bodegaStr.toUpperCase()
   const anada  = producto.acf?.year || ''
 
   return (
