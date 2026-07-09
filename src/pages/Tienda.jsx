@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -86,6 +86,7 @@ export default function Tienda() {
   const [regionActiva, setRegionActiva] = useState(null)   // { id, nombre, descripcion, slug }
   const [regiones,     setRegiones]     = useState([])
   const [regionDropdown, setRegionDropdown] = useState(false)
+  const gridRef = React.useRef(null)
 
   // productos filtrados por región (se cargan aparte)
   const [productosRegion,  setProductosRegion]  = useState([])
@@ -254,7 +255,7 @@ export default function Tienda() {
 
         {/* Product Grid (solo cuando no hay región activa) */}
         {!regionActiva && !error && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
+          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
             {cargando
               ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
               : productos.map((p) => <ProductCard key={p.id} producto={p} />)
@@ -267,7 +268,10 @@ export default function Tienda() {
           <div className="flex justify-center items-center gap-4 mt-20">
             <button
               disabled={page === 1}
-              onClick={() => setPage(p => p - 1)}
+              onClick={() => {
+                setPage(p => p - 1)
+                gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
               className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center disabled:opacity-30 hover:bg-primary hover:text-white transition-all"
             >
               <span className="material-symbols-outlined text-sm">west</span>
@@ -277,7 +281,10 @@ export default function Tienda() {
             </span>
             <button
               disabled={page === totalPaginas}
-              onClick={() => setPage(p => p + 1)}
+              onClick={() => {
+                setPage(p => p + 1)
+                gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
               className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center disabled:opacity-30 hover:bg-primary hover:text-white transition-all"
             >
               <span className="material-symbols-outlined text-sm">east</span>
