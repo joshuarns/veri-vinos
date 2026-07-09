@@ -169,7 +169,7 @@ export default function ProductoSingle() {
                     target="_blank"
                     rel="noopener noreferrer"
                     download
-                    className="inline-flex items-center gap-3 border border-primary text-primary font-label-caps py-4 px-8 tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all duration-300"
+                    className="inline-flex items-center gap-2 border border-primary text-primary font-label-caps py-2 px-5 tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all duration-300 text-[11px]"
                   >
                     <span className="material-symbols-outlined text-[18px]">download</span>
                     FICHA TÉCNICA
