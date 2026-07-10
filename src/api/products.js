@@ -58,7 +58,7 @@ export const obtenerRegiones = async () => {
   if (!atributo) return []
 
   const termsRes = await axios.get(`${BASE_URL}/products/attributes/${atributo.id}/terms`, {
-    params: { ...authParams, per_page: 100, hide_empty: true },
+    params: { ...authParams, per_page: 100 },
   })
   return Array.isArray(termsRes.data)
     ? termsRes.data.map((t) => ({ id: t.id, nombre: t.name, descripcion: t.description, slug: t.slug }))
