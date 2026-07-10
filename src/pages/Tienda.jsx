@@ -143,41 +143,20 @@ export default function Tienda() {
         </div>
 
         {/* Filter Bar */}
-        <section className="py-6 mb-12 border-b border-outline-variant/20">
-          <div className="flex flex-wrap items-center justify-between gap-6">
+        <section className="mb-12 border-b border-outline-variant/20">
+          <div className="py-6 flex flex-wrap items-center justify-between gap-6">
             <div className="flex flex-wrap items-center gap-4 md:gap-8">
 
-              {/* Dropdown Región */}
-              <div className="relative">
-                <button
-                  onClick={() => setRegionDropdown((v) => !v)}
-                  className={`flex items-center gap-2 font-label-caps transition-colors ${regionActiva ? 'text-primary' : 'text-on-surface-variant hover:text-primary'}`}
-                >
-                  {regionActiva ? regionActiva.nombre : 'Región'}
-                  <span className="material-symbols-outlined text-sm">
-                    {regionDropdown ? 'expand_less' : 'expand_more'}
-                  </span>
-                </button>
-                {regionDropdown && (
-                  <div className="absolute top-full left-0 mt-2 bg-surface border border-outline-variant/30 shadow-lg z-50 min-w-[180px]">
-                    <button
-                      onClick={limpiarRegion}
-                      className="w-full text-left px-5 py-3 font-label-caps text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
-                    >
-                      Todas las regiones
-                    </button>
-                    {regiones.map((r) => (
-                      <button
-                        key={r.id}
-                        onClick={() => handleRegion(r)}
-                        className={`w-full text-left px-5 py-3 font-label-caps text-[10px] transition-colors ${regionActiva?.id === r.id ? 'text-primary bg-surface-container' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
-                      >
-                        {r.nombre}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* Botón Región */}
+              <button
+                onClick={() => setRegionDropdown((v) => !v)}
+                className={`flex items-center gap-2 font-label-caps transition-colors ${regionActiva ? 'text-primary' : 'text-on-surface-variant hover:text-primary'}`}
+              >
+                {regionActiva ? regionActiva.nombre : 'Región'}
+                <span className="material-symbols-outlined text-sm">
+                  {regionDropdown ? 'expand_less' : 'expand_more'}
+                </span>
+              </button>
 
               {['Tipo', 'Precio'].map((label) => (
                 <button key={label} className="flex items-center gap-2 font-label-caps text-on-surface-variant hover:text-primary transition-colors">
@@ -201,6 +180,37 @@ export default function Tienda() {
               ))}
             </div>
           </div>
+
+          {/* Panel de regiones — full width */}
+          {regionDropdown && regiones.length > 0 && (
+            <div className="border-t border-outline-variant/20 py-6">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => { limpiarRegion(); setRegionDropdown(false) }}
+                  className={`px-4 py-1.5 rounded-full font-label-caps text-[10px] transition-colors whitespace-nowrap ${
+                    !regionActiva
+                      ? 'bg-primary text-on-primary'
+                      : 'bg-surface-container-high text-on-surface-variant hover:bg-outline-variant/30'
+                  }`}
+                >
+                  Todas
+                </button>
+                {regiones.map((r) => (
+                  <button
+                    key={r.id}
+                    onClick={() => handleRegion(r)}
+                    className={`px-4 py-1.5 rounded-full font-label-caps text-[10px] transition-colors whitespace-nowrap ${
+                      regionActiva?.id === r.id
+                        ? 'bg-primary text-on-primary'
+                        : 'bg-surface-container-high text-on-surface-variant hover:bg-outline-variant/30'
+                    }`}
+                  >
+                    {r.nombre}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Vista de Región seleccionada */}
