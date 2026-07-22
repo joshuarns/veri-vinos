@@ -86,6 +86,11 @@ function FormSellWatch() {
     setPreviewMuneca(URL.createObjectURL(file));
   };
 
+  const eliminarFotoMuneca = () => {
+    setFotoMuneca(null);
+    setPreviewMuneca(null);
+  };
+
   const handleFotoIdentificacion = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -94,6 +99,11 @@ function FormSellWatch() {
     setErrorIdentificacion(null);
     setFotoIdentificacion(file);
     setPreviewIdentificacion(URL.createObjectURL(file));
+  };
+
+  const eliminarFotoIdentificacion = () => {
+    setFotoIdentificacion(null);
+    setPreviewIdentificacion(null);
   };
 
   const handleSubmit = async (e) => {
@@ -244,6 +254,8 @@ function FormSellWatch() {
         {previewMuneca && (
           <div className="sellImagePreview">
             <img src={previewMuneca} alt="Vista previa muñeca" />
+            <button type="button" className="sellImageDelete"
+              onClick={eliminarFotoMuneca} title="Eliminar foto">✕</button>
           </div>
         )}
       </div>
@@ -266,6 +278,8 @@ function FormSellWatch() {
         {previewIdentificacion && (
           <div className="sellImagePreview">
             <img src={previewIdentificacion} alt="Vista previa identificación" />
+            <button type="button" className="sellImageDelete"
+              onClick={eliminarFotoIdentificacion} title="Eliminar foto">✕</button>
           </div>
         )}
       </div>
