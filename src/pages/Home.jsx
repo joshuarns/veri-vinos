@@ -22,7 +22,7 @@ export default function Home() {
       <main>
         <WineSelection />
         <Philosophy />
-        {/* <InteractiveMap /> */}
+        <InteractiveMap />
         {/* <Producers /> */}
         {/* <Testimonials /> */}
         {/* <GourmetExperience /> */}
