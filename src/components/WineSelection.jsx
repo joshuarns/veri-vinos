@@ -57,30 +57,30 @@ export default function WineSelection() {
           </div>
         </div>
 
-        <div ref={carouselRef} className="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4">
+        <div ref={carouselRef} className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4">
           {wines.map((wine) => (
-            <div key={wine.id} className="min-w-[300px] md:min-w-[380px] snap-start group cursor-pointer">
-              <div className="relative aspect-[3/4] bg-surface-container-low overflow-hidden rounded-xl mb-8">
+            <div key={wine.id} className="min-w-[260px] md:min-w-[320px] snap-start group cursor-pointer border border-outline-variant/40 hover:border-primary transition-colors duration-300">
+              <div className="relative aspect-[3/4] bg-surface-container-lowest overflow-hidden">
                 <img
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105"
                   src={wine.img}
                   alt={wine.name}
                 />
-                <div className="absolute top-6 left-6 flex flex-col gap-2">
-                  <span className="bg-white/90 backdrop-blur px-4 py-1.5 rounded-full font-label-caps text-[9px] text-primary shadow-sm uppercase tracking-widest">
+                <div className="absolute top-4 left-4">
+                  <span className="font-label-caps text-[9px] text-secondary tracking-widest uppercase">
                     {wine.badge}
                   </span>
                 </div>
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <button className="bg-white text-primary px-6 py-3 rounded-full font-label-caps text-[10px] tracking-widest">
-                    VER DETALLES
-                  </button>
-                </div>
               </div>
-              <div>
-                <p className="font-label-caps text-secondary text-[10px] mb-2 tracking-widest uppercase">{wine.region}</p>
-                <h4 className="font-headline-sm text-primary mb-2 group-hover:text-secondary transition-colors">{wine.name}</h4>
-                <p className="font-body-md text-primary/80 font-bold">{wine.price}</p>
+              <div className="px-6 py-5 border-t border-outline-variant/30">
+                <p className="font-label-caps text-on-surface-variant/50 text-[10px] mb-1 tracking-widest uppercase">{wine.region}</p>
+                <h4 className="font-headline-sm text-primary mb-3 group-hover:text-secondary transition-colors text-base">{wine.name}</h4>
+                <div className="flex items-center justify-between">
+                  <p className="font-body-md text-primary font-semibold">{wine.price}</p>
+                  <span className="font-label-caps text-[9px] text-on-surface-variant/40 underline underline-offset-2 tracking-widest cursor-pointer hover:text-primary transition-colors">
+                    Agregar al carrito
+                  </span>
+                </div>
               </div>
             </div>
           ))}
