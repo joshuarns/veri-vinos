@@ -4,62 +4,80 @@ export default function Footer() {
   const [email, setEmail] = useState('')
 
   return (
-    <footer className="bg-primary text-white pt-24 pb-12 px-margin-mobile md:px-margin-desktop">
+    <footer className="bg-background pt-16 pb-8 px-margin-mobile md:px-margin-desktop border-t border-outline-variant/20">
       <div className="max-w-container-max mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
-          <div className="col-span-1">
-            <h2 className="font-display-script text-3xl mb-8 tracking-tighter">VERI VINOS</h2>
-            <p className="text-white/60 text-sm leading-relaxed mb-8">
+
+        {/* Main grid */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-12 md:gap-20 mb-12">
+
+          {/* Col izquierda: Veri + descripción + email */}
+          <div className="max-w-sm">
+            <h2 className="font-display-script text-primary mb-6" style={{ fontSize: '64px', lineHeight: 1 }}>
+              Veri
+            </h2>
+            <p className="font-bold text-primary text-sm leading-relaxed mb-4">
               Dedicados a la preservación y promoción de la cultura vinícola artesanal italiana. Calidad sin compromisos.
             </p>
-            <div className="flex gap-6">
-              <span className="font-label-caps text-[10px] tracking-widest border-b border-white/20 pb-1 cursor-pointer hover:text-secondary-container transition-colors">INSTAGRAM</span>
-              <span className="font-label-caps text-[10px] tracking-widest border-b border-white/20 pb-1 cursor-pointer hover:text-secondary-container transition-colors">LINKEDIN</span>
-            </div>
-          </div>
-          <div>
-            <h5 className="font-label-caps text-xs tracking-[0.2em] mb-8 text-secondary-container">CATÁLOGO</h5>
-            <ul className="space-y-4 text-sm text-white/60">
-              <li><a className="hover:text-white transition-colors" href="#">Vinos Tintos</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Vinos Blancos</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Espumosos</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Cestas Regalo</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-label-caps text-xs tracking-[0.2em] mb-8 text-secondary-container">COMPAÑÍA</h5>
-            <ul className="space-y-4 text-sm text-white/60">
-              <li><a className="hover:text-white transition-colors" href="#">Nuestra Bodega</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Sostenibilidad</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Contacto</a></li>
-              <li><a className="hover:text-white transition-colors" href="#">Puntos de Venta</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-label-caps text-xs tracking-[0.2em] mb-8 text-secondary-container">BOLETÍN</h5>
-            <p className="text-xs text-white/50 mb-6">Reciba invitaciones a catas privadas y lanzamientos exclusivos.</p>
-            <form className="flex border-b border-white/20 pb-2" onSubmit={(e) => e.preventDefault()}>
+            <p className="font-bold text-primary text-sm mb-8">
+              Reciba invitaciones a catas privadas y lanzamientos exclusivos.
+            </p>
+            <form onSubmit={(e) => e.preventDefault()} className="border-b border-primary pb-1">
               <input
-                className="bg-transparent border-none text-sm w-full outline-none placeholder:text-white/20"
-                placeholder="Su email"
                 type="email"
+                placeholder="Email*"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="bg-transparent w-full outline-none text-sm text-primary placeholder:text-primary font-bold"
               />
-              <button className="text-white hover:text-secondary-container transition-colors" type="submit">
-                <span className="material-symbols-outlined">north_east</span>
-              </button>
             </form>
           </div>
+
+          {/* Col Catálogo + redes */}
+          <div className="text-center">
+            <h5 className="font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6"
+                style={{ fontFamily: 'Metropolis, sans-serif' }}>
+              Catálogo
+            </h5>
+            <ul className="space-y-3 text-primary text-sm mb-8">
+              <li><a href="#" className="hover:underline">Vinos Tintos</a></li>
+              <li><a href="#" className="hover:underline">Vinos Blancos</a></li>
+              <li><a href="#" className="hover:underline">Espumosos</a></li>
+              <li><a href="#" className="hover:underline">Cestas Regalo</a></li>
+            </ul>
+            <div className="space-y-2 text-primary text-sm">
+              <p><a href="#" className="underline underline-offset-2 hover:opacity-70">Instagram</a></p>
+              <p><a href="#" className="underline underline-offset-2 hover:opacity-70">Linkdin</a></p>
+            </div>
+          </div>
+
+          {/* Col Compañía */}
+          <div className="text-center">
+            <h5 className="font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6"
+                style={{ fontFamily: 'Metropolis, sans-serif' }}>
+              Compañía
+            </h5>
+            <ul className="space-y-3 text-primary text-sm">
+              <li><a href="#" className="hover:underline">Nuestra Bodega</a></li>
+              <li><a href="#" className="hover:underline">Sostenibilidad</a></li>
+              <li><a href="#" className="hover:underline">Contacto</a></li>
+              <li><a href="#" className="hover:underline">Puntos de Venta</a></li>
+            </ul>
+          </div>
+
         </div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-white/5">
-          <p className="text-[10px] text-white/30 tracking-widest uppercase">© 2024 VERI VINOS. TRADICIÓN EMBOTELLADA.</p>
-          <div className="flex gap-8 text-[10px] text-white/30 tracking-widest uppercase">
-            <a className="hover:text-white transition-colors" href="#">Privacidad</a>
-            <a className="hover:text-white transition-colors" href="#">Legal</a>
-            <a className="hover:text-white transition-colors" href="#">Cookies</a>
+
+        {/* Bottom bar */}
+        <div className="border-t border-outline-variant/30 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-label-caps text-primary text-[10px] tracking-widest">
+            ©2024 VERI. TRADICIÓN EMBOTELLADA.
+          </p>
+          <div className="flex gap-8 font-label-caps text-primary text-[10px] tracking-widest">
+            <a href="#" className="hover:underline">PRIVACIDAD</a>
+            <a href="#" className="hover:underline">LEGAL</a>
+            <a href="#" className="hover:underline">COOKIES</a>
           </div>
         </div>
+
       </div>
     </footer>
   )
