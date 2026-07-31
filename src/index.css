@@ -22,3 +22,9 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hero-text-shadow { text-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+
+/* Cormorant Garamond italic para todos los elementos display */
+.font-display-script {
+  font-style: italic;
+  font-weight: 300;
+}
