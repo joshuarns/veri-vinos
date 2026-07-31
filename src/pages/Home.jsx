@@ -22,11 +22,11 @@ export default function Home() {
       <main>
         <WineSelection />
         <Philosophy />
-        <InteractiveMap />
-        <Producers />
-        <Testimonials />
-        <GourmetExperience />
-        <ClubMembership />
+        {/* <InteractiveMap /> */}
+        {/* <Producers /> */}
+        {/* <Testimonials /> */}
+        {/* <GourmetExperience /> */}
+        {/* <ClubMembership /> */}
       </main>
       <Footer />
     </>
