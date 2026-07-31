@@ -6,11 +6,9 @@ export default function Hero() {
     <header className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-primary">
       <img
         alt="Viñedos de Italia"
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        className="absolute inset-0 w-full h-full object-cover"
         src={heroBanner}
       />
-      {/* Overlay sutil */}
-      <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 text-center px-6 max-w-5xl w-full">
         {/* "Veri" — gran script italic */}
