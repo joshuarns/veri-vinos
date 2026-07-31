@@ -28,27 +28,36 @@ export default function Navbar({ barVisible = false }) {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300 ${scrolled ? 'py-3 top-0' : `py-5 ${barVisible ? 'top-[38px]' : 'top-0'}`} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
+        className={`fixed left-0 right-0 z-50 bg-surface border-b border-outline-variant/20 transition-all duration-300 ${scrolled ? 'py-3 top-0' : `py-4 ${barVisible ? 'top-[38px]' : 'top-0'}`} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
       >
-        <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-          <button
-            className="p-2 hover:bg-surface-variant/20 rounded-full transition-colors text-primary"
-            onClick={() => setDrawerOpen(true)}
-          >
-            <span className="material-symbols-outlined">menu</span>
-          </button>
-          <Link to="/" className="font-display-script text-headline-sm md:text-headline-md text-primary tracking-tighter">Veri Vinos</Link>
+        <div className="flex items-center justify-between w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+
+          {/* Izquierda: hamburger + VERI */}
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex gap-8 mr-8">
-              <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>INICIO</Link>
-              <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>PRODUCTORES</Link>
-              <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-secondary border-b border-secondary' : 'text-on-surface-variant/80 hover:text-secondary'}`}>VINOS</Link>
+            <button
+              className="p-1 hover:opacity-60 transition-opacity text-on-surface"
+              onClick={() => setDrawerOpen(true)}
+            >
+              <span className="material-symbols-outlined text-[22px]">menu</span>
+            </button>
+            <Link to="/" className="font-bold text-on-surface tracking-widest text-lg uppercase" style={{ fontFamily: 'Metropolis, sans-serif' }}>
+              VERI
+            </Link>
+          </div>
+
+          {/* Derecha: links + carrito */}
+          <div className="flex items-center gap-8">
+            <div className="hidden md:flex gap-8">
+              <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-primary' : 'text-on-surface-variant/70 hover:text-primary'}`}>INICIO</Link>
+              <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-primary' : 'text-on-surface-variant/70 hover:text-primary'}`}>PRODUCTORES</Link>
+              <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-primary' : 'text-on-surface-variant/70 hover:text-primary'}`}>VINOS</Link>
             </div>
-            <button className="p-2 hover:bg-surface-variant/20 rounded-full transition-colors text-primary relative">
-              <span className="material-symbols-outlined">shopping_bag</span>
-              <span className="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
+            <button className="p-1 hover:opacity-60 transition-opacity text-on-surface relative">
+              <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
             </button>
           </div>
+
         </div>
       </nav>
 
