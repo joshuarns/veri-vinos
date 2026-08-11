@@ -2,16 +2,16 @@ import filosofiaImg from '../assets/img/nuestra-filosofia.jpg'
 
 const values = [
   {
-    title: 'Producción\nNatural',
-    desc: 'Sin herbicidas ni pesticidas. Respetamos los ciclos de la tierra y el trabajo artesanal de generaciones.',
+    title: 'Origen',
+    desc: 'Regiones que han dado forma a algunos de los grandes vinos de Italia.',
   },
   {
-    title: 'Productores\nDirectos',
-    desc: 'Cada botella llega directamente del productor. Sin intermediarios, sin compromisos en la calidad.',
+    title: 'Legado',
+    desc: 'Casas donde el conocimiento se construye vendimia tras vendimia.',
   },
   {
-    title: 'Curaduría\nRigurosa',
-    desc: 'Solo el 12% de los vinos que probamos llegan a nuestra selección. La excelencia no es negociable.',
+    title: 'Identidad',
+    desc: 'Productores que no siguen una referencia; ayudan a construirla.',
   },
 ]
 
@@ -26,18 +26,17 @@ export default function Philosophy() {
           {/* Card izquierda — borde burdeos, fondo crema */}
           <div className="border border-primary rounded-xl p-10 md:p-12 flex flex-col justify-between bg-background">
             <div>
-              <p className="font-label-caps text-primary text-[11px] tracking-[0.25em] font-bold mb-6">
-                NUESTRA FILOSOFÍA
-              </p>
               <h3
                 className="text-primary font-bold uppercase leading-tight mb-8"
-                style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(28px, 4vw, 48px)' }}
+                style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(24px, 3.5vw, 44px)', letterSpacing: '0.02em' }}
               >
-                El vino natural no es una tendencia. Es una memoria.
+                Vinos con Origen.<br />
+                Productores con Historia.<br />
+                Territorios con Identidad.
               </h3>
             </div>
             <p className="font-bold text-on-surface text-sm leading-relaxed">
-              Fundada sobre la convicción de que la tierra habla cuando no se la interrumpe, Veri Vinos nació para llevar a su mesa lo que los viñedos italianos tienen que decir.
+              Veri Selezione nace de una pasión por Italia, sus viñedos y las historias detrás de cada botella. Reunimos casas que han marcado la historia de sus regiones y productores que hoy continúan definiendo su identidad. Familias, viñedos y territorios donde generaciones de conocimiento se traducen en vinos de carácter, precisión y profundo sentido de lugar.
             </p>
           </div>
 
