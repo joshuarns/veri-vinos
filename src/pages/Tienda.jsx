@@ -137,9 +137,13 @@ export default function Tienda() {
 
         {/* Header */}
         <div className="py-16 text-center">
-          <p className="font-label-caps text-secondary mb-4 tracking-[0.3em]">CATA Y SELECCIÓN</p>
-          <h1 className="font-display-script text-headline-lg md:text-[80px] leading-none mb-8">Nuestra Cava</h1>
-          <div className="w-12 h-px bg-outline-variant/50 mx-auto" />
+          <h1
+            className="text-primary font-bold uppercase mb-8"
+            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(36px, 6vw, 80px)', letterSpacing: '0.04em' }}
+          >
+            Nuestra Cava
+          </h1>
+          <div className="w-12 h-px bg-primary/30 mx-auto" />
         </div>
 
         {/* Filter Bar */}

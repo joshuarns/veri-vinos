@@ -45,17 +45,11 @@ export default function Navbar({ barVisible = false }) {
             </Link>
           </div>
 
-          {/* Derecha: links + carrito */}
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-8">
-              <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>INICIO</Link>
-              <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>PRODUCTORES</Link>
-              <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>VINOS</Link>
-            </div>
-            <button className="p-1 hover:opacity-60 transition-opacity text-on-surface relative">
-              <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
-              <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
-            </button>
+          {/* Derecha: links */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>INICIO</Link>
+            <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>PRODUCTORES</Link>
+            <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>VINOS</Link>
           </div>
 
         </div>
