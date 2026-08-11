@@ -59,7 +59,6 @@ export default function WineSelection() {
                     style={{ fontFamily: 'Metropolis, sans-serif' }}>
                   {wine.name.toUpperCase()}
                 </h4>
-                <p className="font-bold text-primary text-sm">{wine.price}</p>
               </div>
 
               {/* Imagen botella */}
