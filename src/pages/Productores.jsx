@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { obtenerProductores, getFeaturedImage } from '../api/producers'
 
-const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
+const WP_MEDIA = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2') + '/media'
 
 function ProductorCard({ productor }) {
   const nombre   = productor.title?.rendered || ''
@@ -14,13 +14,17 @@ function ProductorCard({ productor }) {
   const region   = productor.acf?.region || ''
   const meta     = [region, pais].filter(Boolean).join(' · ').toUpperCase()
 
-  const [imagen, setImagen] = useState(() => getFeaturedImage(productor))
+  const [imagen, setImagen] = useState('')
 
   useEffect(() => {
-    if (imagen) return
+    // Intenta primero desde _embedded (si el servidor lo incluye)
+    const fromEmbed = getFeaturedImage(productor)
+    if (fromEmbed) { setImagen(fromEmbed); return }
+
+    // Fallback: fetch directo por ID
     const mediaId = productor.featured_media
     if (!mediaId) return
-    axios.get(`${WP_BASE}/media/${mediaId}`)
+    axios.get(`${WP_MEDIA}/${mediaId}`)
       .then((r) => { if (r.data?.source_url) setImagen(r.data.source_url) })
       .catch(() => {})
   }, [productor.id])
