@@ -45,9 +45,9 @@ const regionData = {
 }
 
 const INTERACTIVE_IDS = new Set(Object.values(REGION_IDS))
-const C_BG       = '#f0d0d8'  // very light rose — non-interactive regions
-const C_INACTIVE = '#d9a0b0'  // medium rose — interactive but not active
-const C_ACTIVE   = '#FDB814'  // gold — active region
+const C_BG       = '#FDB81430'  // gold 19% — non-interactive regions
+const C_INACTIVE = '#FDB81465'  // gold 40% — interactive but not active
+const C_ACTIVE   = '#FDB814'    // gold 100% — active region
 
 export default function InteractiveMap() {
   const [active, setActive] = useState('puglia')
