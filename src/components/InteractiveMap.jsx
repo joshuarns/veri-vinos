@@ -118,25 +118,25 @@ export default function InteractiveMap() {
   }, [active])
 
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28" style={{ backgroundColor: '#3A3A3A' }}>
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 
         {/* Título centrado */}
         <div className="text-center mb-14">
           <p
-            className="text-primary font-bold text-xs tracking-[0.35em] mb-4 uppercase"
-            style={{ fontFamily: 'Metropolis, sans-serif' }}
+            className="font-bold text-xs tracking-[0.35em] mb-4 uppercase"
+            style={{ fontFamily: 'Metropolis, sans-serif', color: '#d9a0b0' }}
           >
             Terroir de Excelencia
           </p>
           <h3
-            className="text-primary font-bold uppercase mb-6"
+            className="font-bold uppercase mb-6 text-white"
             style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em' }}
           >
             Explora las Regiones
           </h3>
           <p
-            className="text-primary mx-auto max-w-xl leading-relaxed"
+            className="text-white/70 mx-auto max-w-xl leading-relaxed"
             style={{ fontFamily: 'Metropolis, sans-serif', fontSize: '15px' }}
           >
             Cada rincón de Italia respira una esencia distinta. Desde los Alpes en el norte hasta el sol abrasador de Sicilia, descubra cómo el paisaje define el sabor.
@@ -153,7 +153,7 @@ export default function InteractiveMap() {
                 key={id}
                 onClick={() => setActive(id)}
                 className={`text-left font-bold text-xs tracking-[0.2em] uppercase transition-all ${
-                  active === id ? 'text-primary' : 'text-primary/25 hover:text-primary/50'
+                  active === id ? 'text-white' : 'text-white/30 hover:text-white/60'
                 }`}
                 style={{ fontFamily: 'Metropolis, sans-serif' }}
               >
@@ -205,7 +205,7 @@ export default function InteractiveMap() {
               key={id}
               onClick={() => setActive(id)}
               className={`px-4 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase border transition-all ${
-                active === id ? 'bg-primary text-white border-primary' : 'border-primary/30 text-primary'
+                active === id ? 'bg-primary text-white border-primary' : 'border-white/30 text-white/60'
               }`}
               style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
