@@ -24,7 +24,7 @@ const wines = [
 
 export default function WineSelection() {
   return (
-    <section className="py-20 md:py-28 px-margin-mobile md:px-margin-desktop bg-white">
+    <section className="py-20 md:py-28 px-margin-mobile md:px-margin-desktop bg-background">
       <div className="max-w-container-max mx-auto">
 
         {/* Header */}
