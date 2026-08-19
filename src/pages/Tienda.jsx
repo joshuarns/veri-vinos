@@ -26,7 +26,7 @@ function ProductCard({ producto }) {
     ? (productoresRaw[0]?.post_title || productoresRaw[0]?.title?.rendered || '')
     : (typeof productoresRaw === 'string' ? productoresRaw : producto.categories?.[0]?.name || '')
   const bodega = bodegaStr.toUpperCase()
-  const anada  = producto.acf?.year || ''
+  const anada  = producto.acf?.year ? String(parseInt(producto.acf.year)) : ''
 
   return (
     <article className="group">
@@ -40,7 +40,7 @@ function ProductCard({ producto }) {
           />
         )}
         <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-{producto.featured && (
+        {producto.featured && (
           <div className="absolute top-4 left-4">
             <span className="bg-secondary-container text-on-secondary-container px-3 py-1 font-label-caps text-[10px] rounded-full">
               DESTACADO
@@ -55,11 +55,10 @@ function ProductCard({ producto }) {
           </div>
         )}
       </div>
-      <div className="text-center space-y-2">
-        {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[14px]">{bodega}</p>}
+      <div className="text-center space-y-1">
         <h3 className="font-display-script text-title-lg text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
-        {precio !== '—' && <p className="font-body-md text-secondary font-bold">{precio}</p>}
-        {anada && <p className="font-body-md text-base text-on-surface-variant">{anada}</p>}
+        {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[11px] tracking-widest">{bodega}</p>}
+        {anada && <p className="font-body-md text-sm text-on-surface-variant/50 mt-1">{anada}</p>}
       </div>
       </Link>
     </article>
