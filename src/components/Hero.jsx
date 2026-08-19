@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import heroBanner from '../assets/img/hero-banner-home.jpg'
+import heroBanner from '../assets/img/herobanner-veri-vinos.jpeg'
 
 export default function Hero() {
   return (
