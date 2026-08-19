@@ -24,7 +24,7 @@ export default function Hero() {
 
         {/* SELEZIONE — bold uppercase sin italic */}
         <h2 className="text-white font-bold uppercase tracking-[0.12em] mb-8"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(32px, 6vw, 72px)' }}>
+            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(22px, 4vw, 48px)' }}>
           Selezione
         </h2>
 
