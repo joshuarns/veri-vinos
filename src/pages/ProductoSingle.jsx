@@ -66,22 +66,18 @@ export default function ProductoSingle() {
     const ids = productoresRel.map((p) => p?.ID || p?.id).filter(Boolean)
     if (!ids.length) return
 
-    axios.get(`${WP_BASE}/media`, {
-      params: { parent: ids.join(','), per_page: 20 },
-    }).catch(() => ({ data: [] })).then(async () => {
-      // parent filter no siempre funciona para CPTs — fetch por productor directo
-      await Promise.all(ids.map(async (id) => {
+    Promise.all(
+      ids.map(async (producerId) => {
         try {
-          const r = await axios.get(`${WP_BASE}/productores/${id}`, {
-            params: { _embed: true },
-          })
-          const url =
-            r.data?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
-            r.data?.acf?.foto || ''
-          if (url) setProducerImages((prev) => ({ ...prev, [id]: url }))
+          const r = await axios.get(`${WP_BASE}/productores/${producerId}`)
+          const mediaId = r.data?.featured_media
+          if (!mediaId) return
+          const m = await axios.get(`${WP_BASE}/media/${mediaId}`)
+          const url = m.data?.source_url || ''
+          if (url) setProducerImages((prev) => ({ ...prev, [producerId]: url }))
         } catch { /* sin imagen */ }
-      }))
-    })
+      })
+    )
   }, [producto?.id])
 
   return (
