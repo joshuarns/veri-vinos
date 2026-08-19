@@ -1,16 +1,29 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { obtenerProductores, getFeaturedImage } from '../api/producers'
 
+const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
+
 function ProductorCard({ productor }) {
   const nombre   = productor.title?.rendered || ''
-  const imagen   = getFeaturedImage(productor)
   const extracto = productor.excerpt?.rendered || ''
   const pais     = productor.acf?.pais || ''
   const region   = productor.acf?.region || ''
   const meta     = [region, pais].filter(Boolean).join(' · ').toUpperCase()
+
+  const [imagen, setImagen] = useState(() => getFeaturedImage(productor))
+
+  useEffect(() => {
+    if (imagen) return
+    const mediaId = productor.featured_media
+    if (!mediaId) return
+    axios.get(`${WP_BASE}/media/${mediaId}`)
+      .then((r) => { if (r.data?.source_url) setImagen(r.data.source_url) })
+      .catch(() => {})
+  }, [productor.id])
 
   return (
     <Link to={`/productor/${productor.slug}`} className="group block">
