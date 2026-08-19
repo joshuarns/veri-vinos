@@ -1,7 +1,11 @@
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import axios from 'axios'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useProduct } from '../hooks/useProduct'
+
+const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
 
 const acfFields = [
   { key: 'year',          label: 'Añada',          icon: 'calendar_today' },
@@ -53,6 +57,32 @@ export default function ProductoSingle() {
   const camposAcf      = acfFields.filter(({ key }) => acf[key])
   const fichaPdf       = acf.ficha_tecnica || ''
   const productoresRel = Array.isArray(acf.productores) ? acf.productores : []
+
+  // Imágenes de productores relacionados (ACF no las incluye, se fetchean aparte)
+  const [producerImages, setProducerImages] = useState({})
+
+  useEffect(() => {
+    if (!productoresRel.length) return
+    const ids = productoresRel.map((p) => p?.ID || p?.id).filter(Boolean)
+    if (!ids.length) return
+
+    axios.get(`${WP_BASE}/media`, {
+      params: { parent: ids.join(','), per_page: 20 },
+    }).catch(() => ({ data: [] })).then(async () => {
+      // parent filter no siempre funciona para CPTs — fetch por productor directo
+      await Promise.all(ids.map(async (id) => {
+        try {
+          const r = await axios.get(`${WP_BASE}/productores/${id}`, {
+            params: { _embed: true },
+          })
+          const url =
+            r.data?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+            r.data?.acf?.foto || ''
+          if (url) setProducerImages((prev) => ({ ...prev, [id]: url }))
+        } catch { /* sin imagen */ }
+      }))
+    })
+  }, [producto?.id])
 
   return (
     <>
@@ -203,9 +233,10 @@ export default function ProductoSingle() {
                 {productoresRel.map((p, i) => {
                   const nombre   = getProducerName(p)
                   const extracto = getProducerExcerpt(p)
-                  const foto     = getProducerImage(p)
+                  const pid      = p?.ID || p?.id
+                  const foto     = producerImages[pid] || getProducerImage(p)
                   return (
-                    <div key={p?.ID || p?.id || i} className="flex flex-col gap-4">
+                    <div key={pid || i} className="flex flex-col gap-4">
                       <div className="flex items-center gap-4">
                         {foto
                           ? <img src={foto} alt={nombre} className="w-12 h-12 object-cover rounded-full shrink-0" />
