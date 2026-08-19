@@ -47,7 +47,7 @@ const regionData = {
 const INTERACTIVE_IDS = new Set(Object.values(REGION_IDS))
 const C_BG       = '#f0d0d8'  // very light rose — non-interactive regions
 const C_INACTIVE = '#d9a0b0'  // medium rose — interactive but not active
-const C_ACTIVE   = '#8B1A2B'  // dark burgundy — active region
+const C_ACTIVE   = '#FDB814'  // gold — active region
 
 export default function InteractiveMap() {
   const [active, setActive] = useState('puglia')
@@ -170,27 +170,27 @@ export default function InteractiveMap() {
           />
 
           {/* Col 3: tarjeta de región */}
-          <div className="hidden md:flex flex-col items-center text-center bg-primary rounded-2xl p-10 w-[560px] flex-shrink-0 self-center">
+          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-10 w-[560px] flex-shrink-0 self-center" style={{ backgroundColor: '#FDB814' }}>
             <p
-              className="text-white/65 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
+              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A99' }}
             >
               REGIÓN<br />SELECCIONADA
             </p>
-            <span className="text-white text-4xl mb-4 leading-none">☆</span>
+            <span className="text-4xl mb-4 leading-none" style={{ color: '#3A3A3A' }}>☆</span>
             <h4
-              className="text-white font-bold uppercase text-base tracking-widest mb-4"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="font-bold uppercase text-base tracking-widest mb-4"
+              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A' }}
             >
               {region.name}
             </h4>
-            <p className="text-white font-bold text-sm leading-relaxed mb-8">
+            <p className="font-bold text-sm leading-relaxed mb-8" style={{ color: '#3A3A3A' }}>
               {region.desc}
             </p>
             <a
               href="/tienda"
-              className="text-white text-xs underline underline-offset-4 hover:text-secondary transition-colors"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="text-xs underline underline-offset-4 transition-colors"
+              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A' }}
             >
               Explorar Vinos
             </a>
@@ -205,9 +205,9 @@ export default function InteractiveMap() {
               key={id}
               onClick={() => setActive(id)}
               className={`px-4 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase border transition-all ${
-                active === id ? 'bg-primary text-white border-primary' : 'border-white/30 text-white/60'
+                active === id ? 'border-transparent text-[#3A3A3A]' : 'border-white/30 text-white/60'
               }`}
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              style={{ fontFamily: 'Metropolis, sans-serif', ...(active === id ? { backgroundColor: '#FDB814' } : {}) }}
             >
               {data.name}
             </button>
