@@ -12,12 +12,10 @@ import ClubMembership from '../components/ClubMembership'
 import Footer from '../components/Footer'
 
 export default function Home() {
-  const [barVisible, setBarVisible] = useState(true)
-
   return (
     <>
-      {barVisible && <AnnouncementBar onClose={() => setBarVisible(false)} />}
-      <Navbar barVisible={barVisible} />
+      {/* <AnnouncementBar onClose={() => {}} /> */}
+      <Navbar />
       <Hero />
       <main>
         <WineSelection />
