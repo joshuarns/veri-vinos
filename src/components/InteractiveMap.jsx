@@ -170,21 +170,21 @@ export default function InteractiveMap() {
           />
 
           {/* Col 3: tarjeta de región */}
-          <div className="hidden md:flex flex-col items-center text-center bg-primary rounded-2xl p-7 w-[185px] flex-shrink-0 mt-24">
+          <div className="hidden md:flex flex-col items-center text-center bg-primary rounded-2xl p-10 w-[260px] flex-shrink-0 self-center">
             <p
-              className="text-white/65 text-[9px] font-bold tracking-[0.28em] uppercase mb-4 leading-relaxed"
+              className="text-white/65 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
               style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
               REGIÓN<br />SELECCIONADA
             </p>
-            <span className="text-white text-3xl mb-3 leading-none">☆</span>
+            <span className="text-white text-4xl mb-4 leading-none">☆</span>
             <h4
-              className="text-white font-bold uppercase text-sm tracking-widest mb-3"
+              className="text-white font-bold uppercase text-base tracking-widest mb-4"
               style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
               {region.name}
             </h4>
-            <p className="text-white font-bold text-xs leading-relaxed mb-6">
+            <p className="text-white font-bold text-sm leading-relaxed mb-8">
               {region.desc}
             </p>
             <a
