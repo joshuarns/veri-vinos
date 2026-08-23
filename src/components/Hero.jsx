@@ -12,26 +12,10 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-6 max-w-5xl w-full">
         {/* "Veri" — gran script italic */}
-        <h1 className="font-display-script text-white leading-[0.85] hero-text-shadow mb-4"
+        <h1 className="font-display-script text-white leading-[0.85] hero-text-shadow mb-12"
             style={{ fontSize: 'clamp(100px, 20vw, 220px)' }}>
           Veri
         </h1>
-
-        {/* Eyebrow */}
-        <p className="font-label-caps text-white/80 tracking-[0.35em] text-[11px] mb-4 uppercase">
-          Exclusividad en cada gota
-        </p>
-
-        {/* SELEZIONE — bold uppercase sin italic */}
-        <h2 className="text-white font-bold uppercase tracking-[0.12em] mb-8"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(22px, 4vw, 48px)' }}>
-          Selezione
-        </h2>
-
-        {/* Descripción */}
-        <p className="text-white/70 font-body-md text-sm md:text-base max-w-xl mx-auto mb-12 leading-relaxed">
-          Una curaduría artesanal de los viñedos más puros de Italia, traídos directamente a su mesa con respeto por la tradición.
-        </p>
 
         {/* Links estilo subrayado como en el PDF */}
         <div className="flex items-center justify-center gap-12">
