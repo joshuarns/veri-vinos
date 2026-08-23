@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import heroBanner from '../assets/img/herobanner-veri-vinos.jpeg'
+import veriBlanco from '../assets/img/veri_blanco.svg'
 
 export default function Hero() {
   return (
@@ -11,11 +12,12 @@ export default function Hero() {
       />
 
       <div className="relative z-10 text-center px-6 max-w-5xl w-full">
-        {/* "Veri" — gran script italic */}
-        <h1 className="font-display-script text-white leading-[0.85] hero-text-shadow mb-12"
-            style={{ fontSize: 'clamp(100px, 20vw, 220px)' }}>
-          Veri
-        </h1>
+        <img
+          src={veriBlanco}
+          alt="Veri"
+          className="mx-auto mb-12 hero-text-shadow"
+          style={{ width: 'clamp(240px, 40vw, 520px)' }}
+        />
 
         {/* Links estilo subrayado como en el PDF */}
         <div className="flex items-center justify-center gap-12">

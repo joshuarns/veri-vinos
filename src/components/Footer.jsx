@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import veriNegro from '../assets/img/veri_negro.svg'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -12,9 +13,7 @@ export default function Footer() {
 
           {/* Col izquierda: Veri + descripción + email */}
           <div className="max-w-sm">
-            <h2 className="font-display-script text-primary mb-6" style={{ fontSize: '64px', lineHeight: 1 }}>
-              Veri
-            </h2>
+            <img src={veriNegro} alt="Veri" className="mb-6" style={{ width: '160px' }} />
             <p className="font-bold text-primary text-sm leading-relaxed mb-4">
               Dedicados a la preservación y promoción de la cultura vinícola artesanal italiana. Calidad sin compromisos.
             </p>
