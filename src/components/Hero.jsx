@@ -34,14 +34,14 @@ export default function Hero() {
         <Link
           to="/tienda"
           className="font-bold underline underline-offset-4 text-sm md:text-base transition-all duration-300"
-          style={{ color: '#FDB814', decorationColor: '#FDB814' }}
+          style={{ color: '#ffffff', decorationColor: '#ffffff' }}
         >
           Explorar Vinos
         </Link>
         <Link
           to="/"
           className="font-bold underline underline-offset-4 text-sm md:text-base transition-all duration-300"
-          style={{ color: '#FDB814', decorationColor: '#FDB814' }}
+          style={{ color: '#ffffff', decorationColor: '#ffffff' }}
         >
           Nuestra Historia
         </Link>
