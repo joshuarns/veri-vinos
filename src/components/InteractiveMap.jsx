@@ -133,36 +133,33 @@ export default function InteractiveMap() {
         </div>
 
         {/* 3 columnas: lista | mapa | tarjeta */}
-        <div className="flex items-start justify-between gap-8 md:gap-14">
+        <div className="relative flex items-start justify-center gap-8 md:gap-14">
 
-          {/* Grupo: lista + mapa juntos */}
-          <div className="flex items-start gap-8 md:gap-14">
-            {/* Col 1: lista de regiones */}
-            <div className="hidden md:flex flex-col gap-7 pt-36 min-w-[100px] flex-shrink-0">
-              {Object.entries(regionData).map(([id, data]) => (
-                <button
-                  key={id}
-                  onClick={() => setActive(id)}
-                  className={`text-left font-bold text-xs tracking-[0.2em] uppercase transition-all ${
-                    active === id ? 'text-white' : 'text-white/30 hover:text-white/60'
-                  }`}
-                  style={{ fontFamily: 'Metropolis, sans-serif' }}
-                >
-                  {data.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Col 2: mapa SVG real */}
-            <div
-              ref={containerRef}
-              className="flex-shrink-0 w-[200px] md:w-[280px] lg:w-[340px]"
-              dangerouslySetInnerHTML={{ __html: italySvgRaw }}
-            />
+          {/* Col 1: lista de regiones */}
+          <div className="hidden md:flex flex-col gap-7 pt-36 min-w-[100px] flex-shrink-0">
+            {Object.entries(regionData).map(([id, data]) => (
+              <button
+                key={id}
+                onClick={() => setActive(id)}
+                className={`text-left font-bold text-xs tracking-[0.2em] uppercase transition-all ${
+                  active === id ? 'text-white' : 'text-white/30 hover:text-white/60'
+                }`}
+                style={{ fontFamily: 'Metropolis, sans-serif' }}
+              >
+                {data.name}
+              </button>
+            ))}
           </div>
 
-          {/* Col 3: tarjeta de región */}
-          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24 bg-primary">
+          {/* Col 2: mapa SVG real */}
+          <div
+            ref={containerRef}
+            className="flex-shrink-0 w-[200px] md:w-[280px] lg:w-[340px]"
+            dangerouslySetInnerHTML={{ __html: italySvgRaw }}
+          />
+
+          {/* Col 3: tarjeta de región — absoluta a la derecha */}
+          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24 bg-primary absolute right-0 top-0">
             <p
               className="text-white/60 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
               style={{ fontFamily: 'Metropolis, sans-serif' }}
