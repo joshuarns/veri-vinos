@@ -135,6 +135,9 @@ export default function InteractiveMap() {
         {/* 3 columnas: lista | mapa | tarjeta */}
         <div className="relative flex items-start justify-center gap-8 md:gap-14">
 
+          {/* Grupo mapa + lista desplazado 5% a la izquierda */}
+          <div className="flex items-start gap-8 md:gap-14" style={{ transform: 'translateX(-5%)' }}>
+
           {/* Col 1: lista de regiones */}
           <div className="hidden md:flex flex-col gap-7 pt-36 min-w-[100px] flex-shrink-0">
             {Object.entries(regionData).map(([id, data]) => (
@@ -157,6 +160,8 @@ export default function InteractiveMap() {
             className="flex-shrink-0 w-[200px] md:w-[280px] lg:w-[340px]"
             dangerouslySetInnerHTML={{ __html: italySvgRaw }}
           />
+
+          </div>{/* fin grupo mapa+lista */}
 
           {/* Col 3: tarjeta de región — absoluta a la derecha */}
           <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24 bg-primary absolute right-0 top-0">
