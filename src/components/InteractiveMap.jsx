@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import italySvgRaw from '../assets/italyHigh.svg?raw'
+import insignia from '../assets/img/470D3B7B-BA84-45D7-9BA2-6840CEE1D902_4_5005.png'
 
 // amCharts SVG region IDs → interactive region keys
 const REGION_IDS = {
@@ -118,7 +119,13 @@ export default function InteractiveMap() {
   }, [active])
 
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: '#3A3A3A' }}>
+    <section className="relative py-20 md:py-28" style={{ backgroundColor: '#3A3A3A' }}>
+      <img
+        src={insignia}
+        alt="Insignia Veri"
+        className="absolute top-8 right-10 z-10"
+        style={{ width: '140px', opacity: 0.95 }}
+      />
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 
         {/* Título centrado */}

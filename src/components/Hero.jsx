@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import heroBanner from '../assets/img/herobanner-veri-vinos.jpeg'
 import veriBlanco from '../assets/img/veri_blanco.svg'
-import insignia from '../assets/img/470D3B7B-BA84-45D7-9BA2-6840CEE1D902_4_5005.png'
 
 export default function Hero() {
   return (
@@ -20,14 +19,6 @@ export default function Hero() {
           style={{ width: 'clamp(240px, 40vw, 520px)' }}
         />
       </div>
-
-      {/* Insignia — esquina inferior derecha, subida un 20% */}
-      <img
-        src={insignia}
-        alt="Insignia Veri"
-        className="absolute right-10 z-10"
-        style={{ width: '120px', opacity: 0.92, bottom: '28%', right: 'calc(2.5rem + 5%)' }}
-      />
 
       {/* Botones — donde estaba el Scroll */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center gap-12">
