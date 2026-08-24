@@ -125,7 +125,7 @@ export default function InteractiveMap() {
         <div className="text-center mb-14">
           <h3
             className="font-bold uppercase mb-0"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
+            style={{ fontFamily: 'Prozak, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
           >
             Explora las Regiones
           </h3>
