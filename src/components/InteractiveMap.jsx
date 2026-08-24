@@ -170,7 +170,7 @@ export default function InteractiveMap() {
           />
 
           {/* Col 3: tarjeta de región */}
-          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-10 w-[560px] flex-shrink-0 self-center" style={{ backgroundColor: '#FDB814' }}>
+          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[185px] flex-shrink-0 mt-24" style={{ backgroundColor: '#FDB814' }}>
             <p
               className="text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
               style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A99' }}
