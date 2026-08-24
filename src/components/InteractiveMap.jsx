@@ -123,24 +123,12 @@ export default function InteractiveMap() {
 
         {/* Título centrado */}
         <div className="text-center mb-14">
-          <p
-            className="font-bold text-xs tracking-[0.35em] mb-4 uppercase"
-            style={{ fontFamily: 'Metropolis, sans-serif', color: '#d9a0b0' }}
-          >
-            Terroir de Excelencia
-          </p>
           <h3
-            className="font-bold uppercase mb-6 text-white"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em' }}
+            className="font-bold uppercase mb-0"
+            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
           >
             Explora las Regiones
           </h3>
-          <p
-            className="text-white/70 mx-auto max-w-xl leading-relaxed"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: '15px' }}
-          >
-            Cada rincón de Italia respira una esencia distinta. Desde los Alpes en el norte hasta el sol abrasador de Sicilia, descubra cómo el paisaje define el sabor.
-          </p>
         </div>
 
         {/* 3 columnas: lista | mapa | tarjeta */}
