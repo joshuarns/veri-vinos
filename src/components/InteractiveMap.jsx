@@ -136,7 +136,7 @@ export default function InteractiveMap() {
         <div className="relative flex items-start justify-center gap-8 md:gap-14">
 
           {/* Grupo mapa + lista desplazado 5% a la izquierda */}
-          <div className="flex items-start gap-8 md:gap-14" style={{ transform: 'translateX(-5%)' }}>
+          <div className="flex items-start gap-8 md:gap-14" style={{ transform: 'translateX(-15%)' }}>
 
           {/* Col 1: lista de regiones */}
           <div className="hidden md:flex flex-col gap-7 pt-36 min-w-[100px] flex-shrink-0">
