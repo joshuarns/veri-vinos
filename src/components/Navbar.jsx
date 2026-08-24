@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import veriBlanco from '../assets/img/veri_blanco.svg'
 import veriNegro from '../assets/img/veri_negro.svg'
 
 export default function Navbar({ barVisible = false }) {
@@ -30,21 +29,21 @@ export default function Navbar({ barVisible = false }) {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-3 top-0 bg-surface border-b border-outline-variant/20' : `py-4 bg-transparent border-b border-transparent ${barVisible ? 'top-[38px]' : 'top-0'}`} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
+        className={`fixed left-0 right-0 z-50 bg-surface border-b border-outline-variant/20 transition-all duration-300 ${scrolled ? 'py-3 top-0' : `py-4 ${barVisible ? 'top-[38px]' : 'top-0'}`} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="flex items-center justify-between w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 
           {/* Izquierda: hamburger + VERI */}
           <div className="flex items-center gap-4">
             <button
-              className={`p-1 hover:opacity-60 transition-opacity ${scrolled ? 'text-on-surface' : 'text-white'}`}
+              className="p-1 hover:opacity-60 transition-opacity text-on-surface"
               onClick={() => setDrawerOpen(true)}
             >
               <span className="material-symbols-outlined text-[22px]">menu</span>
             </button>
             <Link to="/">
               <img
-                src={scrolled ? veriNegro : veriBlanco}
+                src={veriNegro}
                 alt="Veri"
                 className="transition-all duration-300"
                 style={{ height: scrolled ? '28px' : '32px', width: 'auto' }}
@@ -54,9 +53,9 @@ export default function Navbar({ barVisible = false }) {
 
           {/* Derecha: links */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${scrolled ? (pathname === '/' ? 'text-primary' : 'text-[#000] hover:text-primary') : 'text-white/80 hover:text-white'}`}>INICIO</Link>
-            <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${scrolled ? (pathname === '/productores' ? 'text-primary' : 'text-[#000] hover:text-primary') : 'text-white/80 hover:text-white'}`}>PRODUCTORES</Link>
-            <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${scrolled ? (pathname === '/tienda' ? 'text-primary' : 'text-[#000] hover:text-primary') : 'text-white/80 hover:text-white'}`}>VINOS</Link>
+            <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>INICIO</Link>
+            <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>PRODUCTORES</Link>
+            <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>VINOS</Link>
           </div>
 
         </div>
