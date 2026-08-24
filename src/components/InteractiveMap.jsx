@@ -158,27 +158,27 @@ export default function InteractiveMap() {
           />
 
           {/* Col 3: tarjeta de región */}
-          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24" style={{ backgroundColor: '#FDB814' }}>
+          <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24 bg-primary">
             <p
-              className="text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
-              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A99' }}
+              className="text-white/60 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
+              style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
               REGIÓN<br />SELECCIONADA
             </p>
-            <span className="text-4xl mb-4 leading-none" style={{ color: '#3A3A3A' }}>☆</span>
+            <span className="text-white text-4xl mb-4 leading-none">☆</span>
             <h4
-              className="font-bold uppercase text-base tracking-widest mb-4"
-              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A' }}
+              className="text-white font-bold uppercase text-base tracking-widest mb-4"
+              style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
               {region.name}
             </h4>
-            <p className="font-bold text-sm leading-relaxed mb-8" style={{ color: '#3A3A3A' }}>
+            <p className="text-white font-bold text-sm leading-relaxed mb-8">
               {region.desc}
             </p>
             <a
               href="/tienda"
-              className="text-xs underline underline-offset-4 transition-colors"
-              style={{ fontFamily: 'Metropolis, sans-serif', color: '#3A3A3A' }}
+              className="text-white text-xs underline underline-offset-4 hover:text-white/70 transition-colors"
+              style={{ fontFamily: 'Metropolis, sans-serif' }}
             >
               Explorar Vinos
             </a>
