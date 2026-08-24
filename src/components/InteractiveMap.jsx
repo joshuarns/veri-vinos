@@ -45,9 +45,9 @@ const regionData = {
 }
 
 const INTERACTIVE_IDS = new Set(Object.values(REGION_IDS))
-const C_BG       = '#f0d0d8'  // light rose — non-interactive regions
-const C_INACTIVE = '#d9a0b0'  // medium rose — interactive but not active
-const C_ACTIVE   = '#8B1A2B'  // burgundy — active region
+const C_BG       = '#ffffff4d'  // white 30% — non-interactive regions
+const C_INACTIVE = '#ffffff4d'  // white 30% — interactive but not active
+const C_ACTIVE   = '#8B1A2B'   // burgundy — active region
 
 export default function InteractiveMap() {
   const [active, setActive] = useState('puglia')
@@ -125,7 +125,7 @@ export default function InteractiveMap() {
         <div className="text-center mb-14">
           <h3
             className="font-bold uppercase mb-0"
-            style={{ fontFamily: 'Prozak, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
+            style={{ fontFamily: 'Prozak, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#8B1A2B' }}
           >
             Explora las Regiones
           </h3>
@@ -165,7 +165,7 @@ export default function InteractiveMap() {
             >
               REGIÓN<br />SELECCIONADA
             </p>
-            <span className="text-white text-4xl mb-4 leading-none">☆</span>
+            <span className="text-4xl mb-4 leading-none" style={{ color: '#FDB814' }}>☆</span>
             <h4
               className="text-white font-bold uppercase text-base tracking-widest mb-4"
               style={{ fontFamily: 'Metropolis, sans-serif' }}
@@ -177,8 +177,8 @@ export default function InteractiveMap() {
             </p>
             <a
               href="/tienda"
-              className="text-white text-xs underline underline-offset-4 hover:text-white/70 transition-colors"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="text-xs underline underline-offset-4 transition-colors"
+              style={{ fontFamily: 'Metropolis, sans-serif', color: '#FDB814' }}
             >
               Explorar Vinos
             </a>
