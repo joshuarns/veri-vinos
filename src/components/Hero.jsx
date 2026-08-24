@@ -26,7 +26,7 @@ export default function Hero() {
         src={insignia}
         alt="Insignia Veri"
         className="absolute right-10 z-10"
-        style={{ width: '120px', opacity: 0.92, bottom: '28%' }}
+        style={{ width: '120px', opacity: 0.92, bottom: '28%', right: 'calc(2.5rem + 5%)' }}
       />
 
       {/* Botones — donde estaba el Scroll */}
