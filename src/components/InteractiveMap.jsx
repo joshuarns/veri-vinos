@@ -120,26 +120,20 @@ export default function InteractiveMap() {
 
   return (
     <section className="relative py-20 md:py-28" style={{ backgroundColor: '#3A3A3A' }}>
-      <img
-        src={insignia}
-        alt="Insignia Veri"
-        className="absolute top-8 right-10 z-10"
-        style={{ width: '140px', opacity: 0.95 }}
-      />
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 
         {/* Título centrado */}
         <div className="text-center mb-14">
           <h3
             className="font-bold uppercase mb-0"
-            style={{ fontFamily: 'Prozak, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#ffffff' }}
+            style={{ fontFamily: 'Prozak, sans-serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
           >
             Explora las Regiones
           </h3>
         </div>
 
         {/* 3 columnas: lista | mapa | tarjeta */}
-        <div className="flex items-start justify-center gap-8 md:gap-14">
+        <div className="flex items-start justify-between gap-8 md:gap-14">
 
           {/* Col 1: lista de regiones */}
           <div className="hidden md:flex flex-col gap-7 pt-36 min-w-[100px] flex-shrink-0">
