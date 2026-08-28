@@ -18,6 +18,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'RecklessNeue';
+  src: url('./assets/fonts/reckless-neue-medium.woff2') format('woff2'),
+       url('./assets/fonts/reckless-neue-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   body {
     background-color: #fff8f3;
