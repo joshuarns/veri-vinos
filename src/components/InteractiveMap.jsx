@@ -125,8 +125,8 @@ export default function InteractiveMap() {
         {/* Título centrado */}
         <div className="text-center mb-14">
           <h3
-            className="font-bold uppercase mb-0"
-            style={{ fontFamily: 'RecklessNeue, serif', fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
+            className="uppercase mb-0"
+            style={{ fontFamily: "'RecklessNeue', serif", fontWeight: 500, fontSize: 'clamp(30px, 5vw, 60px)', letterSpacing: '0.04em', color: '#FDB814' }}
           >
             Explora las Regiones
           </h3>
