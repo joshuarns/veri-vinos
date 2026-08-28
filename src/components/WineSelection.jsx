@@ -33,8 +33,8 @@ export default function WineSelection() {
             CURADURÍA PREMIUM
           </p>
           <h3
-            className="text-primary font-bold uppercase mb-6"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '0.04em' }}
+            className="text-primary font-display-script uppercase mb-6"
+            style={{ fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '0.04em' }}
           >
             Nuestra Selección
           </h3>

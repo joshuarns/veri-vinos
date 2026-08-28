@@ -27,8 +27,8 @@ export default function Philosophy() {
           <div className="border border-primary rounded-xl p-10 md:p-12 flex flex-col justify-between bg-background">
             <div>
               <h3
-                className="text-primary font-bold uppercase leading-tight mb-8"
-                style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(24px, 3.5vw, 44px)', letterSpacing: '0.02em' }}
+                className="text-primary font-display-script uppercase leading-tight mb-8"
+                style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', letterSpacing: '0.02em' }}
               >
                 Vinos con Origen.<br />
                 Productores con Historia.<br />
@@ -59,8 +59,8 @@ export default function Philosophy() {
             <div key={v.title} className="flex flex-col items-center gap-4 px-4">
               <span className="text-secondary text-4xl leading-none">☆</span>
               <h4
-                className="text-primary font-bold uppercase text-sm tracking-wide whitespace-pre-line leading-snug"
-                style={{ fontFamily: 'Metropolis, sans-serif' }}
+                className="text-primary font-display-script uppercase text-sm tracking-wide whitespace-pre-line leading-snug"
+                style={{}}
               >
                 {v.title}
               </h4>

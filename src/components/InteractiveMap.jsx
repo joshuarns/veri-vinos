@@ -173,8 +173,8 @@ export default function InteractiveMap() {
             </p>
             <span className="text-4xl mb-4 leading-none" style={{ color: '#FDB814' }}>☆</span>
             <h4
-              className="text-white font-bold uppercase text-base tracking-widest mb-4"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="text-white font-display-script uppercase text-base tracking-widest mb-4"
+              style={{}}
             >
               {region.name}
             </h4>

@@ -137,8 +137,8 @@ export default function Tienda() {
         {/* Header */}
         <div className="py-16 text-center">
           <h1
-            className="text-primary font-bold uppercase mb-8"
-            style={{ fontFamily: 'Metropolis, sans-serif', fontSize: 'clamp(36px, 6vw, 80px)', letterSpacing: '0.04em' }}
+            className="text-primary font-display-script uppercase mb-8"
+            style={{ fontSize: 'clamp(36px, 6vw, 80px)', letterSpacing: '0.04em' }}
           >
             Nuestra Cava
           </h1>
