@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import veriNegro from '../assets/img/veri_negro.svg'
+import ReservationDrawer from './ReservationDrawer'
 
 export default function Navbar({ barVisible = false }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [reservaOpen, setReservaOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const lastScroll = useRef(0)
@@ -51,11 +53,17 @@ export default function Navbar({ barVisible = false }) {
             </Link>
           </div>
 
-          {/* Derecha: links */}
+          {/* Derecha: links + reservas */}
           <div className="hidden md:flex items-center gap-8">
             <Link to="/" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>INICIO</Link>
             <Link to="/productores" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/productores' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>PRODUCTORES</Link>
             <Link to="/tienda" className={`font-label-caps tracking-widest text-[11px] transition-colors ${pathname === '/tienda' ? 'text-primary' : 'text-[#000] hover:text-primary'}`}>VINOS</Link>
+            <button
+              onClick={() => setReservaOpen(true)}
+              className="font-label-caps tracking-widest text-[11px] bg-primary text-white px-4 py-2 hover:bg-secondary transition-colors duration-300"
+            >
+              RESERVAS
+            </button>
           </div>
 
         </div>
@@ -94,6 +102,8 @@ export default function Navbar({ barVisible = false }) {
           </div>
         </div>
       </aside>
+
+      <ReservationDrawer open={reservaOpen} onClose={() => setReservaOpen(false)} />
     </>
   )
 }
