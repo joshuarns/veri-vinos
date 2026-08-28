@@ -81,8 +81,8 @@ export default {
       },
       fontFamily: {
         "body-lg":            ["Metropolis", "sans-serif"],
-        "display-script":     ["'Cormorant Garamond'", "serif"],
-        "display-italic":     ["'Cormorant Garamond'", "serif"],
+        "display-script":     ["'Lust'", "serif"],
+        "display-italic":     ["'Lust'", "serif"],
         "headline-lg-mobile": ["Metropolis", "sans-serif"],
         "headline-md":        ["Metropolis", "sans-serif"],
         "label-caps":         ["Metropolis", "sans-serif"],
