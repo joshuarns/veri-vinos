@@ -33,17 +33,17 @@ export default function WineSelection() {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="font-label-caps text-primary tracking-[0.25em] text-[11px] font-bold mb-3">
-            CURADURÍA PREMIUM
-          </p>
           <h3
-            className="text-primary font-display-script uppercase mb-6"
+            className="text-primary font-display-script uppercase mb-4"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '0.04em' }}
           >
             Nuestra Selección
           </h3>
+          <p className="font-label-caps text-on-surface-variant tracking-[0.2em] text-[11px] mb-6">
+            La Nostra Selezione
+          </p>
           <p className="text-on-surface font-bold text-sm md:text-base max-w-lg mx-auto leading-relaxed">
-            Etiquetas seleccionadas individualmente por su carácter, terroir y fidelidad a los métodos de producción naturales.
+            Productores y etiquetas que expresan lo más extraordinario de Italia.
           </p>
         </div>
 
