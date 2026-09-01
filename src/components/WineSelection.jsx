@@ -65,7 +65,7 @@ export default function WineSelection() {
                 </h4>
                 <p className="text-on-surface text-xs tracking-wide"
                    style={{ fontFamily: 'Metropolis, sans-serif' }}>
-                  Productor · {wine.producer}
+                  {wine.producer}
                 </p>
               </div>
 
