@@ -1,24 +1,28 @@
+import galatronaImg from '../assets/img/galatrona-home.jpeg'
+import baroloArioneImg from '../assets/img/barolo-arione-home.jpeg'
+import bibbonaImg from '../assets/img/bibbona-home.jpeg'
+
 const wines = [
   {
     id: 1,
-    region: 'Piedmonte',
-    name: 'Nebbiolo delle Langhe',
-    price: '$1,200',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDTJx775YDdhyvpfRcNOwrHIR11uEJwJrKTKMOJoPckZnYHdNzFeydrlFkjxNhQhUSIDBrwUmWD0kFrYoD2OlQy1T_RQeKDHU4aimp2g5PsKL9q4CZ8D1tGRinqV-ZvVKAjW-hf2Jnwczn4pzgQq0f-ffGr8RvjwzoyfsL4U4qJz1yDra0E05N2byWGfeGHcqSNaiDJ81NVqaIw2A2kB1LbFOVTMrSeMaM21jlC9eEyObJQOwv3AO11PfAsY29_eGJrF1iNJi00UkQ',
+    region: 'Toscana',
+    name: 'Galatrona',
+    producer: 'Petrolo',
+    img: galatronaImg,
   },
   {
     id: 2,
-    region: 'Piedmonte',
-    name: 'Nebbiolo delle Langhe',
-    price: '$1,200',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCOqQ22mcuu7yVMpj0OroS989c7ckif1Jx9VHVCCj3KYI2xDE7II1cZy66YSAA29UmuDkbYPiI0gzhi_hKe3epr_JrmzjdjnRgMXKylvC3OUrKu9WGcWKzR3UdFHcwb2H9QlVs8zwLZFVzqIA1ZhGbfV_79Pi307zSIGwGSIEitb0kHMnbYbnedJyNsDhF1CiPWsbfGO0iYyS54gdxWSYegYG_rMW-jE7pQslFwKHtFBUREgK2qte0VzM4t7RAIsprubxWj_71dXsA',
+    region: 'Piamonte',
+    name: 'Barolo Arione',
+    producer: 'Giacomo Conterno',
+    img: baroloArioneImg,
   },
   {
     id: 3,
-    region: 'Piedmonte',
-    name: 'Nebbiolo delle Langhe',
-    price: '$1,200',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCsoKKyMNhbVoTlRc7X5tD_tjuUmehR6d0bWsOFDTvwz7Qn0O0_wSSmiCNmP76H5L_vEgVoGPGTOTAGNAEHnkQtyhf5P3nQFUObE-LJ1b7lb786oZC2aj12cJwrWBW5LjodvkqUHeRWFQxblbygTVFB7jcyL5cGXxwZSTRvUVsmLc6cpa3xOP7PQqHMwpD7sjYGegL-x6s5Es6XFjMuSipvC2HXUbnR3ZU0JJrI2U3jto7qeY0L9wRdybywYo0FlZpY8isABvf_bx4',
+    region: 'Costa Toscana',
+    name: 'Bibbona',
+    producer: 'Biserno',
+    img: bibbonaImg,
   },
 ]
 
@@ -59,14 +63,19 @@ export default function WineSelection() {
                     style={{ fontFamily: 'Metropolis, sans-serif' }}>
                   {wine.name.toUpperCase()}
                 </h4>
+                <p className="text-on-surface text-xs tracking-wide"
+                   style={{ fontFamily: 'Metropolis, sans-serif' }}>
+                  Productor · {wine.producer}
+                </p>
               </div>
 
               {/* Imagen botella */}
-              <div className="flex-1 flex items-center justify-center px-8 py-6">
+              <div className="flex-1 flex items-center justify-center px-6 py-4">
                 <img
                   src={wine.img}
-                  alt={wine.name}
-                  className="h-64 object-contain"
+                  alt={`${wine.name} — ${wine.producer}`}
+                  className="w-full aspect-square object-cover rounded-lg"
+                  loading="lazy"
                 />
               </div>
 
