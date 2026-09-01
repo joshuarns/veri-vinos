@@ -157,7 +157,7 @@ export default function InteractiveMap() {
           {/* Col 2: mapa SVG real */}
           <div
             ref={containerRef}
-            className="flex-shrink-0 w-[200px] md:w-[280px] lg:w-[340px]"
+            className="flex-shrink-0 w-[300px] md:w-[420px] lg:w-[510px]"
             dangerouslySetInnerHTML={{ __html: italySvgRaw }}
           />
 
