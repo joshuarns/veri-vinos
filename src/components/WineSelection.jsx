@@ -34,14 +34,11 @@ export default function WineSelection() {
         {/* Header */}
         <div className="text-center mb-14">
           <h3
-            className="text-primary font-display-script uppercase mb-4"
+            className="text-primary font-display-script uppercase mb-6"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '0.04em' }}
           >
-            Nuestra Selección
-          </h3>
-          <p className="font-label-caps text-on-surface-variant tracking-[0.2em] text-[11px] mb-6">
             La Nostra Selezione
-          </p>
+          </h3>
           <p className="text-on-surface font-bold text-sm md:text-base max-w-lg mx-auto leading-relaxed">
             Productores y etiquetas que expresan lo más extraordinario de Italia.
           </p>
