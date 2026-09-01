@@ -81,8 +81,8 @@ export default {
       },
       fontFamily: {
         "body-lg":            ["Metropolis", "sans-serif"],
-        "display-script":     ["'RecklessNeue'", "serif"],
-        "display-italic":     ["'RecklessNeue'", "serif"],
+        "display-script":     ["'Anko'", "serif"],
+        "display-italic":     ["'Anko'", "serif"],
         "headline-lg-mobile": ["Metropolis", "sans-serif"],
         "headline-md":        ["Metropolis", "sans-serif"],
         "label-caps":         ["Metropolis", "sans-serif"],
