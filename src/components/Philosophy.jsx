@@ -36,7 +36,7 @@ export default function Philosophy() {
               </h3>
             </div>
             <p className="font-bold text-on-surface text-sm leading-relaxed">
-              Veri Selezione nace de una pasión por Italia, sus viñedos y las historias detrás de cada botella. Reunimos casas que han marcado la historia de sus regiones y productores que hoy continúan definiendo su identidad. Familias, viñedos y territorios donde generaciones de conocimiento se traducen en vinos de carácter, precisión y profundo sentido de lugar.
+              Veri nace de una pasión por Italia y de una búsqueda personal: vinos que emocionan por lo que son, por el lugar del que vienen y por las historias que llevan consigo.
             </p>
           </div>
 
