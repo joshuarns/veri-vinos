@@ -2,16 +2,16 @@ import filosofiaImg from '../assets/img/nuestra-filosofia.jpg'
 
 const values = [
   {
-    title: 'Origen',
-    desc: 'Regiones que han dado forma a algunos de los grandes vinos de Italia.',
+    title: 'Origine',
+    desc: 'Donde todo comienza.',
   },
   {
-    title: 'Legado',
-    desc: 'Casas donde el conocimiento se construye vendimia tras vendimia.',
+    title: 'Eredità',
+    desc: 'Lo que el tiempo transmite.',
   },
   {
-    title: 'Identidad',
-    desc: 'Productores que no siguen una referencia; ayudan a construirla.',
+    title: 'Identità',
+    desc: 'La firma de quien lo crea.',
   },
 ]
 
