@@ -1,4 +1,4 @@
-import galatronaImg from '../assets/img/galatrona-home.jpeg'
+import galatronaImg from '../assets/img/galatrona-vino.jpeg'
 import baroloArioneImg from '../assets/img/barolo-arione-home.jpeg'
 import bibbonaImg from '../assets/img/bibbona-home.jpeg'
 
