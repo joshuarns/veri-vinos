@@ -1,4 +1,4 @@
-import filosofiaImg from '../assets/img/nuestra-filosofia.jpg'
+import filosofiaImg from '../assets/img/4823594.jpeg'
 
 const values = [
   {
