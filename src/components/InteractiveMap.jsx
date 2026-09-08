@@ -4,11 +4,12 @@ import insignia from '../assets/img/470D3B7B-BA84-45D7-9BA2-6840CEE1D902_4_5005.
 
 // amCharts SVG region IDs → interactive region keys
 const REGION_IDS = {
-  piemonte: 'IT-21',
-  veneto:   'IT-34',
-  toscana:  'IT-52',
-  puglia:   'IT-75',
-  sicilia:  'IT-82',
+  piemonte:  'IT-21',
+  altoAdige: 'IT-32',
+  veneto:    'IT-34',
+  friuli:    'IT-36',
+  toscana:   'IT-52',
+  sicilia:   'IT-82',
 }
 
 // All Italian region IDs in the SVG
@@ -27,17 +28,21 @@ const regionData = {
     name: 'Piemonte',
     desc: 'Vinos con cuerpo y taninos profundos. Terroir arcilloso-calcáreo de tradición secular.',
   },
+  altoAdige: {
+    name: 'Alto Adige',
+    desc: 'Vinos alpinos de precisión y frescura. Altitudes extremas que dan vida a blancos únicos.',
+  },
   veneto: {
     name: 'Veneto',
     desc: 'Hogar del Prosecco y la diversidad climática. Frescura alpina embotellada.',
   },
+  friuli: {
+    name: 'Friuli Venezia Giulia',
+    desc: 'Tierra de frontera y carácter propio. Blancos complejos que definen una identidad única.',
+  },
   toscana: {
     name: 'Toscana',
     desc: 'Cuna del Sangiovese. Colinas soleadas y elegancia atemporal del Chianti.',
-  },
-  puglia: {
-    name: 'Puglia',
-    desc: 'Sol mediterráneo puro, vinos estructurados y olivos milenarios.',
   },
   sicilia: {
     name: 'Sicilia',
@@ -51,7 +56,7 @@ const C_INACTIVE = '#ffffff4d'  // white 30% — interactive but not active
 const C_ACTIVE   = '#8B1A2B'   // burgundy — active region
 
 export default function InteractiveMap() {
-  const [active, setActive] = useState('puglia')
+  const [active, setActive] = useState('piemonte')
   const containerRef = useRef(null)
   const region = regionData[active]
 
