@@ -5,9 +5,9 @@ import bibbonaImg from '../assets/img/bibbona-home.jpeg'
 const wines = [
   {
     id: 1,
-    region: 'Toscana',
-    name: 'Galatrona',
-    producer: 'Petrolo',
+    region: 'Friuli',
+    name: 'Ribolla Gialla',
+    producer: 'Damijan Podversic',
     img: galatronaImg,
   },
   {
