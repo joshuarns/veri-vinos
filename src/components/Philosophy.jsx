@@ -48,7 +48,7 @@ export default function Philosophy() {
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-5 left-6">
-              <span className="font-label-caps text-white text-[10px] tracking-[0.25em]">TOSCANA ITALIA</span>
+              <span className="font-label-caps text-white text-[10px] tracking-[0.25em]">FRIULI VENEZIA GIULIA</span>
             </div>
           </div>
         </div>

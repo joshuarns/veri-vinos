@@ -72,7 +72,7 @@ export default function Navbar({ barVisible = false }) {
         <div className="p-12 h-full flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-16">
-              <h2 className="font-display-script text-headline-md text-secondary">Veri Vinos</h2>
+              <img src={veriNegro} alt="Veri" style={{ height: '36px', width: 'auto' }} />
               <button className="p-2" onClick={() => setDrawerOpen(false)}>
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -89,7 +89,6 @@ export default function Navbar({ barVisible = false }) {
             <p className="font-label-caps text-on-surface-variant text-[10px] mb-4">SÍGUENOS</p>
             <div className="flex gap-4">
               <span className="font-body-md text-sm">Instagram</span>
-              <span className="font-body-md text-sm">Facebook</span>
             </div>
           </div>
         </div>

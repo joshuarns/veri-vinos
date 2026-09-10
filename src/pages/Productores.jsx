@@ -78,7 +78,7 @@ export default function Productores() {
         {/* Header */}
         <div className="py-16 text-center">
           <h1 className="font-display-script text-headline-lg md:text-[80px] leading-none mb-6 text-primary">
-            I Produttori
+            I PRODUTTORI
           </h1>
           <p className="font-body-md text-on-surface-variant max-w-xl mx-auto">
             Familias y productores unidos por una forma de entender el vino: respeto por el territorio, identidad y legado.
