@@ -77,12 +77,11 @@ export default function Productores() {
 
         {/* Header */}
         <div className="py-16 text-center">
-          <p className="font-label-caps text-secondary mb-4 tracking-[0.3em]">TIERRA Y PASIÓN</p>
-          <h1 className="font-display-script text-headline-lg md:text-[80px] leading-none mb-6">
-            Nuestros Productores
+          <h1 className="font-display-script text-headline-lg md:text-[80px] leading-none mb-6 text-primary">
+            I Produttori
           </h1>
           <p className="font-body-md text-on-surface-variant max-w-xl mx-auto">
-            Familias y bodegas italianas unidas por el amor al territorio y la vinicultura de autor.
+            Familias y productores unidos por una forma de entender el vino: respeto por el territorio, identidad y legado.
           </p>
           <div className="w-12 h-px bg-outline-variant/50 mx-auto mt-8" />
         </div>
