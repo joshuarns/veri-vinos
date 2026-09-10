@@ -1,4 +1,5 @@
 import filosofiaImg from '../assets/img/4823594.jpeg'
+import starIcon from '../assets/star-01.svg'
 
 const values = [
   {
@@ -57,7 +58,7 @@ export default function Philosophy() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           {values.map((v) => (
             <div key={v.title} className="flex flex-col items-center gap-4 px-4">
-              <span className="text-secondary text-4xl leading-none">☆</span>
+              <img src={starIcon} alt="" className="w-10 h-10" />
               <h4
                 className="text-primary font-display-script uppercase text-sm tracking-wide whitespace-pre-line leading-snug"
                 style={{}}

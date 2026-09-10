@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import heroBanner from '../assets/img/herobanner-veri-vinos.jpeg'
 import veriBlanco from '../assets/img/veri_blanco.svg'
-import insignia from '../assets/img/470D3B7B-BA84-45D7-9BA2-6840CEE1D902_4_5005.png'
+import insignia from '../assets/sello.svg'
 
 export default function Hero() {
   return (
