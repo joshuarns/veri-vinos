@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import italySvgRaw from '../assets/italyHigh.svg?raw'
 import insignia from '../assets/img/470D3B7B-BA84-45D7-9BA2-6840CEE1D902_4_5005.png'
+import starIcon from '../assets/star-01.svg'
 
 // amCharts SVG region IDs → interactive region keys
 const REGION_IDS = {
@@ -176,7 +177,7 @@ export default function InteractiveMap() {
             >
               REGIÓN<br />SELECCIONADA
             </p>
-            <span className="text-4xl mb-4 leading-none" style={{ color: '#FDB814' }}>☆</span>
+            <img src={starIcon} alt="" className="w-10 h-10 mb-4" />
             <h4
               className="text-white font-display-script uppercase text-base tracking-widest mb-4"
               style={{}}
