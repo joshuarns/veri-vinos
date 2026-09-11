@@ -12,14 +12,14 @@ const wines = [
   },
   {
     id: 2,
-    region: 'Piamonte',
+    region: 'Piemonte',
     name: 'Barolo Arione',
     producer: 'Giacomo Conterno',
     img: baroloArioneImg,
   },
   {
     id: 3,
-    region: 'Costa Toscana',
+    region: 'Toscana',
     name: 'Bibbona',
     producer: 'Biserno',
     img: bibbonaImg,
