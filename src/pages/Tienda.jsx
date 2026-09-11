@@ -161,11 +161,6 @@ export default function Tienda() {
                 </span>
               </button>
 
-              {['Tipo', 'Precio'].map((label) => (
-                <button key={label} className="flex items-center gap-2 font-label-caps text-on-surface-variant hover:text-primary transition-colors">
-                  {label} <span className="material-symbols-outlined text-sm">expand_more</span>
-                </button>
-              ))}
             </div>
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
               {tipos.map((tipo) => (
