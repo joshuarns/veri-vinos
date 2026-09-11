@@ -33,8 +33,7 @@ export default function Footer() {
 
           {/* Col Catálogo + redes */}
           <div className="text-center">
-            <h5 className="font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6"
-                style={{ fontFamily: 'Metropolis, sans-serif' }}>
+            <h5 className="font-label-caps font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6">
               Catálogo
             </h5>
             <ul className="space-y-3 text-primary text-sm mb-8">
@@ -51,8 +50,7 @@ export default function Footer() {
 
           {/* Col Compañía */}
           <div className="text-center">
-            <h5 className="font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6"
-                style={{ fontFamily: 'Metropolis, sans-serif' }}>
+            <h5 className="font-label-caps font-bold text-primary uppercase tracking-[0.1em] text-sm mb-6">
               Compañía
             </h5>
             <ul className="space-y-3 text-primary text-sm">

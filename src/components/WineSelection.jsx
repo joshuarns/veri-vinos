@@ -56,12 +56,10 @@ export default function WineSelection() {
                 <p className="font-label-caps text-primary text-[10px] tracking-[0.2em] mb-1">
                   {wine.region.toUpperCase()}
                 </p>
-                <h4 className="font-bold text-primary uppercase text-sm tracking-wide mb-1"
-                    style={{ fontFamily: 'Metropolis, sans-serif' }}>
+                <h4 className="font-label-caps font-bold text-primary uppercase text-sm tracking-wide mb-1">
                   {wine.name.toUpperCase()}
                 </h4>
-                <p className="text-on-surface text-xs tracking-wide"
-                   style={{ fontFamily: 'Metropolis, sans-serif' }}>
+                <p className="font-body-md text-on-surface text-xs tracking-wide">
                   {wine.producer}
                 </p>
               </div>

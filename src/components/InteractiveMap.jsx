@@ -153,7 +153,6 @@ export default function InteractiveMap() {
                 className={`text-left font-bold text-xs tracking-[0.2em] uppercase transition-all ${
                   active === id ? 'text-white' : 'text-white/30 hover:text-white/60'
                 }`}
-                style={{ fontFamily: 'Metropolis, sans-serif' }}
               >
                 {data.name}
               </button>
@@ -172,15 +171,13 @@ export default function InteractiveMap() {
           {/* Col 3: tarjeta de región — absoluta a la derecha */}
           <div className="hidden md:flex flex-col items-center text-center rounded-2xl p-7 w-[280px] flex-shrink-0 mt-24 bg-primary absolute right-0 top-0">
             <p
-              className="text-white/60 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
-              style={{ fontFamily: 'Metropolis, sans-serif' }}
+              className="font-label-caps text-white/60 text-[9px] font-bold tracking-[0.28em] uppercase mb-5 leading-relaxed"
             >
               REGIÓN<br />SELECCIONADA
             </p>
             <img src={starIcon} alt="" className="w-10 h-10 mb-4" />
             <h4
               className="text-white font-display-script uppercase text-base tracking-widest mb-4"
-              style={{}}
             >
               {region.name}
             </h4>
@@ -189,8 +186,8 @@ export default function InteractiveMap() {
             </p>
             <a
               href="/tienda"
-              className="text-xs underline underline-offset-4 transition-colors"
-              style={{ fontFamily: 'Metropolis, sans-serif', color: '#FDB814' }}
+              className="font-label-caps text-xs underline underline-offset-4 transition-colors"
+              style={{ color: '#FDB814' }}
             >
               Explorar Vinos
             </a>
@@ -207,7 +204,7 @@ export default function InteractiveMap() {
               className={`px-4 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase border transition-all ${
                 active === id ? 'border-transparent text-[#3A3A3A]' : 'border-white/30 text-white/60'
               }`}
-              style={{ fontFamily: 'Metropolis, sans-serif', ...(active === id ? { backgroundColor: '#FDB814' } : {}) }}
+              style={{ ...(active === id ? { backgroundColor: '#FDB814' } : {}) }}
             >
               {data.name}
             </button>
