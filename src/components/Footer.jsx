@@ -69,7 +69,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-outline-variant/30 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-label-caps text-primary text-[10px] tracking-widest">
-            ©2024 VERI. TRADICIÓN EMBOTELLADA.
+            ©2024 VERI.
           </p>
           <div className="flex gap-8 font-label-caps text-primary text-[10px] tracking-widest">
             <a href="#" className="hover:underline">PRIVACIDAD</a>
