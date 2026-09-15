@@ -74,12 +74,6 @@ export default function WineSelection() {
                 />
               </div>
 
-              {/* CTA abajo */}
-              <div className="px-6 pb-6 text-center">
-                <button className="font-body-md text-primary underline underline-offset-4 text-sm hover:text-secondary transition-colors">
-                  Ver más
-                </button>
-              </div>
             </div>
           ))}
         </div>

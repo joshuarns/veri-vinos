@@ -20,7 +20,13 @@ export default function Footer() {
             <p className="font-bold text-primary text-sm mb-8">
               Reciba invitaciones a catas privadas y lanzamientos exclusivos.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="border-b border-primary pb-1">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (email) window.location.href = `mailto:contacto@veriselezione.com?subject=Contacto&body=${encodeURIComponent(email)}`
+              }}
+              className="border-b border-primary pb-1 flex gap-2"
+            >
               <input
                 type="email"
                 placeholder="Email*"
@@ -28,6 +34,7 @@ export default function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent w-full outline-none text-sm text-primary placeholder:text-primary font-bold"
               />
+              <button type="submit" className="text-primary font-bold text-sm shrink-0 hover:opacity-70">→</button>
             </form>
           </div>
 
@@ -40,11 +47,9 @@ export default function Footer() {
               <li><a href="#" className="hover:underline">Vinos Tintos</a></li>
               <li><a href="#" className="hover:underline">Vinos Blancos</a></li>
               <li><a href="#" className="hover:underline">Espumosos</a></li>
-              <li><a href="#" className="hover:underline">Cestas Regalo</a></li>
             </ul>
             <div className="space-y-2 text-primary text-sm">
-              <p><a href="#" className="underline underline-offset-2 hover:opacity-70">Instagram</a></p>
-              <p><a href="#" className="underline underline-offset-2 hover:opacity-70">Linkdin</a></p>
+              <p><a href="https://www.instagram.com/veri.selezione" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">Instagram</a></p>
             </div>
           </div>
 
@@ -54,10 +59,8 @@ export default function Footer() {
               Compañía
             </h5>
             <ul className="space-y-3 text-primary text-sm">
-              <li><a href="#" className="hover:underline">Nuestra Bodega</a></li>
-              <li><a href="#" className="hover:underline">Sostenibilidad</a></li>
-              <li><a href="#" className="hover:underline">Contacto</a></li>
-              <li><a href="#" className="hover:underline">Puntos de Venta</a></li>
+              <li><a href="#" className="hover:underline">L'Enoteca</a></li>
+              <li><a href="mailto:contacto@veriselezione.com" className="hover:underline">Contacto</a></li>
             </ul>
           </div>
 
