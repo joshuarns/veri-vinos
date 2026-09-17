@@ -141,7 +141,7 @@ export default function Tienda() {
             className="text-primary font-display-script uppercase mb-8"
             style={{ fontSize: 'clamp(36px, 6vw, 80px)', letterSpacing: '0.04em' }}
           >
-            Nuestra Cava
+            I Vini
           </h1>
           <div className="w-12 h-px bg-primary/30 mx-auto" />
         </div>
