@@ -46,6 +46,8 @@ export default function Footer() {
             <ul className="space-y-3 text-primary text-sm mb-8">
               <li><a href="#" className="hover:underline">Vinos Tintos</a></li>
               <li><a href="#" className="hover:underline">Vinos Blancos</a></li>
+              <li><a href="#" className="hover:underline">Blancos Macerados</a></li>
+              <li><a href="#" className="hover:underline">Rosados</a></li>
               <li><a href="#" className="hover:underline">Espumosos</a></li>
             </ul>
             <div className="space-y-2 text-primary text-sm">
