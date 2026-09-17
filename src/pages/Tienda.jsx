@@ -5,15 +5,16 @@ import Footer from '../components/Footer'
 import { useProducts } from '../hooks/useProducts'
 import { obtenerRegiones, obtenerProductosPorRegion } from '../api/products'
 
-const tipos = ['Todos', 'Tinto', 'Blanco', 'Rosado', 'Espumoso']
+const tipos = ['Todos', 'Tinto', 'Blanco', 'Rosado', 'Espumoso', 'Blancos Macerados']
 
 // Mapea el slug de WooCommerce a la etiqueta visual del chip
 const TIPO_SLUG = {
-  Tinto:    'tinto',
-  Blanco:   'blanco',
-  Rosado:   'rosado',
-  Espumoso: 'espumoso',
-  Naranja:  'naranja',
+  Tinto:              'tinto',
+  Blanco:             'blanco',
+  Rosado:             'rosado',
+  Espumoso:           'espumoso',
+  Naranja:            'naranja',
+  'Blancos Macerados': 'blancos-macerados',
 }
 
 function ProductCard({ producto }) {
