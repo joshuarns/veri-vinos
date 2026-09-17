@@ -37,7 +37,7 @@ export default function WineSelection() {
             className="text-primary font-display-script uppercase mb-6"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '0.04em' }}
           >
-            La Nostra Selezione
+            La Selezione
           </h3>
           <p className="text-on-surface font-bold text-sm md:text-base max-w-lg mx-auto leading-relaxed">
             Productores y etiquetas que expresan lo más extraordinario de Italia.
