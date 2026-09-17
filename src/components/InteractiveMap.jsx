@@ -185,11 +185,11 @@ export default function InteractiveMap() {
               {region.desc}
             </p>
             <a
-              href="/tienda"
+              href={`/productores?region=${encodeURIComponent(region.name)}`}
               className="font-label-caps text-xs underline underline-offset-4 transition-colors"
               style={{ color: '#FDB814' }}
             >
-              Explorar Vinos
+              Ver Productores
             </a>
           </div>
 

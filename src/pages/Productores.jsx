@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { obtenerProductores, getFeaturedImage } from '../api/producers'
@@ -62,6 +62,8 @@ export default function Productores() {
   const [productores, setProductores] = useState([])
   const [cargando, setCargando]       = useState(true)
   const [error, setError]             = useState(null)
+  const [searchParams]                = useSearchParams()
+  const regionFiltro                  = searchParams.get('region') || ''
 
   useEffect(() => {
     obtenerProductores()
@@ -69,6 +71,12 @@ export default function Productores() {
       .catch(setError)
       .finally(() => setCargando(false))
   }, [])
+
+  const productoresFiltrados = regionFiltro
+    ? productores.filter((p) =>
+        (p.acf?.region || '').toLowerCase().includes(regionFiltro.toLowerCase())
+      )
+    : productores
 
   return (
     <>
@@ -80,9 +88,18 @@ export default function Productores() {
           <h1 className="font-display-script text-headline-lg md:text-[80px] leading-none mb-6 text-primary">
             I PRODUTTORI
           </h1>
-          <p className="font-body-md text-on-surface-variant max-w-xl mx-auto">
-            Familias y productores unidos por una forma de entender el vino: respeto por el territorio, identidad y legado.
-          </p>
+          {regionFiltro ? (
+            <div className="flex items-center justify-center gap-3">
+              <p className="font-label-caps text-primary tracking-[0.2em] text-[11px] uppercase">{regionFiltro}</p>
+              <Link to="/productores" className="font-label-caps text-[10px] text-on-surface-variant hover:text-primary transition-colors underline underline-offset-2">
+                Ver todos
+              </Link>
+            </div>
+          ) : (
+            <p className="font-body-md text-on-surface-variant max-w-xl mx-auto">
+              Familias y productores unidos por una forma de entender el vino: respeto por el territorio, identidad y legado.
+            </p>
+          )}
           <div className="w-12 h-px bg-outline-variant/50 mx-auto mt-8" />
         </div>
 
@@ -100,12 +117,12 @@ export default function Productores() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-gutter gap-y-16 mt-4">
             {cargando
               ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
-              : productores.map((p) => <ProductorCard key={p.id} productor={p} />)
+              : productoresFiltrados.map((p) => <ProductorCard key={p.id} productor={p} />)
             }
           </div>
         )}
 
-        {!cargando && !error && productores.length === 0 && (
+        {!cargando && !error && productoresFiltrados.length === 0 && (
           <p className="text-center font-body-md text-on-surface-variant py-20">
             No hay productores disponibles.
           </p>
