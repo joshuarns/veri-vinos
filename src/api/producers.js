@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
+const WP_BASE  = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
+const authParams = {
+  consumer_key:    import.meta.env.VITE_WC_KEY,
+  consumer_secret: import.meta.env.VITE_WC_SECRET,
+}
 
 // Resuelve imágenes para todos los posts con featured_media > 0
 // usando un batch request (include=id1,id2,...) en lugar de N requests individuales
@@ -13,7 +17,7 @@ const resolveMedia = async (posts) => {
   let mapaMedia = {}
   try {
     const res = await axios.get(`${WP_BASE}/media`, {
-      params: { include: ids, per_page: 100 },
+      params: { ...authParams, include: ids, per_page: 100 },
     })
     const items = Array.isArray(res.data) ? res.data : []
     mapaMedia = Object.fromEntries(items.map((m) => [m.id, m.source_url || '']))
@@ -36,7 +40,7 @@ const resolveMedia = async (posts) => {
 
 export const obtenerProductores = async () => {
   const res = await axios.get(`${WP_BASE}/productores`, {
-    params: { per_page: 20, status: 'publish' },
+    params: { ...authParams, per_page: 50, status: 'publish' },
   })
   const posts = Array.isArray(res.data) ? res.data : []
   return resolveMedia(posts)
@@ -44,7 +48,7 @@ export const obtenerProductores = async () => {
 
 export const obtenerProductor = async (slug) => {
   const res = await axios.get(`${WP_BASE}/productores`, {
-    params: { _embed: true, slug },
+    params: { ...authParams, slug },
   })
   const posts = res.data?.[0] ? [res.data[0]] : []
   const resolved = await resolveMedia(posts)
