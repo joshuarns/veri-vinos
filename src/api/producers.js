@@ -36,7 +36,7 @@ const resolveMedia = async (posts) => {
 
 export const obtenerProductores = async () => {
   const res = await axios.get(`${WP_BASE}/productores`, {
-    params: { per_page: 100, status: 'publish' },
+    params: { per_page: 20, status: 'publish' },
   })
   const posts = Array.isArray(res.data) ? res.data : []
   return resolveMedia(posts)
