@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { obtenerProductor, getFeaturedImage } from '../api/producers'
+import { obtenerProductosPorProductor } from '../api/products'
 
 function SkeletonSingle() {
   return (
@@ -27,11 +28,16 @@ export default function ProductorSingle() {
   const [productor, setProductor]       = useState(null)
   const [cargando, setCargando]         = useState(true)
   const [error, setError]               = useState(null)
+  const [vinos, setVinos]               = useState([])
 
   useEffect(() => {
     setCargando(true)
     obtenerProductor(slug)
-      .then(setProductor)
+      .then((p) => {
+        setProductor(p)
+        const nombre = p?.title?.rendered || ''
+        if (nombre) obtenerProductosPorProductor(nombre).then(setVinos).catch(() => {})
+      })
       .catch(setError)
       .finally(() => setCargando(false))
   }, [slug])
@@ -108,17 +114,35 @@ export default function ProductorSingle() {
                 />
               )}
 
-              <div className="pt-4">
-                <Link
-                  to="/tienda"
-                  className="inline-flex items-center gap-3 border border-primary text-primary font-label-caps py-4 px-8 tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all duration-300"
-                >
-                  <span className="material-symbols-outlined text-[18px]">wine_bar</span>
-                  VER VINOS
-                </Link>
-              </div>
             </div>
           </div>
+
+          {/* Vinos del productor */}
+          {vinos.length > 0 && (
+            <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-24">
+              <div className="border-t border-outline-variant/20 pt-16">
+                <h2 className="font-display-script text-3xl md:text-4xl text-primary mb-10">
+                  Sus Vinos
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-16">
+                  {vinos.map((v) => (
+                    <Link key={v.id} to={`/producto/${v.id}`} className="group block">
+                      <div className="aspect-square bg-surface-container-low overflow-hidden mb-4">
+                        {v.images?.[0]?.src
+                          ? <img src={v.images[0].src} alt={v.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                          : <div className="w-full h-full flex items-center justify-center"><span className="material-symbols-outlined text-5xl text-outline/20">wine_bar</span></div>
+                        }
+                      </div>
+                      <div className="text-center space-y-1">
+                        <h3 className="font-display-script text-primary text-lg group-hover:text-secondary transition-colors">{v.name}</h3>
+                        {v.acf?.year && <p className="font-label-caps text-[10px] text-on-surface-variant/50">{v.acf.year}</p>}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
 
         </main>
       )}

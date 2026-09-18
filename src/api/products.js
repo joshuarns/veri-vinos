@@ -65,6 +65,25 @@ export const obtenerRegiones = async () => {
     : []
 }
 
+// ── obtenerProductosPorProductor ──────────────────────────────────────────────
+export const obtenerProductosPorProductor = async (producerName) => {
+  const res = await axios.get(`${BASE_URL}/products`, {
+    params: { ...authParams, status: 'publish', per_page: 100 },
+  })
+  const todos = Array.isArray(res.data) ? res.data : []
+  const nombre = producerName.toLowerCase()
+  return todos.filter((p) => {
+    const prods = p.acf?.productores
+    if (!prods) return false
+    if (Array.isArray(prods)) {
+      return prods.some((pr) =>
+        (pr.post_title || pr.title?.rendered || '').toLowerCase().includes(nombre)
+      )
+    }
+    return String(prods).toLowerCase().includes(nombre)
+  })
+}
+
 // ── obtenerProductosPorRegion ─────────────────────────────────────────────────
 export const obtenerProductosPorRegion = async (attributeId, termId) => {
   const res = await axios.get(`${BASE_URL}/products`, {
