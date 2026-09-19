@@ -88,7 +88,7 @@ export default function Navbar({ barVisible = false }) {
           <div className="border-t border-outline-variant/30 pt-8">
             <p className="font-label-caps text-on-surface-variant text-[10px] mb-4">SÍGUENOS</p>
             <div className="flex gap-4">
-              <span className="font-body-md text-sm">Instagram</span>
+              <a href="https://www.instagram.com/veri.selezione?stkn=NHJwc2w5ZDRydHln" target="_blank" rel="noopener noreferrer" className="font-body-md text-sm hover:text-secondary transition-colors">Instagram</a>
             </div>
           </div>
         </div>
