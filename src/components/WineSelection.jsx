@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import galatronaImg from '../assets/img/galatrona-vino.jpeg'
 import baroloArioneImg from '../assets/img/barolo-arione-home.jpeg'
 import bibbonaImg from '../assets/img/bibbona-home.jpeg'
@@ -9,6 +10,7 @@ const wines = [
     name: 'Ribolla Gialla',
     producer: 'Damijan Podversic',
     img: galatronaImg,
+    link: '/producto/710',
   },
   {
     id: 2,
@@ -16,6 +18,7 @@ const wines = [
     name: 'Barolo Arione',
     producer: 'Giacomo Conterno',
     img: baroloArioneImg,
+    link: '/producto/651',
   },
   {
     id: 3,
@@ -23,6 +26,7 @@ const wines = [
     name: 'Bibbona',
     producer: 'Biserno',
     img: bibbonaImg,
+    link: '#',
   },
 ]
 
@@ -72,6 +76,16 @@ export default function WineSelection() {
                   className="w-full aspect-square object-cover rounded-lg"
                   loading="lazy"
                 />
+              </div>
+
+              {/* CTA abajo */}
+              <div className="px-6 pb-6 text-center">
+                <Link
+                  to={wine.link}
+                  className="font-body-md text-primary underline underline-offset-4 text-sm hover:text-secondary transition-colors"
+                >
+                  Ver más
+                </Link>
               </div>
 
             </div>
