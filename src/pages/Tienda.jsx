@@ -81,10 +81,7 @@ function SkeletonCard() {
 
 export default function Tienda() {
   const [searchParams]                  = useSearchParams()
-  const [activeTipo,   setActiveTipo]   = useState(() => {
-    const t = searchParams.get('tipo')
-    return tipos.includes(t) ? t : 'Todos'
-  })
+  const [activeTipo,   setActiveTipo]   = useState('Todos')
   const [page,         setPage]         = useState(1)
   const [regionActiva, setRegionActiva] = useState(null)   // { id, nombre, descripcion, slug }
   const [regiones,     setRegiones]     = useState([])
@@ -103,6 +100,13 @@ export default function Tienda() {
     perPage: 12,
     categoria,
   })
+
+  // Sincronizar filtro con ?tipo= del URL
+  useEffect(() => {
+    const t = searchParams.get('tipo')
+    setActiveTipo(tipos.includes(t) ? t : 'Todos')
+    setPage(1)
+  }, [searchParams])
 
   // Cargar lista de regiones al montar
   useEffect(() => {
