@@ -106,6 +106,7 @@ export default function Tienda() {
     const t = searchParams.get('tipo')
     setActiveTipo(tipos.includes(t) ? t : 'Todos')
     setPage(1)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [searchParams])
 
   // Cargar lista de regiones al montar
