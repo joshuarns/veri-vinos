@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useProducts } from '../hooks/useProducts'
@@ -80,7 +80,11 @@ function SkeletonCard() {
 }
 
 export default function Tienda() {
-  const [activeTipo,   setActiveTipo]   = useState('Todos')
+  const [searchParams]                  = useSearchParams()
+  const [activeTipo,   setActiveTipo]   = useState(() => {
+    const t = searchParams.get('tipo')
+    return tipos.includes(t) ? t : 'Todos'
+  })
   const [page,         setPage]         = useState(1)
   const [regionActiva, setRegionActiva] = useState(null)   // { id, nombre, descripcion, slug }
   const [regiones,     setRegiones]     = useState([])

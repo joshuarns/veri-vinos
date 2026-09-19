@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import veriNegro from '../assets/img/veri_negro.svg'
 
 export default function Footer() {
@@ -44,11 +45,11 @@ export default function Footer() {
               Catálogo
             </h5>
             <ul className="space-y-3 text-primary text-sm mb-8">
-              <li><a href="#" className="hover:underline">Vinos Tintos</a></li>
-              <li><a href="#" className="hover:underline">Vinos Blancos</a></li>
-              <li><a href="#" className="hover:underline">Blancos Macerados</a></li>
-              <li><a href="#" className="hover:underline">Rosados</a></li>
-              <li><a href="#" className="hover:underline">Espumosos</a></li>
+              <li><Link to="/tienda?tipo=Tinto" className="hover:underline">Vinos Tintos</Link></li>
+              <li><Link to="/tienda?tipo=Blanco" className="hover:underline">Vinos Blancos</Link></li>
+              <li><Link to="/tienda?tipo=Blancos Macerados" className="hover:underline">Blancos Macerados</Link></li>
+              <li><Link to="/tienda?tipo=Rosado" className="hover:underline">Rosados</Link></li>
+              <li><Link to="/tienda?tipo=Espumoso" className="hover:underline">Espumosos</Link></li>
             </ul>
             <div className="space-y-2 text-primary text-sm">
               <p><a href="https://www.instagram.com/veri.selezione" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">Instagram</a></p>
