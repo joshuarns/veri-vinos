@@ -5,6 +5,7 @@ import ProductoSingle from './pages/ProductoSingle'
 import Productores from './pages/Productores'
 import ProductorSingle from './pages/ProductorSingle'
 import Nosotros from './pages/Nosotros'
+import NuestraHistoria from './pages/NuestraHistoria'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/productores" element={<Productores />} />
         <Route path="/productor/:slug" element={<ProductorSingle />} />
         <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/nuestra-historia" element={<NuestraHistoria />} />
       </Routes>
     </BrowserRouter>
   )
