@@ -59,7 +59,6 @@ function ProductCard({ producto }) {
       <div className="text-center space-y-1">
         <h3 className="font-display-script text-title-lg text-primary group-hover:text-secondary transition-colors">{producto.name}</h3>
         {bodega && <p className="font-label-caps text-on-surface-variant/60 text-[11px] tracking-widest">{bodega}</p>}
-        {anada && <p className="font-body-md text-sm text-on-surface-variant/50 mt-1">{anada}</p>}
       </div>
       </Link>
     </article>
