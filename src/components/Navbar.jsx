@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import veriNegro from '../assets/img/veri_negro.svg'
 
 export default function Navbar({ barVisible = false }) {
@@ -78,9 +78,9 @@ export default function Navbar({ barVisible = false }) {
               </button>
             </div>
             <nav className="flex flex-col gap-6">
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Nosotros</a>
+              <Link to="/nosotros" onClick={() => setDrawerOpen(false)} className="text-headline-sm font-light hover:text-secondary transition-colors">Nosotros</Link>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">News</a>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Contacto</a>
+              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="mailto:contacto@veriselezione.com">Contacto</a>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Gourmet</a>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Aprende (FAQ)</a>
             </nav>

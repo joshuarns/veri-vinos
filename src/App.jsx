@@ -4,6 +4,7 @@ import Tienda from './pages/Tienda'
 import ProductoSingle from './pages/ProductoSingle'
 import Productores from './pages/Productores'
 import ProductorSingle from './pages/ProductorSingle'
+import Nosotros from './pages/Nosotros'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/producto/:id" element={<ProductoSingle />} />
         <Route path="/productores" element={<Productores />} />
         <Route path="/productor/:slug" element={<ProductorSingle />} />
+        <Route path="/nosotros" element={<Nosotros />} />
       </Routes>
     </BrowserRouter>
   )
