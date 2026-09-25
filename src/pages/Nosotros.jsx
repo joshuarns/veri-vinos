@@ -64,24 +64,24 @@ export default function Nosotros() {
               {equipo.map((persona, i) => (
                 <div
                   key={persona.nombre}
-                  className={`grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 xl:gap-20 items-start ${i % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''}`}
+                  className={persona.img
+                    ? `grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 xl:gap-20 items-start ${i % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''}`
+                    : 'max-w-2xl mx-auto'
+                  }
                 >
-                  {/* Foto */}
-                  <div
-                    className="overflow-hidden w-full"
-                    style={{ height: '560px', background: persona.img ? undefined : '#f5f5f5' }}
-                  >
-                    {persona.img && (
+                  {/* Foto — solo si existe */}
+                  {persona.img && (
+                    <div className="overflow-hidden w-full" style={{ height: '560px' }}>
                       <img
                         src={persona.img}
                         alt={persona.nombre}
                         className="w-full h-full object-cover object-top"
                       />
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* Info */}
-                  <div className="flex flex-col justify-center py-4 lg:py-12">
+                  <div className={`flex flex-col justify-center py-4 lg:py-12 ${!persona.img ? 'text-center items-center' : ''}`}>
                     <p className="font-label-caps text-secondary text-[10px] tracking-[0.3em] mb-3">
                       {persona.cargo.toUpperCase()}
                     </p>
@@ -91,7 +91,7 @@ export default function Nosotros() {
                     >
                       {persona.nombre}
                     </h3>
-                    <div className="w-10 h-px bg-outline-variant/50 mb-6" />
+                    <div className={`w-10 h-px bg-outline-variant/50 mb-6 ${!persona.img ? 'mx-auto' : ''}`} />
                     <p className="font-body-md text-on-surface-variant leading-relaxed text-sm mb-6">
                       {persona.bio}
                     </p>
