@@ -190,12 +190,15 @@ export default function Nosotros() {
                   className={`grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 xl:gap-20 items-start ${i % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''}`}
                 >
                   {/* Foto */}
-                  <div className="aspect-[3/4] overflow-hidden" style={{ background: persona.img ? undefined : '#f5f5f5' }}>
+                  <div
+                    className="overflow-hidden w-full"
+                    style={{ height: '560px', background: persona.img ? undefined : '#f5f5f5' }}
+                  >
                     {persona.img && (
                       <img
                         src={persona.img}
                         alt={persona.nombre}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                       />
                     )}
                   </div>
