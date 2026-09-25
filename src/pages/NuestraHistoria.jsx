@@ -31,39 +31,42 @@ export default function NuestraHistoria() {
       <main className="pt-24">
         <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-16 pb-24">
 
-          {/* Eyebrow + Título */}
-          <div className="max-w-3xl mb-20">
-            <p className="font-label-caps text-secondary text-[10px] tracking-[0.35em] mb-6">
-              NUESTRA HISTORIA
-            </p>
-            <h1
-              className="font-display-script text-primary leading-[1.05] mb-8"
-              style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}
-            >
-              Veri no representa Italia. La interpreta.
-            </h1>
-            <p className="font-body-md text-on-surface-variant text-lg leading-relaxed max-w-2xl">
-              Familias, visiones y manos que han convertido el territorio en vinos con identidad propia.
-            </p>
-          </div>
+          {/* Hero: título + imagen lado a lado */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-28 items-start mb-28">
 
-          {/* Qué es Veri + imagen */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-28 items-center mb-28">
-            <div>
-              <h2 className="font-label-caps text-primary tracking-[0.25em] text-[11px] mb-5">QUÉ ES VERI</h2>
-              <p className="font-body-md text-on-surface-variant leading-relaxed text-base">
-                Veri es una selección personal de vinos italianos construida desde el origen, la identidad y el legado.
-                Productores, familias y territorios elegidos por una manera particular de entender el vino:
-                con profundidad, autenticidad y sentido de lugar.
+            {/* Columna izquierda: eyebrow + título + textos */}
+            <div className="flex flex-col justify-center lg:py-8">
+              <p className="font-label-caps text-secondary text-[10px] tracking-[0.35em] mb-6">
+                NUESTRA HISTORIA
               </p>
+              <h1
+                className="font-display-script text-primary leading-[1.05] mb-8"
+                style={{ fontSize: 'clamp(40px, 5vw, 72px)' }}
+              >
+                Veri no representa Italia. La interpreta.
+              </h1>
+              <p className="font-body-md text-on-surface-variant text-lg leading-relaxed mb-10">
+                Familias, visiones y manos que han convertido el territorio en vinos con identidad propia.
+              </p>
+              <div>
+                <h2 className="font-label-caps text-primary tracking-[0.25em] text-[11px] mb-4">QUÉ ES VERI</h2>
+                <p className="font-body-md text-on-surface-variant leading-relaxed text-base">
+                  Veri es una selección personal de vinos italianos construida desde el origen, la identidad y el legado.
+                  Productores, familias y territorios elegidos por una manera particular de entender el vino:
+                  con profundidad, autenticidad y sentido de lugar.
+                </p>
+              </div>
             </div>
-            <div className="aspect-[4/3] overflow-hidden">
+
+            {/* Columna derecha: imagen */}
+            <div className="aspect-[3/4] overflow-hidden">
               <img
                 src={historiaImg}
                 alt="Nuestra historia"
                 className="w-full h-full object-cover"
               />
             </div>
+
           </div>
 
           {/* Cómo empezó */}
