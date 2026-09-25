@@ -1,7 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import historiaImg from '../assets/img/historias-con-alma.jpg'
-import rollyImg    from '../assets/img/team-01.jpg'
 import davideImg   from '../assets/img/Davide-Merlini.jpeg'
 import eneidaImg   from '../assets/img/eneida-fuentes.jpeg'
 
@@ -30,7 +29,7 @@ const equipo = [
   {
     nombre: 'Rolly Pavia',
     cargo:  'Fundador & Curador',
-    img:    rollyImg,
+    img:    null,
     bio:    'Con una herencia que une a México e Italia y más de 25 años como restaurantero, Rolly Pavia ha formado su mirada sobre el vino italiano en la mesa y en el trato directo con los productores. Veri nace de esa trayectoria: primero como una búsqueda personal y hoy como una selección pensada para compartirse. Su criterio privilegia a los productores que trabajan la viña con filosofía propia y guían su oficio desde la convicción, con un compromiso absoluto con la tierra y con lo que llega a la copa.',
     credenciales: [],
   },
@@ -191,12 +190,14 @@ export default function Nosotros() {
                   className={`grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 xl:gap-20 items-start ${i % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''}`}
                 >
                   {/* Foto */}
-                  <div className="aspect-[3/4] overflow-hidden bg-surface-container">
-                    <img
-                      src={persona.img}
-                      alt={persona.nombre}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="aspect-[3/4] overflow-hidden" style={{ background: persona.img ? undefined : '#f5f5f5' }}>
+                    {persona.img && (
+                      <img
+                        src={persona.img}
+                        alt={persona.nombre}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                   </div>
 
                   {/* Info */}
