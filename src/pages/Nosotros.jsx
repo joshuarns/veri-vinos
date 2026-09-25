@@ -15,6 +15,7 @@ const equipo = [
     nombre: 'Davide Merlini',
     cargo:  'Beverage Manager · Head Sommelier',
     img:    davideImg,
+    photoStyle: { objectPosition: 'center 5%', transform: 'scale(0.8)', transformOrigin: 'top center' },
     bio:    'Con más de veinte años en la alta restauración y la hostelería de lujo, Davide Merlini entiende el vino como un encuentro: con quienes trabajan la tierra, con sus historias y con las personas que lo comparten en la mesa. Viaja, visita bodegas y camina entre las vides para construir relaciones basadas en la confianza y el respeto. Su camino se cruzó con el de Rolly en 2010. Desde entonces, la curiosidad y la pasión por el vino italiano se transformaron en una visión compartida: dar a conocer productores de identidad sólida, alejados de las modas y de las lógicas puramente comerciales.',
     credenciales: ['Beverage Manager', 'Head Sommelier', 'Formador y juez internacional'],
   },
@@ -76,6 +77,7 @@ export default function Nosotros() {
                         src={persona.img}
                         alt={persona.nombre}
                         className="w-full h-full object-cover object-top"
+                        style={persona.photoStyle || {}}
                       />
                     </div>
                   )}
