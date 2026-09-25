@@ -39,7 +39,7 @@ export default function Hero() {
           Explorar Vinos
         </Link>
         <Link
-          to="/"
+          to="/nuestra-historia"
           className="font-bold underline underline-offset-4 text-sm md:text-base transition-all duration-300"
           style={{ color: '#ffffff', decorationColor: '#ffffff' }}
         >
