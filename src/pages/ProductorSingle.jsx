@@ -135,7 +135,6 @@ export default function ProductorSingle() {
                       </div>
                       <div className="text-center space-y-1">
                         <h3 className="font-display-script text-primary text-lg group-hover:text-secondary transition-colors">{v.name}</h3>
-                        {v.acf?.year && <p className="font-label-caps text-[10px] text-on-surface-variant/50">{v.acf.year}</p>}
                       </div>
                     </Link>
                   ))}
