@@ -308,8 +308,8 @@ export default function Tienda() {
           </div>
         )}
 
-        {/* Featured Bento */}
-        <section className="mt-40 mb-20">
+        {/* Featured Bento — oculto temporalmente */}
+        <section className="mt-40 mb-20 hidden">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
             <div className="md:col-span-8 aspect-video md:aspect-auto bg-primary relative overflow-hidden group">
               <img
