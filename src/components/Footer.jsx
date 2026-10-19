@@ -76,9 +76,9 @@ export default function Footer() {
             ©2024 VERI.
           </p>
           <div className="flex gap-8 font-label-caps text-primary text-[10px] tracking-widest">
-            <a href="#" className="hover:underline">PRIVACIDAD</a>
-            <a href="#" className="hover:underline">LEGAL</a>
-            <a href="#" className="hover:underline">COOKIES</a>
+            <Link to="/aviso-de-privacidad" className="hover:underline">PRIVACIDAD</Link>
+            <Link to="/terminos-y-condiciones" className="hover:underline">LEGAL</Link>
+            <Link to="/politica-de-cookies" className="hover:underline">COOKIES</Link>
           </div>
         </div>
 
