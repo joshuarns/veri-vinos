@@ -6,16 +6,11 @@
 
 import { axios, BASE_URL, authParams } from './client'
 
-// ── obtenerProductos ──────────────────────────────────────────────────────────
-export const obtenerProductos = async ({
-  page      = 1,
-  perPage   = 12,
-  busqueda  = '',
-  categoria = '',
-} = {}) => {
-  const params = { ...authParams, status: 'publish', per_page: perPage, page }
-
-  if (busqueda) params.search = busqueda
+// ── obtenerCatalogo ───────────────────────────────────────────────────────────
+// Trae todos los productos publicados (páginas de 100) para poder ordenarlos
+// y paginarlos en el cliente.
+export const obtenerCatalogo = async ({ categoria = '' } = {}) => {
+  const params = { ...authParams, status: 'publish', per_page: 100 }
 
   if (categoria) {
     const catRes = await axios.get(`${BASE_URL}/products/categories`, {
@@ -24,12 +19,20 @@ export const obtenerProductos = async ({
     if (catRes.data.length) params.category = catRes.data[0].id
   }
 
-  const res = await axios.get(`${BASE_URL}/products`, { params })
+  const primera = await axios.get(`${BASE_URL}/products`, { params: { ...params, page: 1 } })
+  const totalPaginas = parseInt(primera.headers['x-wp-totalpages'] || '1', 10)
+  let productos = Array.isArray(primera.data) ? primera.data : []
 
-  return {
-    productos   : Array.isArray(res.data) ? res.data : [],
-    totalPaginas: parseInt(res.headers['x-wp-totalpages'] || '1', 10),
+  if (totalPaginas > 1) {
+    const resto = await Promise.all(
+      Array.from({ length: totalPaginas - 1 }, (_, i) =>
+        axios.get(`${BASE_URL}/products`, { params: { ...params, page: i + 2 } })
+      )
+    )
+    resto.forEach((r) => { if (Array.isArray(r.data)) productos = productos.concat(r.data) })
   }
+
+  return productos
 }
 
 // ── obtenerProducto ───────────────────────────────────────────────────────────

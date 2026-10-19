@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -18,17 +18,43 @@ const TIPO_SLUG = {
   Otros:              'otros',
 }
 
+const POR_PAGINA = 12
+
+const ORDENES = [
+  { value: 'productor', label: 'Productor (A–Z)' },
+  { value: 'nombre',    label: 'Nombre (A–Z)' },
+  { value: 'recientes', label: 'Más recientes' },
+]
+
+function getProductor(producto) {
+  const raw = producto.acf?.productores
+  if (Array.isArray(raw)) return raw[0]?.post_title || raw[0]?.title?.rendered || ''
+  if (typeof raw === 'string') return raw
+  return producto.categories?.[0]?.name || ''
+}
+
+const comparar = (a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' })
+
+function ordenarProductos(lista, orden) {
+  if (orden === 'recientes') {
+    return [...lista].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
+  }
+  return [...lista].sort((a, b) => {
+    if (orden === 'productor') {
+      const pa = getProductor(a)
+      const pb = getProductor(b)
+      if (pa && !pb) return -1
+      if (!pa && pb) return 1
+      const porProductor = comparar(pa, pb)
+      if (porProductor) return porProductor
+    }
+    return comparar(a.name, b.name)
+  })
+}
+
 function ProductCard({ producto }) {
   const imagen = producto.images?.[0]?.src || ''
-  const precio = producto.price
-    ? `$${parseFloat(producto.price).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`
-    : '—'
-  const productoresRaw = producto.acf?.productores
-  const bodegaStr = Array.isArray(productoresRaw)
-    ? (productoresRaw[0]?.post_title || productoresRaw[0]?.title?.rendered || '')
-    : (typeof productoresRaw === 'string' ? productoresRaw : producto.categories?.[0]?.name || '')
-  const bodega = bodegaStr.toUpperCase()
-  const anada  = producto.acf?.year ? String(parseInt(producto.acf.year)) : ''
+  const bodega = getProductor(producto).toUpperCase()
 
   return (
     <article className="group">
@@ -83,6 +109,7 @@ export default function Tienda() {
   const [searchParams]                  = useSearchParams()
   const [activeTipo,   setActiveTipo]   = useState('Todos')
   const [page,         setPage]         = useState(1)
+  const [orden,        setOrden]        = useState('productor')
   const [regionActiva, setRegionActiva] = useState(null)   // { id, nombre, descripcion, slug }
   const [regiones,     setRegiones]     = useState([])
   const [regionDropdown, setRegionDropdown] = useState(false)
@@ -95,11 +122,12 @@ export default function Tienda() {
 
   const categoria = activeTipo === 'Todos' ? '' : TIPO_SLUG[activeTipo] ?? ''
 
-  const { productos, totalPaginas, cargando, error } = useProducts({
-    page,
-    perPage: 12,
-    categoria,
-  })
+  const { productos: catalogo, cargando, error } = useProducts({ categoria })
+
+  const ordenados = useMemo(() => ordenarProductos(catalogo, orden), [catalogo, orden])
+  const productosRegionOrdenados = useMemo(() => ordenarProductos(productosRegion, orden), [productosRegion, orden])
+  const totalPaginas = Math.max(1, Math.ceil(ordenados.length / POR_PAGINA))
+  const productos = ordenados.slice((page - 1) * POR_PAGINA, page * POR_PAGINA)
 
   // Sincronizar filtro con ?tipo= del URL
   useEffect(() => {
@@ -170,6 +198,20 @@ export default function Tienda() {
                   {regionDropdown ? 'expand_less' : 'expand_more'}
                 </span>
               </button>
+
+              {/* Ordenar por */}
+              <label className="flex items-center gap-2 font-label-caps text-on-surface-variant">
+                Ordenar por
+                <select
+                  value={orden}
+                  onChange={(e) => { setOrden(e.target.value); setPage(1) }}
+                  className="bg-transparent font-label-caps text-primary outline-none cursor-pointer border-b border-outline-variant/40 pb-0.5"
+                >
+                  {ORDENES.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+              </label>
 
             </div>
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
@@ -255,7 +297,7 @@ export default function Tienda() {
               </p>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-x-gutter gap-y-24">
-                {productosRegion.map((p) => <ProductCard key={p.id} producto={p} />)}
+                {productosRegionOrdenados.map((p) => <ProductCard key={p.id} producto={p} />)}
               </div>
             )}
           </div>

@@ -1,18 +1,17 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // hooks/useProducts.js
 //
-// Hook que encapsula el fetch de productos con estado de carga y error.
-// Recarga automáticamente cuando cambian los filtros.
+// Hook que carga el catálogo completo (opcionalmente por categoría) con estado
+// de carga y error. Recarga automáticamente cuando cambia la categoría.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useEffect } from 'react'
-import { obtenerProductos } from '../api/products'
+import { obtenerCatalogo } from '../api/products'
 
-export function useProducts({ page = 1, perPage = 12, busqueda = '', categoria = '' } = {}) {
-  const [productos,    setProductos]    = useState([])
-  const [totalPaginas, setTotalPaginas] = useState(1)
-  const [cargando,     setCargando]     = useState(true)
-  const [error,        setError]        = useState(null)
+export function useProducts({ categoria = '' } = {}) {
+  const [productos, setProductos] = useState([])
+  const [cargando,  setCargando]  = useState(true)
+  const [error,     setError]     = useState(null)
 
   useEffect(() => {
     let cancelado = false
@@ -21,13 +20,8 @@ export function useProducts({ page = 1, perPage = 12, busqueda = '', categoria =
       setCargando(true)
       setError(null)
       try {
-        const { productos: data, totalPaginas: total } = await obtenerProductos({
-          page, perPage, busqueda, categoria,
-        })
-        if (!cancelado) {
-          setProductos(data)
-          setTotalPaginas(total)
-        }
+        const data = await obtenerCatalogo({ categoria })
+        if (!cancelado) setProductos(data)
       } catch (err) {
         if (!cancelado) setError(err)
       } finally {
@@ -37,7 +31,7 @@ export function useProducts({ page = 1, perPage = 12, busqueda = '', categoria =
 
     fetchData()
     return () => { cancelado = true }
-  }, [page, perPage, busqueda, categoria])
+  }, [categoria])
 
-  return { productos, totalPaginas, cargando, error }
+  return { productos, cargando, error }
 }
