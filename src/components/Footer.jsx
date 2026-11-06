@@ -63,7 +63,7 @@ export default function Footer() {
             </h5>
             <ul className="space-y-3 text-primary text-sm">
               <li><a href="#" className="hover:underline">L'Enoteca</a></li>
-              <li><a href="#" className="hover:underline">News</a></li>
+              <li><Link to="/news" className="hover:underline">News</Link></li>
               <li><a href="mailto:contacto@veriselezione.com" className="hover:underline">Contacto</a></li>
             </ul>
           </div>

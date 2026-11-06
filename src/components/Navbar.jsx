@@ -79,7 +79,7 @@ export default function Navbar({ barVisible = false }) {
             </div>
             <nav className="flex flex-col gap-6">
               <Link to="/nosotros" onClick={() => setDrawerOpen(false)} className="text-headline-sm font-light hover:text-secondary transition-colors">Nosotros</Link>
-              <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">News</a>
+              <Link to="/news" onClick={() => setDrawerOpen(false)} className="text-headline-sm font-light hover:text-secondary transition-colors">News</Link>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="mailto:contacto@veriselezione.com">Contacto</a>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Gourmet</a>
               <a className="text-headline-sm font-light hover:text-secondary transition-colors" href="#">Aprende (FAQ)</a>
