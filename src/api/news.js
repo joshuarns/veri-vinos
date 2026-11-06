@@ -6,16 +6,29 @@ const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/
 export const textoPlano = (html = '') =>
   new DOMParser().parseFromString(html, 'text/html').body.textContent?.trim() || ''
 
-export const normalizarNoticia = (post) => ({
-  id: post.id,
-  slug: post.slug,
-  fecha: post.date,
-  titulo: textoPlano(post.title?.rendered),
-  extracto: textoPlano(post.excerpt?.rendered),
-  contenido: post.content?.rendered || '',
-  imagen: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
-  categoria: post._embedded?.['wp:term']?.[0]?.[0]?.name || '',
-})
+const CATEGORIA_GENERICA = /^(uncategorized|sin categor[ií]a)$/i
+const MIN_CARACTERES_PARRAFO = 60
+
+// Primer párrafo sustancial del artículo (salta líneas cortas de fecha, etiqueta y título)
+const primerParrafo = (html = '') => {
+  const parrafos = [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('p')]
+  const largo = parrafos.find((p) => p.textContent.trim().length >= MIN_CARACTERES_PARRAFO)
+  return largo?.textContent.trim() || ''
+}
+
+export const normalizarNoticia = (post) => {
+  const categoria = post._embedded?.['wp:term']?.[0]?.[0]?.name || ''
+  return {
+    id: post.id,
+    slug: post.slug,
+    fecha: post.date,
+    titulo: textoPlano(post.title?.rendered),
+    extracto: primerParrafo(post.content?.rendered) || textoPlano(post.excerpt?.rendered),
+    contenido: post.content?.rendered || '',
+    imagen: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+    categoria: CATEGORIA_GENERICA.test(categoria) ? '' : categoria,
+  }
+}
 
 export const obtenerNoticias = async ({ page = 1, perPage = 9 } = {}) => {
   const res = await axios.get(`${WP_BASE}/posts`, {
