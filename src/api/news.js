@@ -1,4 +1,6 @@
-import { axios, WP_BASE } from './client'
+import axios from 'axios'
+
+const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
 
 // WordPress devuelve títulos/extractos como HTML con entidades (&#8217;, <p>…)
 export const textoPlano = (html = '') =>

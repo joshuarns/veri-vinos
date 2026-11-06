@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/wp-json/:path*", "destination": "https://cms.verivinos.com/wp-json/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
