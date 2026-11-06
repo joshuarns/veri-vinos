@@ -1,6 +1,5 @@
-import axios from 'axios'
+import { axios, WP_BASE } from './client'
 
-const WP_BASE  = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
 const authParams = {
   consumer_key:    import.meta.env.VITE_WC_KEY,
   consumer_secret: import.meta.env.VITE_WC_SECRET,

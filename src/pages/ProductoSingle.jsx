@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
+import { axios, WP_BASE } from '../api/client'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useProduct } from '../hooks/useProduct'
-
-const WP_BASE = (import.meta.env.VITE_WC_BASE_URL || '').replace('/wc/v3', '/wp/v2')
 
 const acfFields = [
   { key: 'year',          label: 'Añada',          icon: 'calendar_today' },
