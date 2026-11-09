@@ -26,7 +26,7 @@ const wines = [
     name: 'Bibbona',
     producer: 'Biserno',
     img: bibbonaImg,
-    link: '#',
+    link: '/producto/748',
   },
 ]
 
